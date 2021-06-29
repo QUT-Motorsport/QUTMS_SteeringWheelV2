@@ -122,7 +122,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=TLPRWHSP
 
 [Document6]
 DocumentPath=Libraries\QUTMS_InductorLibrary.PcbLib
@@ -139,7 +139,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=JMUQBUHH
 
 [Document7]
 DocumentPath=Libraries\QUTMS_IsolatorLibrary.PcbLib
@@ -428,7 +428,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=ZPGGRGJQ
 
 [Document24]
 DocumentPath=Libraries\QUTMS_InductorLibrary.SchLib
@@ -445,7 +445,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=ZCEZNXQJ
 
 [Document25]
 DocumentPath=Libraries\QUTMS_IsolatorLibrary.SchLib
@@ -598,7 +598,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=OKNHDQJO
 
 [Document34]
 DocumentPath=Libraries\StandardCapacitors.SchLib
@@ -632,7 +632,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=FEIOKSWG
 
 [Document36]
 DocumentPath=Libraries\StandardTest.SchLib
