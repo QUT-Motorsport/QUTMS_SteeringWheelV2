@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=POT-R Pin=J?-2
+Removed Pin From Net: NetName=3V3 Pin=J?-3
+Change Component Footprint: Designator=J2 Old Footprint=MOLX-52437-2471 New Footprint=MOLX-52437-2471
+Change Component Footprint: Designator=U3 Old Footprint=STM-LQFP100_N New Footprint=STM-LQFP100_N
+Change Component Designator: OldDesignator=J? NewDesignator=J6
+Change Component Designator: OldDesignator=J? NewDesignator=J7
+Change Component Designator: OldDesignator=J? NewDesignator=J8
+Change Component Designator: OldDesignator=J? NewDesignator=J9
+Added Pin To Net: NetName=B4 Pin=J9-2
+Added Member To Class: ClassName=STRWL-S01-V00-Master Member=Component J7 JSP PH 2 Way VERT SMD
+Added Member To Class: ClassName=STRWL-S01-V00-Master Member=Component J8 JSP PH 2 Way VERT SMD
+Added Member To Class: ClassName=STRWL-S01-V00-Master Member=Component J9 JSP PH 2 Way VERT SMD
+Added Room: Name=U_STRWL-S04-V00-Microcontroller

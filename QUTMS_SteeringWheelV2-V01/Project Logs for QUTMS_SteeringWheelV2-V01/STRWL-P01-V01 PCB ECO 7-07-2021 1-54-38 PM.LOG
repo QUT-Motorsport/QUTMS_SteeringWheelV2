@@ -1,0 +1,21 @@
+Change Component Footprint: Designator=J2 Old Footprint=MOLX-52437-2471 New Footprint=MOLX-52437-2471
+Change Component Footprint: Designator=U3 Old Footprint=STM-LQFP100_N New Footprint=STM-LQFP100_N
+Added Pin To Net: NetName=USB_D6 Pin=R27-1
+Added Pin To Net: NetName=USB_D6 Pin=R28-2
+Added Pin To Net: NetName=USB_DP Pin=R29-2
+Added Pin To Net: NetName=USB_DM Pin=R30-2
+Added Pin To Net: NetName=SD_D1 Pin=R31-1
+Added Pin To Net: NetName=SD_D0 Pin=R32-1
+Added Pin To Net: NetName=SD_CMD Pin=R33-1
+Added Pin To Net: NetName=SD_D3 Pin=R34-1
+Added Pin To Net: NetName=SD_D2 Pin=R35-1
+Added Pin To Net: NetName=SD_D2 Pin=SD1-1
+Added Pin To Net: NetName=SD_D3 Pin=SD1-2
+Added Pin To Net: NetName=SD_CMD Pin=SD1-3
+Added Pin To Net: NetName=SDIO_CK Pin=SD1-5
+Added Pin To Net: NetName=SD_D0 Pin=SD1-7
+Added Pin To Net: NetName=SD_D1 Pin=SD1-8
+Added Pin To Net: NetName=CAN MAIN RX Pin=U3-95
+Added Pin To Net: NetName=CAN MAIN TX Pin=U3-96
+Change Net Name : Old Net Name=CAN MAIN RX New Net Name=CAN GLV RX
+Change Net Name : Old Net Name=CAN MAIN TX New Net Name=CAN GLX TX

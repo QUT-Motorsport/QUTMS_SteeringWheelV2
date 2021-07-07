@@ -1,0 +1,170 @@
+Added Component: Designator=C4(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C5(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C6(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C7(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C8(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C9(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C10(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C11(Cap_Ceramic_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=DS7(LED ORANGE 0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=DS8(LED ORANGE 0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=J3(IDC 1.27MM 10P)
+Add component. Clean all parameters for all variants
+Added Component: Designator=P1(HDR1X3)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=R14(Res_ThinFilm_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R15(Res_ThinFilm_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R16(Res_ThinFilm_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R17(Res_ThinFilm_0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=SW1(BTN B3U-1000P)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "LCSC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://lcsc.com/product-detail/Tactile-Switches_BRIGHT-TSA063G50-250_C294565.html"; VariantName = "[No Variations]"
+Added Component: Designator=U3(STM-LQFP100_N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.st.com/web/en/home.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00237391.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3Description"; Value = "Package Specification"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3URL"; Value = "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/data_brief/DM00071938.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Core"; Value = "ARM Cortex-M3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "D/A Converter"; Value = "2x12-bit (2 Channel)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "Rev. 9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "FLASH Size (Prog) (kB)"; Value = "1024"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "I/Os (High Current)"; Value = "82"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Internal RAM Size (kB)"; Value = "128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Frequency(F) (Processor speed) (MHz)"; Value = "120"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "100-Pin Low Profile Quad Flat Package, 14 x 14 mm Body, 0.5 mm Pitch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "LQFP100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageVersion"; Value = "Rev. 1, 06/2013"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packing"; Value = "Tray"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PartNumber"; Value = "STM32F207VGT7"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supply Voltage(Vcc) min (V)"; Value = "1.8"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=C4-1
+Added Pin To Net: NetName=3V3 Pin=C4-2
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=NRST Pin=C5-2
+Added Pin To Net: NetName=GND Pin=C6-1
+Added Pin To Net: NetName=3V3 Pin=C6-2
+Added Pin To Net: NetName=GND Pin=C7-1
+Added Pin To Net: NetName=3V3 Pin=C7-2
+Added Pin To Net: NetName=GND Pin=C8-1
+Added Pin To Net: NetName=3V3 Pin=C8-2
+Added Pin To Net: NetName=GND Pin=C9-1
+Added Pin To Net: NetName=3V3 Pin=C9-2
+Added Pin To Net: NetName=GND Pin=C10-1
+Added Pin To Net: NetName=3V3 Pin=C10-2
+Added Pin To Net: NetName=GND Pin=C11-1
+Added Pin To Net: NetName=3V3 Pin=C11-2
+Added Pin To Net: NetName=NetDS7_1 Pin=DS7-1
+Added Pin To Net: NetName=ORANGE LED 1 Pin=DS7-2
+Added Pin To Net: NetName=NetDS8_1 Pin=DS8-1
+Added Pin To Net: NetName=ORANGE LED 2 Pin=DS8-2
+Added Pin To Net: NetName=3V3 Pin=J3-1
+Added Pin To Net: NetName=SWDIO Pin=J3-2
+Added Pin To Net: NetName=GND Pin=J3-3
+Added Pin To Net: NetName=SWCLK Pin=J3-4
+Added Pin To Net: NetName=GND Pin=J3-5
+Added Pin To Net: NetName=GND Pin=J3-9
+Added Pin To Net: NetName=NRST Pin=J3-10
+Added Pin To Net: NetName=USART3_TX Pin=P1-1
+Added Pin To Net: NetName=USART3_RX Pin=P1-2
+Added Pin To Net: NetName=GND Pin=P1-3
+Added Pin To Net: NetName=NetDS7_1 Pin=R14-1
+Added Pin To Net: NetName=3V3 Pin=R14-2
+Added Pin To Net: NetName=NetDS8_1 Pin=R15-1
+Added Pin To Net: NetName=3V3 Pin=R15-2
+Added Pin To Net: NetName=BOOT Pin=R16-1
+Added Pin To Net: NetName=GND Pin=R16-2
+Added Pin To Net: NetName=NRST Pin=R17-1
+Added Pin To Net: NetName=3V3 Pin=R17-2
+Added Pin To Net: NetName=GND Pin=SW1-1
+Added Pin To Net: NetName=NRST Pin=SW1-2
+Added Pin To Net: NetName=3V3 Pin=U3-6
+Added Pin To Net: NetName=GND Pin=U3-10
+Added Pin To Net: NetName=3V3 Pin=U3-11
+Added Pin To Net: NetName=OSC IN Pin=U3-12
+Added Pin To Net: NetName=GND Pin=U3-13
+Added Pin To Net: NetName=NRST Pin=U3-14
+Added Pin To Net: NetName=POT-L Pin=U3-15
+Added Pin To Net: NetName=POT-M Pin=U3-16
+Added Pin To Net: NetName=POT-R Pin=U3-17
+Added Pin To Net: NetName=3V3 Pin=U3-19
+Added Pin To Net: NetName=GND Pin=U3-20
+Added Pin To Net: NetName=GND Pin=U3-21
+Added Pin To Net: NetName=3V3 Pin=U3-22
+Added Pin To Net: NetName=RESET Pin=U3-25
+Added Pin To Net: NetName=DATA/CMD Pin=U3-26
+Added Pin To Net: NetName=GND Pin=U3-27
+Added Pin To Net: NetName=3V3 Pin=U3-28
+Added Pin To Net: NetName=CHIP SEL Pin=U3-29
+Added Pin To Net: NetName=SERIAL CLK Pin=U3-30
+Added Pin To Net: NetName=SERIAL DATA Pin=U3-31
+Added Pin To Net: NetName=USART3_TX Pin=U3-47
+Added Pin To Net: NetName=USART3_RX Pin=U3-48
+Added Pin To Net: NetName=3V3 Pin=U3-50
+Added Pin To Net: NetName=USB_D6 Pin=U3-52
+Added Pin To Net: NetName=USB_DM Pin=U3-53
+Added Pin To Net: NetName=USB_DP Pin=U3-54
+Added Pin To Net: NetName=ORANGE LED 2 Pin=U3-63
+Added Pin To Net: NetName=ORANGE LED 1 Pin=U3-64
+Added Pin To Net: NetName=SD_D0 Pin=U3-65
+Added Pin To Net: NetName=SD_D1 Pin=U3-66
+Added Pin To Net: NetName=TEMP CLK Pin=U3-67
+Added Pin To Net: NetName=TEMP DATA Pin=U3-68
+Added Pin To Net: NetName=BUS SEL Pin=U3-69
+Added Pin To Net: NetName=BUS STATE Pin=U3-70
+Added Pin To Net: NetName=SWDIO Pin=U3-72
+Added Pin To Net: NetName=GND Pin=U3-74
+Added Pin To Net: NetName=3V3 Pin=U3-75
+Added Pin To Net: NetName=SWCLK Pin=U3-76
+Added Pin To Net: NetName=SD_D2 Pin=U3-78
+Added Pin To Net: NetName=SD_D3 Pin=U3-79
+Added Pin To Net: NetName=SDIO_CK Pin=U3-80
+Added Pin To Net: NetName=SD_CMD Pin=U3-83
+Added Pin To Net: NetName=B1 Pin=U3-84
+Added Pin To Net: NetName=B2 Pin=U3-85
+Added Pin To Net: NetName=B3 Pin=U3-86
+Added Pin To Net: NetName=B4 Pin=U3-87
+Added Pin To Net: NetName=BOOT Pin=U3-94
+Added Pin To Net: NetName=CAN GLV RX Pin=U3-95
+Added Pin To Net: NetName=CAN GLX TX Pin=U3-96
+Added Pin To Net: NetName=3V3 Pin=U3-100
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C4 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C5 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C6 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C7 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C8 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C9 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C10 100nF 50V 5% X7R 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component C11 4u7
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component DS7 LED Orange
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component DS8 LED Orange
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component J3 IDC 10P 2x5 1.27mm
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component P1 Header 3
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component R14 330R
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component R15 330R
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component R16 10k 1% 0603
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component R17 4k7
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component SW1 B3U-1000P
+Added Member To Class: ClassName=U_STRWL-S04-V00-Microcontroller Member=Component U3 STM32F207VGT7
+Added Room: Name=U_STRWL-S04-V00-Microcontroller
