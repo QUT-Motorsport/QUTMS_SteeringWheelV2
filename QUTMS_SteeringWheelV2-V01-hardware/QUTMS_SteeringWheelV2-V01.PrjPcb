@@ -650,23 +650,6 @@ GenerateClassCluster=0
 DocumentUniqueId=SXESSGAZ
 
 [Document37]
-DocumentPath=STRWL-P01-V01-3V3Plane.PcbDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=MXJUMTOP
-
-[Document38]
 DocumentPath=STRWL-S02-V00-12VProtection.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -683,7 +666,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EEIMOJGL
 
-[Document39]
+[Document38]
 DocumentPath=STRWL-S03-V00-CAN_MAIN.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -700,7 +683,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OIXXHZFD
 
-[Document40]
+[Document39]
 DocumentPath=STRWL-S04-V00-Microcontroller.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -717,7 +700,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=STYNTWSO
 
-[Document41]
+[Document40]
 DocumentPath=STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -734,7 +717,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ISNQRADO
 
-[Document42]
+[Document41]
 DocumentPath=STRWL-S06-V00-Peripherals.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -751,7 +734,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QVIMFQMC
 
-[Document43]
+[Document42]
 DocumentPath=Libraries\QUTMS_JSTHeaderLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -768,7 +751,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=KAJFRXQG
 
-[Document44]
+[Document43]
 DocumentPath=Libraries\QUTMS_JSTHeaderLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -785,7 +768,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QRLGPAPR
 
-[Document45]
+[Document44]
 DocumentPath=Libraries\Molex_52437_2471_0.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -802,7 +785,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document46]
+[Document45]
 DocumentPath=Libraries\Molex_52437_2471.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -819,7 +802,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IAYSIIMG
 
-[Document47]
+[Document46]
 DocumentPath=STRWL-S04-V00-Microcontroller.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -836,7 +819,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document48]
+[Document47]
 DocumentPath=STRWL-S06-V00-Peripherals.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -853,7 +836,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document49]
+[Document48]
 DocumentPath=Libraries\FFCConnectors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -870,7 +853,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document50]
+[Document49]
 DocumentPath=Libraries\FFCConnectors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -887,7 +870,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PMQZETJJ
 
-[Document51]
+[Document50]
 DocumentPath=Libraries\IDCConnectors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -904,7 +887,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document52]
+[Document51]
 DocumentPath=Libraries\IDCConnectors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -921,7 +904,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FMGMPDCL
 
-[Document53]
+[Document52]
 DocumentPath=Libraries\IC_Texas_Instruments_LMR14010ADDCR_eec.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -938,7 +921,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OUTWSOGG
 
-[Document54]
+[Document53]
 DocumentPath=Libraries\IC_Texas_Instruments_LMR14010ADDCR_eec_IPC_A.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -955,7 +938,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JQXWFUFU
 
-[Document55]
+[Document54]
 DocumentPath=STRWL-S03-V00-CAN_MAIN.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -972,7 +955,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document56]
+[Document55]
 DocumentPath=Libraries\QUTMS-MCISOLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -989,7 +972,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document57]
+[Document56]
 DocumentPath=Libraries\QUTMS-MCISOLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1006,7 +989,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YWMSGQFK
 
-[Document58]
+[Document57]
 DocumentPath=STRWL-S01-V01-Master1.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1023,7 +1006,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=POGKEIXE
 
-[Document59]
+[Document58]
 DocumentPath=Sheet1.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1040,7 +1023,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document60]
+[Document59]
 DocumentPath=STRWL-S01-V01-Master1.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1056,6 +1039,23 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
+
+[Document60]
+DocumentPath=STRWL-P01-V01.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=MXJUMTOP
 
 [GeneratedDocument1]
 DocumentPath=Project Outputs for QUTMS_SteeringWheelV2-V01\Design Rule Check - STRWL-P01-V01-3V3Plane.html

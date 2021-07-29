@@ -1,26 +1,24 @@
 Protel Design System Design Rule Check
-PCB File : D:\GIT\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01-hardware\STRWL-P01-V01.PcbDoc
-Date     : 9/07/2021
-Time     : 4:33:34 PM
+PCB File : C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01-hardware\STRWL-P01-V01.PcbDoc
+Date     : 29/07/2021
+Time     : 11:45:43 AM
 
-Processing Rule : Clearance Constraint (Gap=10mil) (All),(All)
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (1628.5mil,3014.024mil) on Keep-Out Layer And Pad FID1-1(1628.5mil,3014.024mil) on Bottom Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (1628.5mil,3014.024mil) on Keep-Out Layer And Pad FID1-1(1628.5mil,3014.024mil) on Top Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (2476.889mil,1526mil) on Keep-Out Layer And Pad FID3-1(2476.889mil,1526mil) on Bottom Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (2476.889mil,1526mil) on Keep-Out Layer And Pad FID3-1(2476.889mil,1526mil) on Top Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (2623.252mil,1115.648mil) on Keep-Out Layer And Pad M3-1(2623.252mil,1115.648mil) on Multi-Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (2625.362mil,3079.166mil) on Keep-Out Layer And Pad M1-1(2625.362mil,3079.166mil) on Multi-Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (318mil,1519.783mil) on Keep-Out Layer And Pad FID4-1(318mil,1519.783mil) on Bottom Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (318mil,1519.783mil) on Keep-Out Layer And Pad FID4-1(318mil,1519.783mil) on Top Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (391.201mil,3083.865mil) on Keep-Out Layer And Pad M2-1(391.201mil,3083.865mil) on Multi-Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (591mil,2897mil) on Keep-Out Layer And Pad FID2-1(591mil,2897mil) on Bottom Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (591mil,2897mil) on Keep-Out Layer And Pad FID2-1(591mil,2897mil) on Top Layer 
-   Violation between Clearance Constraint: (Collision < 10mil) Between Arc (745mil,498mil) on Keep-Out Layer And Pad M4-1(745mil,498mil) on Multi-Layer 
-   Violation between Clearance Constraint: (0mil < 10mil) Between Area Fill (1404.104mil,2977.637mil) (1435.6mil,3028.818mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
-   Violation between Clearance Constraint: (0mil < 10mil) Between Area Fill (884.42mil,2977.637mil) (915.916mil,3028.819mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
-   Violation between Clearance Constraint: (8.575mil < 10mil) Between Region (0 hole(s)) Top Layer And Region (0 hole(s)) Top Layer 
-   Violation between Clearance Constraint: (8.575mil < 10mil) Between Region (0 hole(s)) Top Layer And Region (0 hole(s)) Top Layer 
-Rule Violations :16
+Processing Rule : Clearance Constraint (Gap=5mil) (All),(All)
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2132mil,660mil) on Keep-Out Layer And Pad FID3-1(2132mil,660mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2132mil,660mil) on Keep-Out Layer And Pad FID3-1(2132mil,660mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2324mil,319mil) on Keep-Out Layer And Pad M4-1(2324mil,319mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2364mil,3100mil) on Keep-Out Layer And Pad FID4-1(2364mil,3100mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2364mil,3100mil) on Keep-Out Layer And Pad FID4-1(2364mil,3100mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2625.362mil,3079.166mil) on Keep-Out Layer And Pad M1-1(2625.362mil,3079.166mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (391.201mil,3083.865mil) on Keep-Out Layer And Pad M2-1(391.201mil,3083.865mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (582.866mil,3166.621mil) on Keep-Out Layer And Pad FID2-1(582.866mil,3166.621mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (582.866mil,3166.621mil) on Keep-Out Layer And Pad FID2-1(582.866mil,3166.621mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (702mil,524mil) on Keep-Out Layer And Pad FID1-1(702mil,524mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (702mil,524mil) on Keep-Out Layer And Pad FID1-1(702mil,524mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (731mil,319mil) on Keep-Out Layer And Pad M3-1(731mil,319mil) on Multi-Layer 
+   Violation between Clearance Constraint: (0mil < 5mil) Between Area Fill (1404.104mil,2977.637mil) (1435.6mil,3028.818mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
+   Violation between Clearance Constraint: (0mil < 5mil) Between Area Fill (884.42mil,2977.637mil) (915.916mil,3028.819mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
+Rule Violations :14
 
 Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
 Rule Violations :0
@@ -40,8 +38,8 @@ Rule Violations :0
 Processing Rule : Hole Size Constraint (Min=1mil) (Max=100mil) (All)
    Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M1-1(2625.362mil,3079.166mil) on Multi-Layer Actual Hole Size = 125.984mil
    Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M2-1(391.201mil,3083.865mil) on Multi-Layer Actual Hole Size = 125.984mil
-   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M3-1(2623.252mil,1115.648mil) on Multi-Layer Actual Hole Size = 125.984mil
-   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M4-1(745mil,498mil) on Multi-Layer Actual Hole Size = 125.984mil
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M3-1(731mil,319mil) on Multi-Layer Actual Hole Size = 125.984mil
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M4-1(2324mil,319mil) on Multi-Layer Actual Hole Size = 125.984mil
 Rule Violations :4
 
 Processing Rule : Hole To Hole Clearance (Gap=10mil) (All),(All)
@@ -54,6 +52,6 @@ Processing Rule : Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (
 Rule Violations :0
 
 
-Violations Detected : 20
+Violations Detected : 18
 Waived Violations : 0
-Time Elapsed        : 00:00:02
+Time Elapsed        : 00:00:00
