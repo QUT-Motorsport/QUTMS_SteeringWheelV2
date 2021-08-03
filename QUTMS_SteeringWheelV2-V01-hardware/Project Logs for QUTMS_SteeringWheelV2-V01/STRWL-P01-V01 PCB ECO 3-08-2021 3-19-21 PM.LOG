@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=USB DM Pin=U3-53
+Removed Pin From Net: NetName=USB DP Pin=U3-54
+Removed Pin From Net: NetName=CAN GLX TX Pin=U3-92
+Added Pin To Net: NetName=CAN GLX TX Pin=U3-52
