@@ -1,30 +1,13 @@
-Output: Gerber Files
-Type  : Gerber
-From  : Variant [[No Variations]] of Project [QUTMS_SteeringWheelV2-V01.PrjPcb]
-   Generated File[STRWL-P01-V01.GTO]
-   Generated File[STRWL-P01-V01.GTP]
-   Generated File[STRWL-P01-V01.GTS]
-   Generated File[STRWL-P01-V01.GTL]
-   Generated File[STRWL-P01-V01.GBL]
-   Generated File[STRWL-P01-V01.GBS]
-   Generated File[STRWL-P01-V01.GBP]
-   Generated File[STRWL-P01-V01.GBO]
-   Generated File[STRWL-P01-V01.GM1]
-   Generated File[STRWL-P01-V01.GM5]
-   Generated File[STRWL-P01-V01.GM10]
-   Generated File[STRWL-P01-V01.GM12]
-   Generated File[STRWL-P01-V01.GM13]
-   Generated File[STRWL-P01-V01.GM15]
-   Generated File[STRWL-P01-V01.GKO]
-   Generated File[STRWL-P01-V01.GPT]
-   Generated File[STRWL-P01-V01.GPB]
-   Generated File[STRWL-P01-V01.GD1]
-   Generated File[STRWL-P01-V01.RUL]
-   Generated File[STRWL-P01-V01.EXTREP]
-   Generated File[STRWL-P01-V01.REP]
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [QUTMS_SteeringWheelV2-V01.PrjPcb]
+   Generated File[STRWL-P01-V01-Plated.TXT]
+   Generated File[STRWL-P01-V01-NonPlated.TXT]
+   Generated File[STRWL-P01-V01.LDP]
+   Generated File[STRWL-P01-V01.DRR]
 
 
-Files Generated   : 21
+Files Generated   : 4
 Documents Printed : 0
 
-Finished Output Generation At 4:25:54 PM On 3/08/2021
+Finished Output Generation At 4:58:21 PM On 3/08/2021
