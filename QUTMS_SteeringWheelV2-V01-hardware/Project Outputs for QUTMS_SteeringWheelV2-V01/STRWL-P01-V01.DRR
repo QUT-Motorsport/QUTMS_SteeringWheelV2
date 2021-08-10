@@ -1,10 +1,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------
-NCDrill File Report For: STRWL-P01-V01.PcbDoc   3/08/2021  4:58:21 PM
+NCDrill File Report For: STRWL-P01-V01.PcbDoc   10/08/2021  12:08:13 PM
 ----------------------------------------------------------------------------------------------------------------------------------
 
 Layer Pair : Top Layer to Bottom Layer
-ASCII Plated RoundHoles File : STRWL-P01-V01-Plated.TXT
-ASCII Non-Plated RoundHoles File : STRWL-P01-V01-NonPlated.TXT
+ASCII RoundHoles File : STRWL-P01-V01.TXT
 
 Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
 ----------------------------------------------------------------------------------------------------------------------------------

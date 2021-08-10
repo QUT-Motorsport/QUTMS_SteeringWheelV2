@@ -1,3 +1,2 @@
 Layer Pairs Export File for PCB: D:\GIT\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01-hardware\STRWL-P01-V01.PcbDoc
-LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=strwl-p01-v01-plated.txt|DrillLayers=gtl,gbl
-LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=strwl-p01-v01-nonplated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=strwl-p01-v01.txt|DrillLayers=gtl,gbl
