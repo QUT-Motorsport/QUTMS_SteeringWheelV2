@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include "screen.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,6 +107,13 @@ int main(void)
 3) != HAL_OK) {
 	  Error_Handler();
   	}
+
+  if (epd_init() != 0) {
+	  Error_Handler();
+  }
+
+  epd_clear();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
