@@ -19,10 +19,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
+#include "spi.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +58,16 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+uint16_t dma_raw[3];
+uint16_t pot_value[3];
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+	if (hadc == &hadc1) {
+		memcpy(pot_value, dma_raw,
+						sizeof(uint16_t) * 3);
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -83,8 +97,15 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_SPI1_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
+  if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_raw,
+3) != HAL_OK) {
+	  Error_Handler();
+  	}
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -94,6 +115,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	 HAL_Delay(5);
   }
   /* USER CODE END 3 */
 }

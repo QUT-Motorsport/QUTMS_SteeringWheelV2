@@ -58,6 +58,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define POT_R_Pin GPIO_PIN_0
+#define POT_R_GPIO_Port GPIOC
+#define POT_M_Pin GPIO_PIN_1
+#define POT_M_GPIO_Port GPIOC
+#define POT_L_Pin GPIO_PIN_2
+#define POT_L_GPIO_Port GPIOC
+#define RST_SCREEN_Pin GPIO_PIN_2
+#define RST_SCREEN_GPIO_Port GPIOA
+#define DC_SCREEN_Pin GPIO_PIN_3
+#define DC_SCREEN_GPIO_Port GPIOA
+#define CS_SCREEN_Pin GPIO_PIN_4
+#define CS_SCREEN_GPIO_Port GPIOA
+#define BUS_SCREEN_Pin GPIO_PIN_10
+#define BUS_SCREEN_GPIO_Port GPIOA
+#define SCREEN_BUSY_Pin GPIO_PIN_11
+#define SCREEN_BUSY_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
