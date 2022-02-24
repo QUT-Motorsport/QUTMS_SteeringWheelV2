@@ -47,23 +47,6 @@ PrefsVaultGUID=
 PrefsRevisionGUID=
 
 [Document1]
-DocumentPath=C:\Users\Jarrod\Downloads\Altium_WR-PHD (rev22a)\WR-PHD_Pin Header.PcbLib
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=VTIGDAHA
-
-[Document2]
 DocumentPath=Libraries\DSC1101CI5-020.0000T.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -80,7 +63,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document3]
+[Document2]
 DocumentPath=Libraries\QUTMS_CANLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -97,7 +80,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document4]
+[Document3]
 DocumentPath=Libraries\QUTMS_CrystalLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -114,7 +97,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document5]
+[Document4]
 DocumentPath=Libraries\QUTMS_DiodeLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -131,7 +114,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TLPRWHSP
 
-[Document6]
+[Document5]
 DocumentPath=Libraries\QUTMS_InductorLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -148,7 +131,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JMUQBUHH
 
-[Document7]
+[Document6]
 DocumentPath=Libraries\QUTMS_IsolatorLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -165,7 +148,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document8]
+[Document7]
 DocumentPath=Libraries\QUTMS_JumperLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -182,7 +165,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document9]
+[Document8]
 DocumentPath=Libraries\QUTMS_LEDLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -199,7 +182,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document10]
+[Document9]
 DocumentPath=Libraries\QUTMS_MicrofitLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -216,7 +199,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document11]
+[Document10]
 DocumentPath=Libraries\QUTMS_OctocouplerLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -233,7 +216,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IYAQXSIA
 
-[Document12]
+[Document11]
 DocumentPath=Libraries\QUTMS_PCBLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -250,7 +233,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document13]
+[Document12]
 DocumentPath=Libraries\QUTMS_PowerSupplyLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -267,7 +250,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document14]
+[Document13]
 DocumentPath=Libraries\QUTMS_STM32Library.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -284,7 +267,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document15]
+[Document14]
 DocumentPath=Libraries\QUTMS_SwitchLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -301,7 +284,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document16]
+[Document15]
 DocumentPath=Libraries\StandardCapacitors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -318,7 +301,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document17]
+[Document16]
 DocumentPath=Libraries\StandardResistors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -335,7 +318,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document18]
+[Document17]
 DocumentPath=Libraries\StandardTest.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -352,7 +335,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document19]
+[Document18]
 DocumentPath=Libraries\STM32F207VGT7.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -369,24 +352,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document20]
-DocumentPath=C:\Users\Jarrod\Downloads\Altium_WR-PHD (rev22a)\WR-PHD_Pin Header.SchLib
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=UPGIVYMA
-
-[Document21]
+[Document19]
 DocumentPath=Libraries\DSC1101CI5-020.0000T.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -403,7 +369,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HKAFCCYO
 
-[Document22]
+[Document20]
 DocumentPath=Libraries\QUTMS_CANLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -420,7 +386,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WYTIWMFD
 
-[Document23]
+[Document21]
 DocumentPath=Libraries\QUTMS_CrystalLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -437,7 +403,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JVMAAZUP
 
-[Document24]
+[Document22]
 DocumentPath=Libraries\QUTMS_DiodeLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -454,7 +420,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ZPGGRGJQ
 
-[Document25]
+[Document23]
 DocumentPath=Libraries\QUTMS_InductorLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -471,7 +437,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ZCEZNXQJ
 
-[Document26]
+[Document24]
 DocumentPath=Libraries\QUTMS_IsolatorLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -488,7 +454,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YVEATMQE
 
-[Document27]
+[Document25]
 DocumentPath=Libraries\QUTMS_JumperLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -505,7 +471,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QKGTBYVP
 
-[Document28]
+[Document26]
 DocumentPath=Libraries\QUTMS_LEDLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -522,7 +488,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HWMRVBIF
 
-[Document29]
+[Document27]
 DocumentPath=Libraries\QUTMS_MicrofitLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -539,7 +505,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=DYJMDMMB
 
-[Document30]
+[Document28]
 DocumentPath=Libraries\QUTMS_OctocouplerLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -556,7 +522,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YMNZRAFD
 
-[Document31]
+[Document29]
 DocumentPath=Libraries\QUTMS_PCBLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -573,7 +539,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=XMFVKUQS
 
-[Document32]
+[Document30]
 DocumentPath=Libraries\QUTMS_PowerSupplyLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -590,7 +556,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=UMVHGHTR
 
-[Document33]
+[Document31]
 DocumentPath=Libraries\QUTMS_STM32Library.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -607,7 +573,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QQAKGVDZ
 
-[Document34]
+[Document32]
 DocumentPath=Libraries\QUTMS_SwitchLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -624,7 +590,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OKNHDQJO
 
-[Document35]
+[Document33]
 DocumentPath=Libraries\StandardCapacitors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -641,7 +607,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WFWZTUBU
 
-[Document36]
+[Document34]
 DocumentPath=Libraries\StandardResistors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -658,7 +624,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FEIOKSWG
 
-[Document37]
+[Document35]
 DocumentPath=Libraries\StandardTest.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -675,7 +641,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ZUGZGKQV
 
-[Document38]
+[Document36]
 DocumentPath=Libraries\STM32F207VGT7.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -692,7 +658,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SXESSGAZ
 
-[Document39]
+[Document37]
 DocumentPath=STRWL-S02-V00-12VProtection.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -709,7 +675,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EEIMOJGL
 
-[Document40]
+[Document38]
 DocumentPath=STRWL-S03-V00-CAN_MAIN.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -726,7 +692,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OIXXHZFD
 
-[Document41]
+[Document39]
 DocumentPath=STRWL-S04-V00-Microcontroller.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -743,7 +709,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=STYNTWSO
 
-[Document42]
+[Document40]
 DocumentPath=STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -760,7 +726,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ISNQRADO
 
-[Document43]
+[Document41]
 DocumentPath=STRWL-S06-V00-Peripherals.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -777,7 +743,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QVIMFQMC
 
-[Document44]
+[Document42]
 DocumentPath=Libraries\QUTMS_JSTHeaderLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -794,7 +760,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=KAJFRXQG
 
-[Document45]
+[Document43]
 DocumentPath=Libraries\QUTMS_JSTHeaderLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -811,7 +777,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QRLGPAPR
 
-[Document46]
+[Document44]
 DocumentPath=Libraries\Molex_52437_2471_0.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -828,7 +794,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document47]
+[Document45]
 DocumentPath=Libraries\Molex_52437_2471.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -845,7 +811,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IAYSIIMG
 
-[Document48]
+[Document46]
 DocumentPath=STRWL-S04-V00-Microcontroller.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -862,7 +828,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document49]
+[Document47]
 DocumentPath=STRWL-S06-V00-Peripherals.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -879,7 +845,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document50]
+[Document48]
 DocumentPath=Libraries\FFCConnectors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -896,7 +862,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document51]
+[Document49]
 DocumentPath=Libraries\FFCConnectors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -913,7 +879,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PMQZETJJ
 
-[Document52]
+[Document50]
 DocumentPath=Libraries\IDCConnectors.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -930,7 +896,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document53]
+[Document51]
 DocumentPath=Libraries\IDCConnectors.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -947,7 +913,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FMGMPDCL
 
-[Document54]
+[Document52]
 DocumentPath=Libraries\IC_Texas_Instruments_LMR14010ADDCR_eec.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -964,7 +930,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OUTWSOGG
 
-[Document55]
+[Document53]
 DocumentPath=Libraries\IC_Texas_Instruments_LMR14010ADDCR_eec_IPC_A.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -981,7 +947,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JQXWFUFU
 
-[Document56]
+[Document54]
 DocumentPath=STRWL-S03-V00-CAN_MAIN.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -998,7 +964,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document57]
+[Document55]
 DocumentPath=Libraries\QUTMS-MCISOLibrary.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1015,7 +981,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document58]
+[Document56]
 DocumentPath=Libraries\QUTMS-MCISOLibrary.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1032,7 +998,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YWMSGQFK
 
-[Document59]
+[Document57]
 DocumentPath=STRWL-S01-V01-Master1.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1049,7 +1015,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=POGKEIXE
 
-[Document60]
+[Document58]
 DocumentPath=Sheet1.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1066,7 +1032,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document61]
+[Document59]
 DocumentPath=STRWL-S01-V01-Master1.Harness
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1083,7 +1049,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document62]
+[Document60]
 DocumentPath=STRWL-P01-V01.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1100,7 +1066,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MXJUMTOP
 
-[Document63]
+[Document61]
 DocumentPath=QUTMS-STRWL-Gerbers.Cam
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1117,7 +1083,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document64]
+[Document62]
 DocumentPath=QUTMS-STRWL-DrillGuide.Cam
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1134,7 +1100,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document65]
+[Document63]
 DocumentPath=STRWL-P01-V01.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1311,7 +1277,7 @@ OutputDir=
 [OutputGroup1]
 Name=Netlist Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=CadnetixNetlist
 OutputName1=Cadnetix Netlist
@@ -1417,7 +1383,7 @@ OutputDefault20=0
 [OutputGroup2]
 Name=Simulator Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 
 [OutputGroup3]
@@ -1495,7 +1461,7 @@ PageOptions11=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 [OutputGroup4]
 Name=Assembly Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Assembly
 OutputName1=Assembly Drawings
@@ -1517,7 +1483,7 @@ OutputDefault3=0
 [OutputGroup5]
 Name=Fabrication Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=CompositeDrill
 OutputName1=Composite Drill Drawing
@@ -1597,7 +1563,7 @@ Configuration12_Item2=AddToAllLayerClasses.Set= |AddToAllPlots.Set=SerializeLaye
 [OutputGroup6]
 Name=Report Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=BOM_PartType
 OutputName1=Bill of Materials
@@ -1658,7 +1624,7 @@ PageOptions8=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintS
 [OutputGroup7]
 Name=Other Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Text Print
 OutputName1=Text Print
@@ -1766,7 +1732,7 @@ PageOptions17=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 [OutputGroup8]
 Name=Validation Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=BOM_Violations
 OutputName1=BOM Checks Report
@@ -1810,7 +1776,7 @@ OutputDefault7=0
 [OutputGroup9]
 Name=Export Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=AutoCAD dwg/dxf PCB
 OutputName1=AutoCAD dwg/dxf File PCB
@@ -1871,7 +1837,7 @@ OutputDefault11=0
 [OutputGroup10]
 Name=PostProcess Outputs
 Description=
-TargetPrinter=FX DocuPrint CM215fw - Wireless
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputType1=Copy Files
 OutputName1=Copy Files
