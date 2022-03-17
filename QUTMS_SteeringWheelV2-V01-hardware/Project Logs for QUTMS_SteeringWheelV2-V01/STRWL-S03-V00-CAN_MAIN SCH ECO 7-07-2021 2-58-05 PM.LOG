@@ -1,0 +1,14 @@
+Replace Part C12 100nF 50V 5% X7R 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with 100nF 50V 5% X7R 0603 from StandardCapacitors.SchLib
+Replace Part D5 NUP2105L in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with NUP2105L from QUTMS_CANLibrary.SchLib
+Replace Part DS5 LED Blue 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with LED Blue 0603 from QUTMS_LEDLibrary.SchLib
+Replace Part DS6 LED Blue 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with LED Blue 0603 from QUTMS_LEDLibrary.SchLib
+Replace Part J10 Jumper 2Way Side Solderable in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with Jumper 2Way Side Solderable from QUTMS_JumperLibrary.SchLib
+Replace Part J11 Jumper 2Way Side Solderable in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with Jumper 2Way Side Solderable from QUTMS_JumperLibrary.SchLib
+Replace Part R17 330R 5% 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with 330R 5% 0603 from StandardResistors.SchLib
+Replace Part R18 330R 5% 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with 330R 5% 0603 from StandardResistors.SchLib
+Replace Part R19 120R 1% 1210 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with 120R 1% 1210 from StandardResistors.SchLib
+Replace Part TP3 TestPoint_SMD in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with TestPoint_SMD from StandardTest.SchLib
+Replace Part TP4 TestPoint_SMD in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with TestPoint_SMD from StandardTest.SchLib
+Replace Part TP5 TestPoint_SMD in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with TestPoint_SMD from StandardTest.SchLib
+Replace Part TP6 TestPoint_SMD in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with TestPoint_SMD from StandardTest.SchLib
+Replace Part U2 SN65HVD233 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S03-V00-CAN_MAIN.SchDoc with SN65HVD233 from QUTMS_CANLibrary.SchLib

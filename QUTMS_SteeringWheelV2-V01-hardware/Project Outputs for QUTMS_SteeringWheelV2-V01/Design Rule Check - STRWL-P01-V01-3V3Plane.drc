@@ -1,0 +1,95 @@
+Protel Design System Design Rule Check
+PCB File : D:\GIT\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01-hardware\STRWL-P01-V01-3V3Plane.PcbDoc
+Date     : 25/07/2021
+Time     : 10:30:11 PM
+
+WARNING: Design contains shelved or modified (but not repoured) polygons. The result of DRC is not correct. Recommended to restore/repour all polygons and proceed with DRC again
+   Polygon named: NONET_L02_P001 In net GND On Bottom Layer
+
+Processing Rule : Clearance Constraint (Gap=5mil) (All),(All)
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2132mil,660mil) on Keep-Out Layer And Pad FID3-1(2132mil,660mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2132mil,660mil) on Keep-Out Layer And Pad FID3-1(2132mil,660mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2324mil,319mil) on Keep-Out Layer And Pad M4-1(2324mil,319mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2458mil,2905mil) on Keep-Out Layer And Pad FID4-1(2458mil,2905mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2458mil,2905mil) on Keep-Out Layer And Pad FID4-1(2458mil,2905mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (2625.362mil,3079.166mil) on Keep-Out Layer And Pad M1-1(2625.362mil,3079.166mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (391.201mil,3083.865mil) on Keep-Out Layer And Pad M2-1(391.201mil,3083.865mil) on Multi-Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (582.866mil,3166.621mil) on Keep-Out Layer And Pad FID2-1(582.866mil,3166.621mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (582.866mil,3166.621mil) on Keep-Out Layer And Pad FID2-1(582.866mil,3166.621mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (702mil,524mil) on Keep-Out Layer And Pad FID1-1(702mil,524mil) on Bottom Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (702mil,524mil) on Keep-Out Layer And Pad FID1-1(702mil,524mil) on Top Layer 
+   Violation between Clearance Constraint: (Collision < 5mil) Between Arc (731mil,319mil) on Keep-Out Layer And Pad M3-1(731mil,319mil) on Multi-Layer 
+   Violation between Clearance Constraint: (0mil < 5mil) Between Area Fill (1404.104mil,2977.637mil) (1435.6mil,3028.818mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
+   Violation between Clearance Constraint: (0mil < 5mil) Between Area Fill (884.42mil,2977.637mil) (915.916mil,3028.819mil) on Keep-Out Layer And Region (0 hole(s)) Top Layer 
+Rule Violations :14
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+   Violation between Modified Polygon: Polygon Shelved  (NONET_L02_P001) on Bottom Layer 
+Rule Violations :1
+
+Processing Rule : Width Constraint (Min=5mil) (Max=20mil) (Preferred=10mil) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=1mil) (Max=100mil) (All)
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M1-1(2625.362mil,3079.166mil) on Multi-Layer Actual Hole Size = 125.984mil
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M2-1(391.201mil,3083.865mil) on Multi-Layer Actual Hole Size = 125.984mil
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M3-1(731mil,319mil) on Multi-Layer Actual Hole Size = 125.984mil
+   Violation between Hole Size Constraint: (125.984mil > 100mil) Pad M4-1(2324mil,319mil) on Multi-Layer Actual Hole Size = 125.984mil
+Rule Violations :4
+
+Processing Rule : Hole To Hole Clearance (Gap=10mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mil) (All)
+   Violation between Net Antennae: Track (1617.28mil,2144mil)(2445.28mil,1316mil) on Bottom Layer 
+   Violation between Net Antennae: Track (2449.28mil,1295mil)(2595mil,1295mil) on Bottom Layer 
+   Violation between Net Antennae: Track (2449.28mil,1295mil)(2595mil,1295mil) on Bottom Layer 
+   Violation between Net Antennae: Track (2591mil,1316mil)(2682mil,1225mil) on Bottom Layer 
+   Violation between Net Antennae: Via (1029.559mil,2783.272mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1038.181mil,1158.069mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1089.531mil,2783.272mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1149.642mil,2781.76mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1149.646mil,715.594mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1184.236mil,802.764mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1184.236mil,988mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1235mil,2318mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1265.389mil,1607mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1341.228mil,862.532mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1342.229mil,1035mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1380.461mil,2829.635mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1405.389mil,1607mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1541mil,845mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1589.253mil,2859.974mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1687mil,930.5mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1691mil,2614mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1701.304mil,1729mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1892mil,1519mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1970.1mil,1860.461mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (1973.1mil,1519mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (2106mil,1987.872mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (2145mil,2324mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (2530mil,1469.506mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (386.866mil,2138.85mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (442mil,2012mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (665.5mil,1177.985mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (711mil,2144mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (713.638mil,1697mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (811.5mil,2877mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (908.436mil,2781.415mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (920.457mil,2599.33mil) from Top Layer to Bottom Layer 
+   Violation between Net Antennae: Via (969mil,2781.415mil) from Top Layer to Bottom Layer 
+Rule Violations :37
+
+Processing Rule : Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)
+Rule Violations :0
+
+
+Violations Detected : 56
+Waived Violations : 0
+Time Elapsed        : 00:00:02

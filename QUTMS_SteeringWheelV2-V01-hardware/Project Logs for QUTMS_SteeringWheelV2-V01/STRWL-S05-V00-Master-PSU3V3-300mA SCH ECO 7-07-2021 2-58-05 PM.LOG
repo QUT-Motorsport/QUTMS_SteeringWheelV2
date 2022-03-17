@@ -1,0 +1,10 @@
+Replace Part C21 100nF 50V 5% X7R 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 100nF 50V 5% X7R 0603 from StandardCapacitors.SchLib
+Replace Part C24 47uF 16V 10% X7R 1210 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 47uF 16V 10% X7R 1210 from StandardCapacitors.SchLib
+Replace Part C25 47uF 16V 10% X7R 1210 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 47uF 16V 10% X7R 1210 from StandardCapacitors.SchLib
+Replace Part D6 B260A-13-F in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with B260A-13-F from QUTMS_DiodeLibrary.SchLib
+Replace Part DS9 LED Green 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with LED Green 0603 from QUTMS_LEDLibrary.SchLib
+Replace Part L2 74404064221 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 74404064221 from QUTMS-MCISOLibrary.SchLib
+Replace Part R24 64k9 1% 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 64k9 1% 0603 from StandardResistors.SchLib
+Replace Part R25 1k 5% 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 1k 5% 0603 from StandardResistors.SchLib
+Replace Part R26 19k6 1% 0603 in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with 19k6 1% 0603 from StandardResistors.SchLib
+Replace Part U5 LMR14010ADDCR in C:\Users\n10462091\Documents\GitHub\QUTMS_SteeringWheelV2\QUTMS_SteeringWheelV2-V01\STRWL-S05-V00-Master-PSU3V3-300mA.SchDoc with LMR14010ADDCR from IC_Texas_Instruments_LMR14010ADDCR_eec.SchLib
