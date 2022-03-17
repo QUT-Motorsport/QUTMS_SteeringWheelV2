@@ -41,9 +41,6 @@ extern message_queue_t queue_CAN;
 extern message_queue_t queue_CAN_OD;
 /* USER CODE END Private defines */
 
-extern uint32_t canMailbox;
-/* USER CODE END Private defines */
-
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */

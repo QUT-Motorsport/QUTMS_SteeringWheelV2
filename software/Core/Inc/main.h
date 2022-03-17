@@ -64,6 +64,10 @@ void Error_Handler(void);
 #define POT_M_GPIO_Port GPIOC
 #define POT_L_Pin GPIO_PIN_2
 #define POT_L_GPIO_Port GPIOC
+#define B4_Pin GPIO_PIN_0
+#define B4_GPIO_Port GPIOA
+#define B3_Pin GPIO_PIN_1
+#define B3_GPIO_Port GPIOA
 #define RST_SCREEN_Pin GPIO_PIN_2
 #define RST_SCREEN_GPIO_Port GPIOA
 #define DC_SCREEN_Pin GPIO_PIN_3
@@ -74,6 +78,10 @@ void Error_Handler(void);
 #define BUS_SCREEN_GPIO_Port GPIOA
 #define SCREEN_BUSY_Pin GPIO_PIN_11
 #define SCREEN_BUSY_GPIO_Port GPIOA
+#define B1_Pin GPIO_PIN_3
+#define B1_GPIO_Port GPIOD
+#define B2_Pin GPIO_PIN_4
+#define B2_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
