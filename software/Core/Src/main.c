@@ -23,11 +23,13 @@
 #include "can.h"
 #include "dma.h"
 #include "spi.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,11 +105,14 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_CAN1_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   if (HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_raw,
 3) != HAL_OK) {
 	  Error_Handler();
   	}
+
+  char buff[256];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,7 +123,21 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	 HAL_Delay(5);
+	  //UART transmit takes in as parameters the UART peripheral
+	  //the buffer as the data to transmit
+	  //numchars as how much data to transmit.
+
+	  uint8_t state_b1 = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  uint8_t state_b2 = HAL_GPIO_ReadPin(B2_GPIO_Port, B2_Pin);
+	  uint8_t state_b3 = HAL_GPIO_ReadPin(B3_GPIO_Port, B3_Pin);
+	  uint8_t state_b4 = HAL_GPIO_ReadPin(B4_GPIO_Port, B4_Pin);
+
+
+	  //int numchars = sprintf(buff, "B1: %i\r\n", state_b1);
+	  int numchars = sprintf(buff, "B1: %i B2: %i B3: %i B4: %i\r\n", state_b1, state_b2, state_b3, state_b4);
+	  HAL_UART_Transmit(&huart3,
+			  buff, numchars, 2000);
+	 HAL_Delay(50);
   }
   /* USER CODE END 3 */
 }
