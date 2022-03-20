@@ -121,6 +121,8 @@ int main(void)
   uint8_t b2_prev = 1;
   uint8_t b3_prev = 1;
   uint8_t b4_prev = 1;
+  uint8_t button_current_state[4];
+  uint8_t button_prev_state[4];
   while (1)
   {
     /* USER CODE END WHILE */
@@ -131,10 +133,10 @@ int main(void)
 	  //the buffer as the data to transmit
 	  //numchars as how much data to transmit.
 
-	  uint8_t state_b1 = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
-	  uint8_t state_b2 = HAL_GPIO_ReadPin(B2_GPIO_Port, B2_Pin);
-	  uint8_t state_b3 = HAL_GPIO_ReadPin(B3_GPIO_Port, B3_Pin);
-	  uint8_t state_b4 = HAL_GPIO_ReadPin(B4_GPIO_Port, B4_Pin);
+	  uint8_t button_current_state[1] = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  uint8_t button_current_state[2] = HAL_GPIO_ReadPin(B2_GPIO_Port, B2_Pin);
+	  uint8_t button_current_state[3] = HAL_GPIO_ReadPin(B3_GPIO_Port, B3_Pin);
+	  uint8_t button_current_state[4] = HAL_GPIO_ReadPin(B4_GPIO_Port, B4_Pin);
 
 
 	  //int numchars = sprintf(buff, "B1: %i\r\n", state_b1);
@@ -144,13 +146,21 @@ int main(void)
 
 
 	 //Test to see if button press sends data
+	  bool is_btn_pressed(uint8_t idx)
+	  {
+		  if (button_current_state[idx] == 1 && button_prev_state[idx] == 0)
+		  {
+			  return true;
+		  }
+		  return false;
+	  }
+	 /*if(b1_prev == 0 && state_b1 == 1)
 
-	 if(b1_prev == 0 && state_b1 == 1)
 	 {
 		HAL_UART_Transmit(&huart3, buff, "I am working", 2000);
 
 	 }
-	 b1_prev = state_b1;
+	 b1_prev = state_b1;*/
 
 	 int pot_result[3];
 	 for(int i = 0; i < 3; i++)
@@ -159,14 +169,32 @@ int main(void)
 	 }
 
 
-	 HAL_UART_Transmit(&huart3, buff, pot_value, 2000);
+
+	 if(is_btn_pressed(1))
+	 {
+		 HAL_UART_Transmit(&huart3, buff, "I am working", 2000);
+	 }
+
+	 for(int i = 0; i < 4; i++)
+	 {
+		 button_prev_state[i] = button_current_state[i];
+	 }
+
+	 /*- make function to check if btn is pressed
+- update main to read all pins and save into array
+- check if btn is pressed
+- update prev state array*/
+
+
+	 //HAL_UART_Transmit(&huart3, buff, pot_value, 2000);
 
 
 	 HAL_Delay(50);
   }
+}
 
   /* USER CODE END 3 */
-}
+
 
 /**
   * @brief System Clock Configuration
