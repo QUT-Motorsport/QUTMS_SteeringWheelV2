@@ -117,6 +117,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t b1_prev = 1;
+  uint8_t b2_prev = 1;
+  uint8_t b3_prev = 1;
+  uint8_t b4_prev = 1;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -137,8 +141,30 @@ int main(void)
 	  int numchars = sprintf(buff, "B1: %i B2: %i B3: %i B4: %i\r\n", state_b1, state_b2, state_b3, state_b4);
 	  HAL_UART_Transmit(&huart3,
 			  buff, numchars, 2000);
+
+
+	 //Test to see if button press sends data
+
+	 if(b1_prev == 0 && state_b1 == 1)
+	 {
+		HAL_UART_Transmit(&huart3, buff, "I am working", 2000);
+
+	 }
+	 b1_prev = state_b1;
+
+	 int pot_result[3];
+	 for(int i = 0; i < 3; i++)
+	 {
+	 pot_result[i] = pot_value[i]/4096 * 120;
+	 }
+
+
+	 HAL_UART_Transmit(&huart3, buff, pot_value, 2000);
+
+
 	 HAL_Delay(50);
   }
+
   /* USER CODE END 3 */
 }
 
