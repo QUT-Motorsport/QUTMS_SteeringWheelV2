@@ -30,11 +30,19 @@
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#define MAX_REGEN_CURRENT 120
+#define MAX_REGEN_DEADZONE 100
+bool is_btn_pressed(uint8_t idx);
+void button_one_function();
+void button_two_function();
+void button_three_function();
+void button_four_function();
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -63,6 +71,10 @@ void SystemClock_Config(void);
 
 uint16_t dma_raw[3];
 uint16_t pot_value[3];
+int pot_result[3];
+uint8_t button_current_state[4];
+uint8_t button_prev_state[4];
+char buff[256];
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc == &hadc1) {
@@ -70,6 +82,40 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 						sizeof(uint16_t) * 3);
 	}
 }
+
+bool is_btn_pressed(uint8_t idx)
+{
+	  if (button_current_state[idx] == 0 && button_prev_state[idx] == 1)
+	  {
+		  return true;
+	  }
+	  return false;
+}
+void button_one_function()
+{
+	 int value_results = sprintf(buff, "value 1: %i value 2: %i value 3: %i\r\n",  pot_result[0], pot_result[1], pot_result[2]);
+	 	 HAL_UART_Transmit(&huart3,
+	 		 	 buff, value_results, 2000);
+}
+void button_two_function()
+{
+	 int numchars = sprintf(buff, "This does nothing at the moment\r\n");
+	 	 HAL_UART_Transmit(&huart3,
+	 			 buff, numchars, 2000);
+}
+void button_three_function()
+{
+	 int fan_toggle = sprintf(buff, "Fan button Pressed\r\n");
+	 	 HAL_UART_Transmit(&huart3,
+	 			 buff, fan_toggle, 2000);
+}
+void button_four_function()
+{
+	 int car_horn = sprintf(buff, "Beep Beep! get out of the way\r\n");
+	 	 HAL_UART_Transmit(&huart3,
+	 			 buff, car_horn, 2000);
+}
+
 
 /* USER CODE END 0 */
 
@@ -117,12 +163,18 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t b1_prev = 1;
-  uint8_t b2_prev = 1;
-  uint8_t b3_prev = 1;
-  uint8_t b4_prev = 1;
-  uint8_t button_current_state[4];
-  uint8_t button_prev_state[4];
+ /* enum{
+  	DISPLAY_POTVALUES,
+  	NOTHING,
+  	TOGGLE_FAN,
+	HORN
+
+  };*/
+
+  for (int i = 0; i < 4; i++) {
+	  button_prev_state[i] = 1;
+  }
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -133,46 +185,47 @@ int main(void)
 	  //the buffer as the data to transmit
 	  //numchars as how much data to transmit.
 
-	  uint8_t button_current_state[1] = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
-	  uint8_t button_current_state[2] = HAL_GPIO_ReadPin(B2_GPIO_Port, B2_Pin);
-	  uint8_t button_current_state[3] = HAL_GPIO_ReadPin(B3_GPIO_Port, B3_Pin);
-	  uint8_t button_current_state[4] = HAL_GPIO_ReadPin(B4_GPIO_Port, B4_Pin);
+	  button_current_state[0] = HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	  button_current_state[1] = HAL_GPIO_ReadPin(B2_GPIO_Port, B2_Pin);
+	  button_current_state[2] = HAL_GPIO_ReadPin(B3_GPIO_Port, B3_Pin);
+	  button_current_state[3] = HAL_GPIO_ReadPin(B4_GPIO_Port, B4_Pin);
 
 
 	  //int numchars = sprintf(buff, "B1: %i\r\n", state_b1);
-	  int numchars = sprintf(buff, "B1: %i B2: %i B3: %i B4: %i\r\n", state_b1, state_b2, state_b3, state_b4);
-	  HAL_UART_Transmit(&huart3,
-			  buff, numchars, 2000);
+	 // int numchars = sprintf(buff, "B1: %i B2: %i B3: %i B4: %i\r\n", button_current_state[0], button_current_state[1], button_current_state[2], button_current_state[3]);
+	 // HAL_UART_Transmit(&huart3,
+	//		  buff, numchars, 2000);
 
 
-	 //Test to see if button press sends data
-	  bool is_btn_pressed(uint8_t idx)
-	  {
-		  if (button_current_state[idx] == 1 && button_prev_state[idx] == 0)
-		  {
-			  return true;
-		  }
-		  return false;
-	  }
-	 /*if(b1_prev == 0 && state_b1 == 1)
 
+
+	// for(int i = 0; i < 3; i++)
+	 //
+	 pot_result[0] = pot_value[0]/4095.0f * 120;
+	 pot_result[1] = pot_value[1]/4095.0f * 100;
+
+
+	 //potValues
+
+
+
+	 //buttton 3 fan on and off
+	 //button 4 is horn
+	 if(is_btn_pressed(0))
 	 {
-		HAL_UART_Transmit(&huart3, buff, "I am working", 2000);
-
+		 button_one_function();
 	 }
-	 b1_prev = state_b1;*/
-
-	 int pot_result[3];
-	 for(int i = 0; i < 3; i++)
-	 {
-	 pot_result[i] = pot_value[i]/4096 * 120;
-	 }
-
-
-
 	 if(is_btn_pressed(1))
 	 {
-		 HAL_UART_Transmit(&huart3, buff, "I am working", 2000);
+		 button_two_function();
+	 }
+	 if(is_btn_pressed(2))
+	 {
+		 button_three_function();
+	 }
+	 if(is_btn_pressed(3))
+	 {
+		 button_four_function();
 	 }
 
 	 for(int i = 0; i < 4; i++)
@@ -180,10 +233,7 @@ int main(void)
 		 button_prev_state[i] = button_current_state[i];
 	 }
 
-	 /*- make function to check if btn is pressed
-- update main to read all pins and save into array
-- check if btn is pressed
-- update prev state array*/
+
 
 
 	 //HAL_UART_Transmit(&huart3, buff, pot_value, 2000);
