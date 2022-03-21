@@ -210,7 +210,7 @@ int main(void) {
 		if (is_btn_pressed(2)) {
 			button_three_function();
 		}
-		if (is_btn_pressed(3)) {
+		if (button_current_state[3] == 0) {
 			button_four_function();
 		}
 
