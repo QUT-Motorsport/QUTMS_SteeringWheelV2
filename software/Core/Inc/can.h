@@ -39,6 +39,7 @@ extern CAN_HandleTypeDef hcan1;
 
 extern message_queue_t queue_CAN;
 extern message_queue_t queue_CAN_OD;
+extern uint32_t txMailbox_CAN1;
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
