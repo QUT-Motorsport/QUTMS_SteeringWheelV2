@@ -140,6 +140,7 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 
 	SW_hbState.stateID = SW_STATE_START;
+	SW_hbState.flags.FAN_ENABLE = 1;
 
 	setup_CAN();
 
@@ -210,6 +211,7 @@ int main(void) {
 
 		//HAL_UART_Transmit(&huart3, buff, pot_value, 2000);
 
+		timer_update(&timer_heartbeat, NULL);
 		HAL_Delay(1);
 	}
 }
