@@ -1,0 +1,13 @@
+Screen.c:75:13:Screen_Reset	8	static
+Screen.c:90:13:Screen_SendCommand	16	static
+Screen.c:103:13:Screen_SendData	16	static
+Screen.c:111:13:Screen_ReadBusy_HIGH	16	static
+Screen.c:126:6:Screen_Load_LUT	24	static
+Screen.c:149:6:Screen_4Gray_Init	8	static
+Screen.c:227:6:Screen_1Gray_Init	8	static
+Screen.c:305:6:Screen_4Gray_Clear	24	static
+Screen.c:354:6:Screen_1Gray_Clear	16	static
+Screen.c:382:6:Screen_4Gray_Display	32	static
+Screen.c:496:6:Screen_1Gray_Display	24	static
+Screen.c:523:6:Screen_1Gray_Display_Part	32	static
+Screen.c:555:6:Screen_Sleep	8	static

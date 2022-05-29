@@ -1,0 +1,3 @@
+ScreenConfig.c:6:6:Screen_WriteByte	16	static
+ScreenConfig.c:11:5:Screen_Init	8	static
+ScreenConfig.c:19:6:Screen_Exit	8	static
