@@ -91,29 +91,54 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   // Initialise the screen
-  /*
-  UBYTE *Canvas;
+
+  //UBYTE *Canvas;
 	if(Screen_Init()!=0){
 			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 	 }
 
+	//Screen_1Gray_Init();
 	Screen_4Gray_Init();
-	Screen_1Gray_Init();
+	Screen_4Gray_Clear();
 	Screen_Delay_ms(500);
 
 	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-	/*UWORD Imagesize = ((SCREEN_WIDTH % 4 == 0)? (SCREEN_WIDTH / 4 ): (SCREEN_WIDTH / 4 + 1)) * SCREEN_HEIGHT;
+	UBYTE *Canvas;
+	UWORD Imagesize = ((SCREEN_WIDTH % 4 == 0)? (SCREEN_WIDTH / 4 ): (SCREEN_WIDTH / 4 + 1)) * SCREEN_HEIGHT;
 	if((Canvas = (UBYTE *)malloc(Imagesize)) == NULL) {
 		return -1;
 	}
-	return 0;
+
+
   // Initialise the canvas
-  Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, 270, WHITE);
+  //Screen_1Gray_Clear();
+	//Screen_1Gray_Init();
+	//Screen_1Gray_Clear();
+  Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, 0, WHITE);
   Paint_SelectImage(Canvas);
   Paint_SetScale(4);
   Paint_Clear(WHITE);
-  Paint_DrawString_EN(10, 200, "QUT Motorsports", &Font24, BLACK, GRAY4);
+
+
   Screen_4Gray_Display(Canvas);
+
+  HAL_Delay(500);
+  Paint_DrawString_EN(0, 0, "QUT Motorsports", &Font24, WHITE, GRAY1);
+  Paint_DrawString_EN(0, 25, "QUT Motorsports", &Font24, WHITE, GRAY2);
+  Paint_DrawString_EN(0, 50, "QUT Motorsports", &Font24, WHITE, GRAY3);
+  Paint_DrawString_EN(0, 75, "QUT Motorsports", &Font24, WHITE, GRAY4);
+
+  Paint_DrawString_EN(0, 100, "QUT Motorsports", &Font24, BLACK, GRAY1);
+    Paint_DrawString_EN(0, 125, "QUT Motorsports", &Font24, BLACK, GRAY2);
+    Paint_DrawString_EN(0, 150, "QUT Motorsports", &Font24, BLACK, GRAY3);
+    Paint_DrawString_EN(0, 175, "QUT Motorsports", &Font24, BLACK, GRAY4);
+  Screen_4Gray_Display(Canvas);
+
+  //Paint_DrawString_EN(10, 10, "QUT Motorsports", &Font24, BLACK, GRAY2);
+    //Screen_1Gray_Display(Canvas);
+
+  HAL_Delay(10000);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,9 +146,16 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-	HAL_Delay(300);
+
     /* USER CODE BEGIN 3 */
+	 /* Screen_1Gray_Clear();
+	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	  HAL_Delay(1000);
+	  Screen_1Gray_Clear();
+	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	  */
+	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -181,12 +213,12 @@ static void MX_SPI1_Init(void)
   /* SPI1 parameter configuration*/
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
-  hspi1.Init.Direction = SPI_DIRECTION_1LINE;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
+  hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -212,21 +244,32 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SRST_Pin|SDC_Pin|SBUSY_Pin|SCS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, SBUSY_Pin|SCS_Pin|SDC_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SRST_GPIO_Port, SRST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, LED1_Pin|LED2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : SRST_Pin SDC_Pin SBUSY_Pin SCS_Pin */
-  GPIO_InitStruct.Pin = SRST_Pin|SDC_Pin|SBUSY_Pin|SCS_Pin;
+  /*Configure GPIO pins : SBUSY_Pin SCS_Pin SDC_Pin */
+  GPIO_InitStruct.Pin = SBUSY_Pin|SCS_Pin|SDC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SRST_Pin */
+  GPIO_InitStruct.Pin = SRST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(SRST_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED1_Pin LED2_Pin */
   GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin;

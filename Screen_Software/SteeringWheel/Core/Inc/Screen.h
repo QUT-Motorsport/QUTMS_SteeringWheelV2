@@ -17,6 +17,7 @@
 void Screen_4Gray_Clear(void);
 void Screen_4Gray_Init(void);
 void Screen_4Gray_Display(const UBYTE *Image);
+void Screen_4Gray_ClearData(uint8_t data);
 
 void Screen_1Gray_Clear(void);
 void Screen_1Gray_Init(void);

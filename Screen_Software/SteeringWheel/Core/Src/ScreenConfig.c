@@ -5,7 +5,16 @@ extern SPI_HandleTypeDef hspi1;
 
 void Screen_WriteByte(UBYTE value)
 {
-    HAL_SPI_Transmit(&hspi1, &value, 1, 1000);
+	uint8_t data = value;
+    HAL_SPI_Transmit(&hspi1, &data, 1, 1000);
+}
+
+void Screen_Digital_Write(uint16_t pin, GPIO_TypeDef* port, uint8_t value) {
+	HAL_GPIO_WritePin(port, pin, value == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
+}
+
+uint8_t Screen_Digital_Read(uint16_t pin, GPIO_TypeDef* port) {
+	return HAL_GPIO_ReadPin(port, pin);
 }
 
 int Screen_Init(void)

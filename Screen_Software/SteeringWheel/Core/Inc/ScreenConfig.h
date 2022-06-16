@@ -20,18 +20,13 @@
 #define UDOUBLE uint32_t
 
 /**
- * GPIO read and write
-**/
-
-#define Screen_Digital_Write(_pin, _port,_value) HAL_GPIO_WritePin(_pin, _port, _value == 0? GPIO_PIN_RESET:GPIO_PIN_SET)
-#define Screen_Digital_Read(_pin, _port) HAL_GPIO_ReadPin(_pin, _port)
-
-/**
  * delay ms
 **/
 #define Screen_Delay_ms(_ms) HAL_Delay(_ms);
 
 void Screen_WriteByte(UBYTE value);
+void Screen_Digital_Write(uint16_t pin, GPIO_TypeDef* port, uint8_t value);
+uint8_t Screen_Digital_Read(uint16_t pin, GPIO_TypeDef* port);
 
 int Screen_Init(void);
 void Screen_Exit(void);

@@ -160,7 +160,7 @@ void Screen_4Gray_Init(void)
     Screen_SendData(0xF7);
     Screen_ReadBusy_HIGH();
 
-    Screen_SendCommand(0x01); // setting gaet number
+    Screen_SendCommand(0x01); // setting gate number
     Screen_SendData(0xDF);
     Screen_SendData(0x01);
     Screen_SendData(0x00);
@@ -302,6 +302,48 @@ void Screen_1Gray_Init(void)
 function :	Clear screen
 parameter:
 ******************************************************************************/
+void Screen_4Gray_ClearData(uint8_t data)
+{
+    UWORD Width, Height;
+    Width = (SCREEN_WIDTH % 8 == 0)? (SCREEN_WIDTH / 8 ): (SCREEN_WIDTH / 8 + 1);
+    Height = SCREEN_HEIGHT;
+
+    Screen_SendCommand(0x49);
+    Screen_SendData(0x00);
+    Screen_SendCommand(0x4E);
+    Screen_SendData(0x00);
+    Screen_SendData(0x00);
+    Screen_SendCommand(0x4F);
+    Screen_SendData(0x00);
+    Screen_SendData(0x00);
+
+    Screen_SendCommand(0x24);
+    for (UWORD j = 0; j < (Height*Width); j++) {
+    	   Screen_SendData(j % 4 == 0 ? 0x00 : 0xff);
+    }
+
+    Screen_SendCommand(0x4E);
+    Screen_SendData(0x00);
+    Screen_SendData(0x00);
+
+    Screen_SendCommand(0x4F);
+    Screen_SendData(0x00);
+    Screen_SendData(0x00);
+
+    Screen_SendCommand(0x26);
+    for (UWORD j = 0; j < (Height*Width); j++) {
+    	   Screen_SendData(j % 4 == 0 ? 0x00 : 0xff);
+    }
+
+    Screen_Load_LUT(0);
+    Screen_SendCommand(0x22);
+    Screen_SendData(0xC7);
+
+    Screen_SendCommand(0x20);
+    Screen_ReadBusy_HIGH();
+}
+
+
 void Screen_4Gray_Clear(void)
 {
     UWORD Width, Height;
