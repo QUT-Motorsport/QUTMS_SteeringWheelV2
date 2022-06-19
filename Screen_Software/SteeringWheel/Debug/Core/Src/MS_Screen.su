@@ -1,1 +1,7 @@
-MS_Screen.c:12:5:MS_Screen_Init	16	static
+MS_Screen.c:14:6:Screen_Static_Init	8	static
+MS_Screen.c:22:6:Static_Display	16	static
+MS_Screen.c:27:6:Screen_Dynamic_Init	8	static
+MS_Screen.c:35:6:Dynamic_Display	16	static
+MS_Screen.c:40:8:Canvas_Init	16	static
+MS_Screen.c:50:6:Screen_Startup	24	static
+MS_Screen.c:69:6:Dynamic_Counter	24	static

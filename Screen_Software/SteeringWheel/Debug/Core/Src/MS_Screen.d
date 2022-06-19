@@ -25,7 +25,8 @@ Core/Src/MS_Screen.o: ../Core/Src/MS_Screen.c ../Core/Inc/MS_Screen.h \
  ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr.h \
  ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h \
  ../Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_spi.h \
- ../Core/Inc/GUI_Paint.h ../Core/Inc/fonts.h ../Core/Inc/Debug.h
+ ../Core/Inc/GUI_Paint.h ../Core/Inc/fonts.h ../Core/Inc/Debug.h \
+ ../Core/Inc/ScreenConfig.h
 
 ../Core/Inc/MS_Screen.h:
 
@@ -90,3 +91,5 @@ Core/Src/MS_Screen.o: ../Core/Src/MS_Screen.c ../Core/Inc/MS_Screen.h \
 ../Core/Inc/fonts.h:
 
 ../Core/Inc/Debug.h:
+
+../Core/Inc/ScreenConfig.h:

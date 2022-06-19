@@ -93,51 +93,18 @@ int main(void)
   // Initialise the screen
 
   //UBYTE *Canvas;
-	if(Screen_Init()!=0){
-			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	 }
+  if(Screen_Init()!=0){
+	 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+   }
 
-	//Screen_1Gray_Init();
-	Screen_4Gray_Init();
-	Screen_4Gray_Clear();
-	Screen_Delay_ms(500);
-
+  Screen_Static_Init();
 	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-	UBYTE *Canvas;
-	UWORD Imagesize = ((SCREEN_WIDTH % 4 == 0)? (SCREEN_WIDTH / 4 ): (SCREEN_WIDTH / 4 + 1)) * SCREEN_HEIGHT;
-	if((Canvas = (UBYTE *)malloc(Imagesize)) == NULL) {
-		return -1;
-	}
+  UBYTE *Canvas = Canvas_Init();
 
+  Screen_Startup(Canvas);
 
-  // Initialise the canvas
-  //Screen_1Gray_Clear();
-	//Screen_1Gray_Init();
-	//Screen_1Gray_Clear();
-  Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, 0, WHITE);
-  Paint_SelectImage(Canvas);
-  Paint_SetScale(4);
-  Paint_Clear(WHITE);
-
-
-  Screen_4Gray_Display(Canvas);
-
-  HAL_Delay(500);
-  Paint_DrawString_EN(0, 0, "QUT Motorsports", &Font24, WHITE, GRAY1);
-  Paint_DrawString_EN(0, 25, "QUT Motorsports", &Font24, WHITE, GRAY2);
-  Paint_DrawString_EN(0, 50, "QUT Motorsports", &Font24, WHITE, GRAY3);
-  Paint_DrawString_EN(0, 75, "QUT Motorsports", &Font24, WHITE, GRAY4);
-
-  Paint_DrawString_EN(0, 100, "QUT Motorsports", &Font24, BLACK, GRAY1);
-    Paint_DrawString_EN(0, 125, "QUT Motorsports", &Font24, BLACK, GRAY2);
-    Paint_DrawString_EN(0, 150, "QUT Motorsports", &Font24, BLACK, GRAY3);
-    Paint_DrawString_EN(0, 175, "QUT Motorsports", &Font24, BLACK, GRAY4);
-  Screen_4Gray_Display(Canvas);
-
-  //Paint_DrawString_EN(10, 10, "QUT Motorsports", &Font24, BLACK, GRAY2);
-    //Screen_1Gray_Display(Canvas);
-
-  HAL_Delay(10000);
+  Screen_Dynamic_Init();
+  uint16_t counter = 0;
 
   /* USER CODE END 2 */
 
@@ -155,7 +122,8 @@ int main(void)
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 	  */
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  HAL_Delay(1000);
+	  //Dynamic_Counter(Canvas, counter);
+	  counter++;
   }
   /* USER CODE END 3 */
 }
