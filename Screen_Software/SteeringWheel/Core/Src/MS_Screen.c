@@ -21,7 +21,7 @@ void Screen_Static_Init()
 
 void Static_Display(UBYTE *Canvas)
 {
-	Screen_1Gray_Display(Canvas);
+	Screen_4Gray_Display(Canvas);
 }
 
 void Screen_Dynamic_Init()
@@ -34,7 +34,7 @@ void Screen_Dynamic_Init()
 
 void Dynamic_Display(UBYTE *Canvas)
 {
-	Screen_4Gray_Display(Canvas);
+	Screen_1Gray_Display(Canvas);
 }
 
 UBYTE* Canvas_Init()
@@ -66,13 +66,13 @@ void Screen_Startup(UBYTE * Canvas)
 	Static_Display(Canvas);
 }
 
-void Dynamic_Counter(UBYTE *Canvas, uint16_t value)
+void Dynamic_Counter(UBYTE *Canvas, int32_t value)
 {
 	Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ORIENTATION, NONINVERTED);
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(4);
-	Paint_Clear(BLACK);
-
+	Paint_Clear(WHITE);
+	Paint_ClearWindows(20, 20, 80, 80, WHITE);
 	Paint_DrawNum(50, 50, value, &Font24, WHITE, ClrBlack);
 	Dynamic_Display(Canvas);
 	HAL_Delay(1000);

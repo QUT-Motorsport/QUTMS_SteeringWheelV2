@@ -43,6 +43,6 @@ UBYTE* Canvas_Init(void);
 void Screen_Startup(UBYTE * Canvas);
 void Static_Display(UBYTE *Canvas);
 void Dynamic_Display(UBYTE *Canvas);
-void Dynamic_Counter(UBYTE *Canvas, uint16_t value);
+void Dynamic_Counter(UBYTE *Canvas, int32_t value);
 
 #endif /* INC_MS_SCREEN_H_ */

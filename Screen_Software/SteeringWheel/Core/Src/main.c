@@ -92,7 +92,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // Initialise the screen
 
-  //UBYTE *Canvas;
   if(Screen_Init()!=0){
 	 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
    }
@@ -102,11 +101,13 @@ int main(void)
   UBYTE *Canvas = Canvas_Init();
 
   Screen_Startup(Canvas);
+  free(Canvas);
 
   Screen_Dynamic_Init();
-  uint16_t counter = 0;
+  int32_t counter = 0;
 
   /* USER CODE END 2 */
+  UBYTE *CountScreen = Canvas_Init();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -122,8 +123,9 @@ int main(void)
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 	  */
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  //Dynamic_Counter(Canvas, counter);
+	  Dynamic_Counter(CountScreen, counter);
 	  counter++;
+	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
