@@ -150,49 +150,49 @@ void Screen_4Gray_Init(void)
 {
     Screen_Reset();
 
-    Screen_SendCommand(0x12);
+    Screen_SendCommand(SCREEN_CMD_SW_RESET);
     Screen_Delay_ms(300);
 
-    Screen_SendCommand(0x46);
+    Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_RED_RAM);
     Screen_SendData(0xF7);
     Screen_ReadBusy_HIGH();
-    Screen_SendCommand(0x47);
+    Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_BW_RAM);
     Screen_SendData(0xF7);
     Screen_ReadBusy_HIGH();
 
-    Screen_SendCommand(0x01); // setting gate number
+    Screen_SendCommand(SCREEN_CMD_GATE_OUTPUT_CONTROL); // setting gate number
     Screen_SendData(0xDF);
     Screen_SendData(0x01);
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x03); // set gate voltage
+    Screen_SendCommand(SCREEN_CMD_DRIVING_VOLTAGE_CONTROL); // set gate voltage
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x04); // set source voltage
+    Screen_SendCommand(SCREEN_CMD_SOURCE_DRIVING_VOLTAGE_CONTROL); // set source voltage
     Screen_SendData(0x41);
     Screen_SendData(0xA8);
     Screen_SendData(0x32);
 
-    Screen_SendCommand(0x11); // set data entry sequence
+    Screen_SendCommand(SCREEN_CMD_DATA_ENTRY_MODE); // set data entry sequence
     Screen_SendData(0x03);
 
-    Screen_SendCommand(0x3C); // set border
+    Screen_SendCommand(SCREEN_CMD_BORDER_WAVEFORM_CTRL); // set border
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x0C); // set booster strength
+    Screen_SendCommand(SCREEN_CMD_BOOSTER_SOFT_START_CTRL); // set booster strength
     Screen_SendData(0xAE);
     Screen_SendData(0xC7);
     Screen_SendData(0xC3);
     Screen_SendData(0xC0);
     Screen_SendData(0xC0);
 
-    Screen_SendCommand(0x18); // set internal sensor on
+    Screen_SendCommand(SCREEN_CMD_TEMP_SENSOR_CTRL); // set internal sensor on
     Screen_SendData(0x80);
 
-    Screen_SendCommand(0x2C); // set vcom value
+    Screen_SendCommand(SCREEN_CMD_WRITE_VCOM_REG); // set vcom value
     Screen_SendData(0x44);
 
-    Screen_SendCommand(0x37); // set display option, these setting turn on previous function
+    Screen_SendCommand(SCREEN_CMD_WRITE_DISPLAY_OPTION_REG); // set display option, these setting turn on previous function
     Screen_SendData(0x00);
     Screen_SendData(0x00);
     Screen_SendData(0x00);
@@ -204,19 +204,19 @@ void Screen_4Gray_Init(void)
     Screen_SendData(0x00);
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x44); // setting X direction start/end position of RAM
+    Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS); // setting X direction start/end position of RAM
     Screen_SendData(0x00);
     Screen_SendData(0x00);
     Screen_SendData(0x17);
     Screen_SendData(0x01);
 
-    Screen_SendCommand(0x45); // setting Y direction start/end position of RAM
+    Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_YPOS); // setting Y direction start/end position of RAM
     Screen_SendData(0x00);
     Screen_SendData(0x00);
     Screen_SendData(0xDF);
     Screen_SendData(0x01);
 
-    Screen_SendCommand(0x22); // Display Update Control 2
+    Screen_SendCommand(SCREEN_CMD_DISPLAY_UPDATE_CTRL2); // Display Update Control 2
     Screen_SendData(0xCF);
 }
 
@@ -228,49 +228,49 @@ void Screen_1Gray_Init(void)
 {
     Screen_Reset();
 
-    Screen_SendCommand(0x12);
+    Screen_SendCommand(SCREEN_CMD_SW_RESET);
     Screen_Delay_ms(300);
 
-    Screen_SendCommand(0x46);
+    Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_RED_RAM);
     Screen_SendData(0xF7);
     Screen_ReadBusy_HIGH();
-    Screen_SendCommand(0x47);
+    Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_BW_RAM);
     Screen_SendData(0xF7);
     Screen_ReadBusy_HIGH();
 
-    Screen_SendCommand(0x01); // setting gaet number
+    Screen_SendCommand(SCREEN_CMD_GATE_OUTPUT_CONTROL); // setting gate number
     Screen_SendData(0xDF);
     Screen_SendData(0x01);
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x03); // set gate voltage
+    Screen_SendCommand(SCREEN_CMD_DRIVING_VOLTAGE_CONTROL); // set gate voltage
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x04); // set source voltage
+    Screen_SendCommand(SCREEN_CMD_SOURCE_DRIVING_VOLTAGE_CONTROL); // set source voltage
     Screen_SendData(0x41);
     Screen_SendData(0xA8);
     Screen_SendData(0x32);
 
-    Screen_SendCommand(0x11); // set data entry sequence
+    Screen_SendCommand(SCREEN_CMD_DATA_ENTRY_MODE); // set data entry sequence
     Screen_SendData(0x03);
 
-    Screen_SendCommand(0x3C); // set border
+    Screen_SendCommand(SCREEN_CMD_BORDER_WAVEFORM_CTRL); // set border
     Screen_SendData(0x00);
 
-    Screen_SendCommand(0x0C); // set booster strength
+    Screen_SendCommand(SCREEN_CMD_BOOSTER_SOFT_START_CTRL); // set booster strength
     Screen_SendData(0xAE);
     Screen_SendData(0xC7);
     Screen_SendData(0xC3);
     Screen_SendData(0xC0);
     Screen_SendData(0xC0);
 
-    Screen_SendCommand(0x18); // set internal sensor on
+    Screen_SendCommand(SCREEN_CMD_TEMP_SENSOR_CTRL); // set internal sensor on
     Screen_SendData(0x80);
 
-    Screen_SendCommand(0x2C); // set vcom value
+    Screen_SendCommand(SCREEN_CMD_WRITE_VCOM_REG); // set vcom value
     Screen_SendData(0x44);
 
-    Screen_SendCommand(0x37); // set display option, these setting turn on previous function
+    Screen_SendCommand(SCREEN_CMD_WRITE_DISPLAY_OPTION_REG); // set display option, these setting turn on previous function
     Screen_SendData(0x00);     //can switch 1 gray or 4 gray
     Screen_SendData(0xFF);
     Screen_SendData(0xFF);
@@ -282,19 +282,19 @@ void Screen_1Gray_Init(void)
     Screen_SendData(0xFF);
     Screen_SendData(0xFF);
 
-    Screen_SendCommand(0x44); // setting X direction start/end position of RAM
+    Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS); // setting X direction start/end position of RAM
     Screen_SendData(0x00);
     Screen_SendData(0x00);
     Screen_SendData(0x17);
     Screen_SendData(0x01);
 
-    Screen_SendCommand(0x45); // setting Y direction start/end position of RAM
+    Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_YPOS); // setting Y direction start/end position of RAM
     Screen_SendData(0x00);
     Screen_SendData(0x00);
     Screen_SendData(0xDF);
     Screen_SendData(0x01);
 
-    Screen_SendCommand(0x22); // Display Update Control 2
+    Screen_SendCommand(SCREEN_CMD_DISPLAY_UPDATE_CTRL2); // Display Update Control 2
     Screen_SendData(0xCF);
 }
 
@@ -308,8 +308,9 @@ void Screen_4Gray_ClearData(uint8_t data)
     Width = (SCREEN_WIDTH % 8 == 0)? (SCREEN_WIDTH / 8 ): (SCREEN_WIDTH / 8 + 1);
     Height = SCREEN_HEIGHT;
 
-    Screen_SendCommand(0x49);
-    Screen_SendData(0x00);
+    /*Screen_SendCommand(0x18);
+    Screen_SendData(0x00);*/
+
     Screen_SendCommand(0x4E);
     Screen_SendData(0x00);
     Screen_SendData(0x00);

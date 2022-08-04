@@ -123,8 +123,7 @@ int main(void)
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 	  */
 	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  Dynamic_Counter(CountScreen, counter);
-	  counter++;
+	  Dynamic_Counter(CountScreen, counter++);
 	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
