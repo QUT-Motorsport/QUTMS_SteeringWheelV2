@@ -92,39 +92,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
   // Initialise the screen
 
-  if(Screen_Init()!=0){
-	 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-   }
-
+  Screen_Init();
   Screen_Static_Init();
-	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-  UBYTE *Canvas = Canvas_Init();
-
-  Screen_Startup(Canvas);
-  free(Canvas);
-
-  Screen_Dynamic_Init();
-  int32_t counter = 0;
-
-  /* USER CODE END 2 */
-  UBYTE *CountScreen = Canvas_Init();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-	 /* Screen_1Gray_Clear();
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  HAL_Delay(1000);
-	  Screen_1Gray_Clear();
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  */
-	  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-	  Dynamic_Counter(CountScreen, counter++);
-	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
