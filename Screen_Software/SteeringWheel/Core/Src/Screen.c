@@ -68,46 +68,6 @@ static const UBYTE lut_1Gray_A2[] =
 0x22,0x22,0x22,0x22,0x22
 };
 
-/******************************************************************************
-function :	Software reset
-parameter:
-******************************************************************************/
-static void Screen_Reset(void)
-{
-    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 1);
-    Screen_Delay_ms(300);
-    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 0);
-    Screen_Delay_ms(3);
-    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 1);
-    Screen_Delay_ms(300);
-}
-
-/******************************************************************************
-function :	send command
-parameter:
-     Reg : Command register
-******************************************************************************/
-static void Screen_SendCommand(UBYTE Reg)
-{
-    Screen_Digital_Write(SDC_Pin, SDC_GPIO_Port, 0);
-    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 0);
-    Screen_WriteByte(Reg);
-    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 1);
-}
-
-/******************************************************************************
-function :	send data
-parameter:
-    Data : Write data
-******************************************************************************/
-static void Screen_SendData(UBYTE Data)
-{
-    Screen_Digital_Write(SDC_Pin, SDC_GPIO_Port, 1);
-    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 0);
-    Screen_WriteByte(Data);
-    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 1);
-}
-
 static void Screen_ReadBusy_HIGH(void)
 {
     Debug("e-Paper busy\r\n");

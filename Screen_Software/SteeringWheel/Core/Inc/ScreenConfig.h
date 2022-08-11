@@ -54,5 +54,44 @@ static inline void Screen_Exit()
     Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 0);
 }
 
+/******************************************************************************
+function :	Software reset
+parameter:
+******************************************************************************/
+static inline void Screen_Reset(void)
+{
+    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 1);
+    Screen_Delay_ms(300);
+    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 0);
+    Screen_Delay_ms(3);
+    Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 1);
+    Screen_Delay_ms(300);
+}
+
+/******************************************************************************
+function :	send command
+parameter:
+     Reg : Command register
+******************************************************************************/
+static inline void Screen_SendCommand(UBYTE Reg)
+{
+    Screen_Digital_Write(SDC_Pin, SDC_GPIO_Port, 0);
+    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 0);
+    Screen_WriteByte(Reg);
+    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 1);
+}
+
+/******************************************************************************
+function :	send data
+parameter:
+    Data : Write data
+******************************************************************************/
+static inline void Screen_SendData(UBYTE Data)
+{
+    Screen_Digital_Write(SDC_Pin, SDC_GPIO_Port, 1);
+    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 0);
+    Screen_WriteByte(Data);
+    Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 1);
+}
 
 #endif
