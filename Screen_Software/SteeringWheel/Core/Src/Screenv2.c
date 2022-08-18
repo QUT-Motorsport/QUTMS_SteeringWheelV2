@@ -70,10 +70,27 @@ void Screen_Set_Border() // TODO: use enum for custmoisation if necessary
 	Screen_SendData(0x00);
 }
 
-/*void Screen_Set_Booster_Soft_Start()
+void Screen_Set_Booster_Soft_Start()
 {
+	Screen_SendCommand(SCREEN_CMD_BOOSTER_SOFT_START_CTRL); // set booster strength
+	Screen_SendData(0xAE);
+	Screen_SendData(0xC7);
+	Screen_SendData(0xC3);
+	Screen_SendData(0xC0);
+	Screen_SendData(0xC0);
+}
 
-}*/
+void Screen_Set_Internal_TempSensor_On()
+{
+	Screen_SendCommand(SCREEN_CMD_TEMP_SENSOR_CTRL); // set internal sensor on
+	Screen_SendData(0x80);
+}
+
+void Screen_Set_Vcom_Value(uint8_t val)
+{
+	Screen_SendCommand(SCREEN_CMD_WRITE_VCOM_REG); // set vcom value
+	Screen_SendData(val);
+}
 
 void Screen_Setup()
 {
@@ -82,6 +99,9 @@ void Screen_Setup()
 	Screen_Gate_Init();
 	Screen_Set_DataEntryMode(SCREEN_DATA_ENTRY_MODE_INC_X | SCREEN_DATA_ENTRY_MODE_INC_Y | SCREEN_DATA_ENTRY_MODE_X_UPDATE);
 	Screen_Set_Border();
+	Screen_Set_Booster_Soft_Start();
+	Screen_Set_Internal_TempSensor_On();
+	Screen_set_Vcom_Value(0x44);
 
 }
 
