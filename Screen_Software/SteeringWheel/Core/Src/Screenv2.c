@@ -22,31 +22,32 @@ static const UBYTE lut_4Gray_GC[] =
 	0x22,0x22,0x22,0x22,0x22
 };
 
-void Screen_Clear()                                                                                                                                                                                                              x
+/*void Screen_Clear()                                                                                                                                                                                                              x
 {
 
-}
+}*/
 
 // TODO: Figure out what this does, hex codes?
-static inline void Screen_RedRam_Init()
+void Screen_RedRam_Init()
 {
 	Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_RED_RAM);
 	Screen_SendData(0xF7);
 	Screen_ReadBusy_HIGH();
+
 	Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_BW_RAM);
 	Screen_SendData(0xF7);
 	Screen_ReadBusy_HIGH();
 }
 
 
-static inline void Screen_Software_Reset()
+void Screen_Software_Reset()
 {
 	Screen_Reset();
 	Screen_SendCommand(SCREEN_CMD_SW_RESET);
 	Screen_Delay_ms(300);
 }
 
-static inline void Screen_Gate_Init()
+void Screen_Gate_Init()
 {
 	Screen_SendCommand(SCREEN_CMD_GATE_OUTPUT_CONTROL); // setting gate number
 	Screen_SendData(0xDF);
@@ -57,19 +58,24 @@ static inline void Screen_Gate_Init()
 	Screen_SendData(0x00);
 }
 
-static inline void Screen_Set_DataEntryMode(SCREEN_DATA_ENTRY_MODE mode)
+void Screen_Set_DataEntryMode(SCREEN_DATA_ENTRY_MODE mode)
 {
 	Screen_SendCommand(SCREEN_CMD_DATA_ENTRY_MODE);
 	Screen_SendData(mode);
 }
 
-static inline void Screen_Set_Border() // TODO: use enum for custmoisation if necessary
+void Screen_Set_Border() // TODO: use enum for custmoisation if necessary
 {
 	Screen_SendCommand(SCREEN_CMD_BORDER_WAVEFORM_CTRL); // set border
 	Screen_SendData(0x00);
 }
 
-void Screen_Init()
+/*void Screen_Set_Booster_Soft_Start()
+{
+
+}*/
+
+void Screen_Setup()
 {
 	Screen_Software_Reset();
 	Screen_RedRam_Init();

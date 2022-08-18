@@ -29,6 +29,8 @@
 
 void Screen_WriteByte(UBYTE value);
 
+int Init_Spi_Handle();
+
 static inline void Screen_Digital_Write(uint16_t pin, GPIO_TypeDef* port, uint8_t value)
 {
 	HAL_GPIO_WritePin(port, pin, value == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
@@ -40,8 +42,9 @@ static inline uint8_t Screen_Digital_Read(uint16_t pin, GPIO_TypeDef* port)
 }
 
 
-static inline void Screen_Init()
+static inline void Screen_Device_Init()
 {
+	Init_Spi_Handle();
     Screen_Digital_Write(SDC_Pin, SDC_GPIO_Port, 0);
     Screen_Digital_Write(SCS_Pin, SCS_GPIO_Port, 0);
     Screen_Digital_Write(SRST_Pin, SRST_GPIO_Port, 1);

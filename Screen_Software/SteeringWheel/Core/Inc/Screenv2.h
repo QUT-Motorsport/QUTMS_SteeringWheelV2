@@ -38,10 +38,10 @@ typedef enum SCREEN_DATA_ENTRY_MODE {
 	SCREEN_DATA_ENTRY_MDOE_DEC_X = 0b00000000,
 	SCREEN_DATA_ENTRY_MODE_Y_UPDATE = 0b00000100, // TODO: double check this is correct
 	SCREEN_DATA_ENTRY_MODE_X_UPDATE = 0b00000000
-};
+} SCREEN_DATA_ENTRY_MODE;
 
 void Screen_Clear();
-void Screen_Init();
+void Screen_Setup();
 void Screen_Display(const UBYTE * Image);
 
 
