@@ -1,17 +1,23 @@
-18:04:23 **** Incremental Build of configuration Debug for project SteeringWheel ****
+17:06:27 **** Incremental Build of configuration Debug for project SteeringWheel ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/Screen.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F207xx -c -I../Core/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/Screen.d" -MT"Core/Src/Screen.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/Screen.o"
-arm-none-eabi-gcc -o "SteeringWheel.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\n10255460\OneDrive - Queensland University of Technology\QUTMS_SteeringWheelV2\Screen_Software\SteeringWheel\STM32F207VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteeringWheel.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+arm-none-eabi-gcc "../Core/Src/Screenv2.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F207xx -c -I../Core/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/Screenv2.d" -MT"Core/Src/Screenv2.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/Screenv2.o"
+../Core/Src/Screenv2.c:55:20: warning: 'lut_1Gray_A2' defined but not used [-Wunused-const-variable=]
+   55 | static const UBYTE lut_1Gray_A2[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+      |                    ^~~~~~~~~~~~
+../Core/Src/Screenv2.c:24:20: warning: 'lut_1Gray_GC' defined but not used [-Wunused-const-variable=]
+   24 | static const UBYTE lut_1Gray_GC[] = { 0x2A, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00,
+      |                    ^~~~~~~~~~~~
+arm-none-eabi-gcc -o "SteeringWheel.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\n10255460\OneDrive - Queensland University of Technology\Documents\QUTMS_SteeringWheelV2\Screen_Software\SteeringWheel\STM32F207VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SteeringWheel.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: SteeringWheel.elf
  
 arm-none-eabi-size   SteeringWheel.elf 
 arm-none-eabi-objdump -h -S  SteeringWheel.elf  > "SteeringWheel.list"
    text	   data	    bss	    dec	    hex	filename
-  23652	    128	   1704	  25484	   638c	SteeringWheel.elf
+   8684	     20	   1660	  10364	   287c	SteeringWheel.elf
 Finished building: default.size.stdout
  
 Finished building: SteeringWheel.list
  
 
-18:04:24 Build Finished. 0 errors, 0 warnings. (took 1s.311ms)
+17:06:28 Build Finished. 0 errors, 2 warnings. (took 1s.149ms)
 
