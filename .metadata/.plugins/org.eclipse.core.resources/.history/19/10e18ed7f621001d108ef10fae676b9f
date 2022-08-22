@@ -1,0 +1,18 @@
+/*
+ * MS_ScreenV2.c
+ *
+ *  Created on: Aug 22, 2022
+ *      Author: n10255460
+ */
+
+
+UBYTE * Buffer;
+
+void MS_Screen_Init()
+{
+
+}
+
+void MS_Screen_DrawPixel(uint16_t x, uint16_t y);
+void MS_Screen_Clear();
+void MS_Screen_Flush();

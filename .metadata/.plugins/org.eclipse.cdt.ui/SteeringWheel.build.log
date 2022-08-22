@@ -1,4 +1,4 @@
-17:06:27 **** Incremental Build of configuration Debug for project SteeringWheel ****
+19:43:36 **** Incremental Build of configuration Debug for project SteeringWheel ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/Screenv2.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F207xx -c -I../Core/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc -I../Drivers/STM32F2xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F2xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/Screenv2.d" -MT"Core/Src/Screenv2.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/Screenv2.o"
 ../Core/Src/Screenv2.c:55:20: warning: 'lut_1Gray_A2' defined but not used [-Wunused-const-variable=]
@@ -13,11 +13,11 @@ Finished building target: SteeringWheel.elf
 arm-none-eabi-size   SteeringWheel.elf 
 arm-none-eabi-objdump -h -S  SteeringWheel.elf  > "SteeringWheel.list"
    text	   data	    bss	    dec	    hex	filename
-   8684	     20	   1660	  10364	   287c	SteeringWheel.elf
+   8944	     20	  18460	  27424	   6b20	SteeringWheel.elf
 Finished building: default.size.stdout
  
 Finished building: SteeringWheel.list
  
 
-17:06:28 Build Finished. 0 errors, 2 warnings. (took 1s.149ms)
+19:43:37 Build Finished. 0 errors, 2 warnings. (took 1s.25ms)
 

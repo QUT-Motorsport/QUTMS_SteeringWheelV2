@@ -1,0 +1,41 @@
+/*
+ * MS_ScreenV2.c
+ *
+ *  Created on: Aug 22, 2022
+ *      Author: n10255460
+ */
+
+
+#include "MS_ScreenV2.h"
+
+#define BUFFER_SIZE (SCREEN_WIDTH * SCREEN_HEIGHT / 8)
+
+uint8_t Buffer[BUFFER_SIZE];
+
+void MS_Screen_Init()
+{
+	// zeroing out buffer
+	memset(&Buffer, 0, BUFFER_SIZE * sizeof(uint8_t));
+
+	Screen_Device_Init();
+	Screen_Setup();
+
+	Screen_Clear(); // don't delay_ms since read_busy_high is in place
+}
+
+void MS_Screen_DrawPixel(uint16_t x, uint16_t y)
+{
+	Buffer[(x + (y * SCREEN_WIDTH)) / 8] = 0xFF;
+}
+
+
+void MS_Screen_Clear_Buffer()
+{
+	memset(&Buffer, 0, BUFFER_SIZE * sizeof(uint8_t));
+}
+
+
+void MS_Screen_Flush(SCREEN_DISPLAY_MODE mode)
+{
+	Screen_Display(Buffer, mode);
+}

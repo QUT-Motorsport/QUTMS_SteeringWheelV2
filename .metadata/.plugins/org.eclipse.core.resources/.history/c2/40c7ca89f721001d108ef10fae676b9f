@@ -1,0 +1,27 @@
+/*
+ * MS_ScreenV2.c
+ *
+ *  Created on: Aug 22, 2022
+ *      Author: n10255460
+ */
+
+
+#define BUFFER_SIZE (SCREEN_WIDTH * SCREEN_HEIGHT)
+
+UBYTE Buffer[BUFFER_SIZE];
+
+void MS_Screen_Init()
+{
+	// zeroing out buffer
+	memset(&Buffer, 0, BUFFER_SIZE * sizeof(UBYTE));
+
+	Screen_Device_Init();
+	Screen_Setup();
+
+	Screen_Clear();
+	Screen_Delay_ms();
+}
+
+void MS_Screen_DrawPixel(uint16_t x, uint16_t y);
+void MS_Screen_Clear();
+void MS_Screen_Flush();
