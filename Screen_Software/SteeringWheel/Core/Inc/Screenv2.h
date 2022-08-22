@@ -40,9 +40,14 @@ typedef enum SCREEN_DATA_ENTRY_MODE {
 	SCREEN_DATA_ENTRY_MODE_X_UPDATE = 0b00000000
 } SCREEN_DATA_ENTRY_MODE;
 
-void Screen_Clear();
+typedef enum SCREEN_DISPLAY_MODE {
+	SCREEN_DISPLAY_MODE_FAST = 0x00,
+	SCREEN_DISPLAY_MODE_FANCY = 0xFF
+} SCREEN_DISPLAY_MODE;
+
+void Screen_Clear(SCREEN_DISPLAY_MODE displayMode);
 void Screen_Setup();
-void Screen_Display(const UBYTE * Image);
+void Screen_Display(const UBYTE * Image, SCREEN_DISPLAY_MODE displayMode);
 
 
 #endif

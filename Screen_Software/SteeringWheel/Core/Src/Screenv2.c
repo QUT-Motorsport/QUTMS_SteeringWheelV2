@@ -92,6 +92,63 @@ void Screen_Set_Vcom_Value(uint8_t val)
 	Screen_SendData(val);
 }
 
+void Sceen_Setup_DisplayOption_Fancy() // 1gray
+{
+	Screen_SendCommand(SCREEN_CMD_WRITE_DISPLAY_OPTION_REG); // set display option, these setting turn on previous function
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+}
+
+void Sceen_Setup_DisplayOption_Fast() // 4gray
+{
+	Screen_SendCommand(SCREEN_CMD_WRITE_DISPLAY_OPTION_REG); // set display option, these setting turn on previous function
+	Screen_SendData(0x00);     //can switch 1 gray or 4 gray
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0x4F);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+}
+
+void Screen_Setup_Ram_StartEndPos() // TODO: double check
+{
+	Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS); // setting X direction start/end position of RAM
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0x17);
+	Screen_SendData(0x01);
+
+	Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_YPOS); // setting Y direction start/end position of RAM
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
+	Screen_SendData(0xDF);
+	Screen_SendData(0x01);
+}
+
+void Screen_Update_Display_Ctrl2_Fast()
+{
+	Screen_SendCommand(SCREEN_CMD_DISPLAY_UPDATE_CTRL2); // Display Update Control 2
+	Screen_SendData(0xC7);
+}
+
+void Screen_Update_Display_Ctrl2_Fancy()
+{
+	Screen_SendCommand(SCREEN_CMD_DISPLAY_UPDATE_CTRL2); // Display Update Control 2
+	Screen_SendData(0xCF);
+}
+
 void Screen_Setup()
 {
 	Screen_Software_Reset();
@@ -101,8 +158,10 @@ void Screen_Setup()
 	Screen_Set_Border();
 	Screen_Set_Booster_Soft_Start();
 	Screen_Set_Internal_TempSensor_On();
-	Screen_set_Vcom_Value(0x44);
-
+	Screen_Set_Vcom_Value(0x44);
+	Screen_Setup_DisplayOption_Fancy();
+	Screen_Setup_Ram_StartEndPos();
+	Screen_Update_Display_Ctrl2();
 }
 
 void Screen_Display(const UBYTE * Image)
