@@ -66,13 +66,10 @@ static const UBYTE lut_1Gray_A2[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x22, 0x22, 0x22, 0x22, 0x22 };
 
 void Screen_ReadBusy_HIGH(void) {
-	//Debug("e-Paper busy\r\n");
 	UBYTE busy;
 	do {
 		busy = Screen_Digital_Read(SBUSY_Pin, SBUSY_GPIO_Port);
 	} while (busy);
-	Screen_Delay_ms(200); // don't fuckin delete this Calvin!
-	//Debug("e-Paper busy release\r\n");
 }
 
 void Screen_General_Reset() {
@@ -86,10 +83,12 @@ void Screen_RAM_Init() {
 	Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_RED_RAM);
 	Screen_SendData(0xF7);
 	Screen_ReadBusy_HIGH();
+	Screen_Delay_ms(200);
 
 	Screen_SendCommand(SCREEN_CMD_AUTO_WRITE_BW_RAM);
 	Screen_SendData(0xF7);
 	Screen_ReadBusy_HIGH();
+	Screen_Delay_ms(200);
 }
 
 void Screen_Gate_Init() {
@@ -139,16 +138,16 @@ void Screen_Set_Vcom_Value(uint8_t val) {
 
 void Screen_Setup_DisplayOption() {
 	Screen_SendCommand(SCREEN_CMD_WRITE_DISPLAY_OPTION_REG); // set display option, these setting turn on previous function
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
+	Screen_SendData(0x00);     //can switch 1 gray or 4 gray
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0x4F);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
+	Screen_SendData(0xFF);
 }
 
 void Screen_Setup_Ram_StartEndPos() // TODO: double check
@@ -171,18 +170,44 @@ void Screen_Update_Display_Mode(UBYTE mode) {
 	Screen_SendData(mode);
 }
 
-void Screen_Set_Ram_xy_counter(uint8_t x0, uint8_t x1, uint8_t y0, uint8_t y1) {
-	Screen_SendCommand(0x4E);
-	Screen_SendData(x0);
-	Screen_SendData(x1);
+void Screen_ResetRamCounter() {
+	Screen_SendCommand(SCREEN_CMD_SET_RAM_X_COUNTER);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
 
-	Screen_SendCommand(0x4F);
-	Screen_SendData(y0);
-	Screen_SendData(y1);
-
+	Screen_SendCommand(SCREEN_CMD_SET_RAM_Y_COUNTER);
+	Screen_SendData(0x00);
+	Screen_SendData(0x00);
 }
 
-void Screen_Load_LUT_constant(const UBYTE *lut) {
+void Screen_SetRamCounter(UWORD x, UWORD y)
+{
+	  Screen_SendCommand(SCREEN_CMD_SET_RAM_X_COUNTER);
+	  Screen_SendData(x & 0xff);
+	  Screen_SendData((x >> 8) & 0x03);
+
+	  Screen_SendCommand(SCREEN_CMD_SET_RAM_Y_COUNTER);
+	  Screen_SendData(y & 0xff);
+	  Screen_SendData((y >> 8) & 0x03);
+}
+
+void Screen_SetRam_StartEndPos(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+{
+	  Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS);
+	  Screen_SendData(Xstart & 0xff);
+	  Screen_SendData((Xstart >> 8) & 0x03);
+	  Screen_SendData(Xend & 0x3f);
+	  Screen_SendData((Xend >> 8) & 0x03);
+
+	  Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_YPOS);
+	  Screen_SendData(Ystart & 0xff);
+	  Screen_SendData((Ystart >> 8) & 0x03);
+	  Screen_SendData(Yend & 0xff);
+	  Screen_SendData((Yend >> 8) & 0x03);
+}
+
+void Screen_Load_LUT_constant(const UBYTE *lut)
+{
 	Screen_SendCommand(SCREEN_CMD_WRITE_LUT_REG);
 	int i;
 	for (i = 0; i < 105; i++) {
@@ -218,15 +243,14 @@ void Screen_Setup(void)
 void Screen_Clear(void) {
 	const uint32_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
 
-	Screen_Set_Ram_xy_counter(0x00, 0x00, 0x00, 0x00);
-	//Screen_Set_Booster_Soft_Start();
+	Screen_ResetRamCounter();
 
 	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
 	for (uint32_t i = 0; i < IMAGE_COUNTER; ++i) {
 		Screen_SendData(0xFF);
 	}
 
-	Screen_Set_Ram_xy_counter(0x00, 0x00, 0x00, 0x00);
+	Screen_ResetRamCounter();
 
 	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
 	for (uint32_t i = 0; i < IMAGE_COUNTER; ++i) {
@@ -237,6 +261,7 @@ void Screen_Clear(void) {
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
+	Screen_Delay_ms(20);
 }
 
 void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
@@ -244,12 +269,12 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
     UDOUBLE i,j,k;
     UBYTE temp1,temp2,temp3;
 
-    Screen_SendCommand(0x49);
-    Screen_SendData(0x00);
+    //Screen_SendCommand(0x49);
+    //Screen_SendData(0x00);
 
-	Screen_Set_Ram_xy_counter(0x00, 0x00, 0x00, 0x00);
+    Screen_ResetRamCounter();
 
-    Screen_SendCommand(0x24);
+    Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
     for(i=0;i<IMAGE_COUNTER;i++){
         temp3=0;
         for(j=0; j<2; j++) {
@@ -286,9 +311,9 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
         Screen_SendData(temp3);
     }
     // new  data
-    Screen_Set_Ram_xy_counter(0x00, 0x00, 0x00, 0x00);
+    Screen_ResetRamCounter();
 
-    Screen_SendCommand(0x26);
+    Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
     for(i=0; i<IMAGE_COUNTER; i++) {
         temp3=0;
         for(j=0; j<2; j++) {
@@ -324,36 +349,43 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
         Screen_SendData(temp3);
     }
 
-    Screen_Load_LUT(0);
+    Screen_Load_LUT_constant(lut_4Gray_GC);
 
-    Screen_SendCommand(0x22);
-    Screen_SendData(0xC7);
+    Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
 
-    Screen_SendCommand(0x20);
+    Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 
     Screen_ReadBusy_HIGH();
 }
 
-void Screen_DrawBlank() {
-	Screen_SendCommand(0x4E);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
-	Screen_SendCommand(0x4F);
-	Screen_SendData(0x00);
-	Screen_SendData(0x00);
+void Screen_DisplayPartial(const UBYTE * Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
+{
+	const UWORD Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
+	const UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
 
-	Screen_SendCommand(0x24);
-	for (int i = 0; i < 16800; i++) {
-		Screen_SendData(0x01);
+	Screen_SetRam_StartEndPos(Xstart, Ystart, Xend, Yend);
+	Screen_SetRamCounter(Xstart, Ystart);
+
+	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
+	for(UWORD i; i < IMAGE_COUNTER; ++i)
+	{
+		Screen_SendData(Image[i]);
 	}
 
-	Screen_SendCommand(0x26);
-	for (int i = 0; i < 16800; i++) {
-		Screen_SendData(0x01);
-	}
+	Screen_Load_LUT_constant(lut_1Gray_DU);
 
-	Screen_Load_LUT_constant(lut_4Gray_GC);
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
+
 	Screen_ReadBusy_HIGH();
+}
+
+void Screen_Sleep(void)
+{
+    Screen_SendCommand(0X50); // mystery command
+    Screen_SendData(0xf7);
+    Screen_SendCommand(SCREEN_CMD_POWER_OFF);  	//power off
+    Screen_SendCommand(SCREEN_CMD_SLEEP);  	//deep sleep
+    Screen_SendData(0xA5);
 }

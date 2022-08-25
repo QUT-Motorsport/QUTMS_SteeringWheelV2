@@ -21,9 +21,11 @@
 
 // Screen commands
 #define SCREEN_CMD_GATE_OUTPUT_CONTROL				0x01
+#define SCREEN_CMD_POWER_OFF						0x02
 #define SCREEN_CMD_DRIVING_VOLTAGE_CONTROL			0x03
 #define SCREEN_CMD_SOURCE_DRIVING_VOLTAGE_CONTROL	0x04
 #define SCREEN_CMD_INIT_CODE_SETTING_OTP_PROG		0x08 // initial Code Setting OTP Program
+#define SCREEN_CMD_SLEEP							0x07
 #define SCREEN_CMD_INIT_WRITE_REG_CODE_SETTING		0x09 // Write Register for Initial Code Setting
 #define SCREEN_CMD_INIT_READ_REG_CODE_SETTING		0x0A // Read Register for Initial Code Setting
 #define SCREEN_CMD_BOOSTER_SOFT_START_CTRL			0x0C

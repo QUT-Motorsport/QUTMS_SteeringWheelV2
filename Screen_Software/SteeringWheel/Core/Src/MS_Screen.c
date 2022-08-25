@@ -22,7 +22,7 @@ void Screen_Static_Init()
 
 void Static_Display(UBYTE *Canvas)
 {
-	Screen_Display(Canvas);
+	Screen_DisplayPartial(Canvas, 0, 0, 280, 480);
 }
 
 void Screen_Dynamic_Init()
@@ -75,7 +75,7 @@ void Dynamic_Counter(UBYTE *Canvas, int32_t value)
 	Paint_Clear(WHITE);
 	Paint_ClearWindows(20, 20, 80, 80, WHITE);
 	Paint_DrawNum(50, 50, value, &Font24, WHITE, ClrBlack);
-	Dynamic_Display(Canvas);
+	Static_Display(Canvas);
 	HAL_Delay(1000);
 }
 

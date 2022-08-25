@@ -25,7 +25,7 @@ typedef enum SCREEN_DISPLAY_MODE {
 void Screen_Clear(void);
 void Screen_Setup(void);
 void Screen_Display(const UBYTE * Image);
-void Screen_DrawBlank(void);
-
+void Screen_DisplayPartial(const UBYTE * Image, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
+void Screen_Sleep(void);
 
 #endif

@@ -550,16 +550,3 @@ void Screen_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, U
   Screen_SendCommand(0x20);
   Screen_ReadBusy_HIGH();
 }
-
-/******************************************************************************
-function :	Enter sleep mode
-parameter:
-******************************************************************************/
-void Screen_Sleep(void)
-{
-    Screen_SendCommand(0X50);
-    Screen_SendData(0xf7);
-    Screen_SendCommand(0X02);  	//power off
-    Screen_SendCommand(0X07);  	//deep sleep
-    Screen_SendData(0xA5);
-}

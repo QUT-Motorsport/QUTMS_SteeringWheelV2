@@ -21,6 +21,4 @@ void Screen_1Gray_Init(void);
 void Screen_1Gray_Display(const UBYTE *Image);
 void Screen_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
 
-void Screen_Sleep(void);
-
 #endif /* INC_SCREEN_H_ */
