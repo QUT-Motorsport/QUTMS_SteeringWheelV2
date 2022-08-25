@@ -6,6 +6,7 @@
  */
 
 #include "MS_Screen.h"
+#include "ScreenV2.h"
 #include "ScreenConfig.h"
 
 extern UBYTE *STATIC_CANVAS;
@@ -21,7 +22,7 @@ void Screen_Static_Init()
 
 void Static_Display(UBYTE *Canvas)
 {
-	Screen_4Gray_Display(Canvas);
+	Screen_Display(Canvas);
 }
 
 void Screen_Dynamic_Init()
@@ -62,8 +63,8 @@ void Screen_Startup(UBYTE * Canvas)
 	Paint_DrawString_EN(35, 250, "Version 1.0", &Font24, WHITE, ClrBlack);
 	Static_Display(Canvas);
 	HAL_Delay(10000);
-	Paint_Clear(WHITE);
-	Static_Display(Canvas);
+	//Paint_Clear(WHITE);
+	//Static_Display(Canvas);
 }
 
 void Dynamic_Counter(UBYTE *Canvas, int32_t value)
