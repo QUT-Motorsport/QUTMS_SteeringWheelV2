@@ -98,6 +98,8 @@ int main(void)
   UBYTE* canvas = Canvas_Init();
   Screen_Startup(canvas);
 
+
+  int counter = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,7 +107,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	Dynamic_Counter(canvas, counter);
+	counter += 1;
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
