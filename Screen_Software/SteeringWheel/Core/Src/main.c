@@ -108,7 +108,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	Dynamic_Counter(canvas, counter);
-	counter += 1;
+	counter++;
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

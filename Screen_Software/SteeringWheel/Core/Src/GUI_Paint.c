@@ -353,13 +353,13 @@ void Paint_DrawRectangle(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend,
     if (Draw_Fill) {
         UWORD Ypoint;
         for(Ypoint = Ystart; Ypoint < Yend; Ypoint++) {
-            Paint_DrawLine(Xstart, Ypoint, Xend, Ypoint, Color , Line_width, LINE_STYLE_SOLID);
+            Paint_DrawLine(Xstart, Ypoint, Xend, Ypoint, Color , Line_width, Line_width);
         }
     } else {
-        Paint_DrawLine(Xstart, Ystart, Xend, Ystart, Color, Line_width, LINE_STYLE_SOLID);
-        Paint_DrawLine(Xstart, Ystart, Xstart, Yend, Color, Line_width, LINE_STYLE_SOLID);
-        Paint_DrawLine(Xend, Yend, Xend, Ystart, Color, Line_width, LINE_STYLE_SOLID);
-        Paint_DrawLine(Xend, Yend, Xstart, Yend, Color, Line_width, LINE_STYLE_SOLID);
+        Paint_DrawLine(Xstart, Ystart, Xend, Ystart, Color, Line_width, Line_width);
+        Paint_DrawLine(Xstart, Ystart, Xstart, Yend, Color, Line_width, Line_width);
+        Paint_DrawLine(Xend, Yend, Xend, Ystart, Color, Line_width, Line_width);
+        Paint_DrawLine(Xend, Yend, Xstart, Yend, Color, Line_width, Line_width);
     }
 }
 

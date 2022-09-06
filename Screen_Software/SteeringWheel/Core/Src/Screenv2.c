@@ -196,7 +196,7 @@ void Screen_SetRam_StartEndPos(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yen
 	  Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS);
 	  Screen_SendData(Xstart & 0xff);
 	  Screen_SendData((Xstart >> 8) & 0x03);
-	  Screen_SendData(Xend & 0x3f);
+	  Screen_SendData(Xend & 0xff);
 	  Screen_SendData((Xend >> 8) & 0x03);
 
 	  Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_YPOS);
@@ -237,7 +237,7 @@ void Screen_Setup(void)
 
 	Screen_Setup_Ram_StartEndPos();
 
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
 }
 
 void Screen_Clear(void) {
@@ -269,8 +269,8 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
     UDOUBLE i,j,k;
     UBYTE temp1,temp2,temp3;
 
-    //Screen_SendCommand(0x49);
-    //Screen_SendData(0x00);
+    Screen_SendCommand(0x49);
+    Screen_SendData(0x00);
 
     Screen_ResetRamCounter();
 
@@ -351,7 +351,7 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
 
     Screen_Load_LUT_constant(lut_4Gray_GC);
 
-    Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
+    Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
 
     Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 
@@ -374,7 +374,7 @@ void Screen_DisplayPartial(const UBYTE * Image, uint16_t Xstart, uint16_t Ystart
 
 	Screen_Load_LUT_constant(lut_1Gray_DU);
 
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 
