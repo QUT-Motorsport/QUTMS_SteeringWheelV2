@@ -165,7 +165,7 @@ void Screen_Setup_Ram_StartEndPos() // TODO: double check
 	Screen_SendData(0x01);
 }
 
-void Screen_Update_Display_Mode(UBYTE mode) {
+void Screen_Update_Display_Mode(uint8_t mode) {
 	Screen_SendCommand(SCREEN_CMD_DISPLAY_UPDATE_CTRL2); // Display Update Control 2
 	Screen_SendData(mode);
 }
@@ -180,7 +180,7 @@ void Screen_ResetRamCounter() {
 	Screen_SendData(0x00);
 }
 
-void Screen_SetRamCounter(UWORD x, UWORD y)
+void Screen_SetRamCounter(uint16_t x, uint16_t y)
 {
 	  Screen_SendCommand(SCREEN_CMD_SET_RAM_X_COUNTER);
 	  Screen_SendData(x & 0xff);
@@ -191,7 +191,7 @@ void Screen_SetRamCounter(UWORD x, UWORD y)
 	  Screen_SendData((y >> 8) & 0x03);
 }
 
-void Screen_SetRam_StartEndPos(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+void Screen_SetRam_StartEndPos(uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
 {
 	  Screen_SendCommand(SCREEN_CMD_SET_RAM_START_END_XPOS);
 	  Screen_SendData(Xstart & 0xff);
@@ -240,7 +240,27 @@ void Screen_Setup(void)
 	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
 }
 
-void Screen_Clear(void) {
+void Screen_Clear(uint8_t color)
+{
+	const uint16_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
+
+	Screen_ResetRamCounter();
+
+	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
+	for (uint16_t i = 0; i < IMAGE_COUNTER; i++)
+	{
+		Screen_SendData(color);
+	}
+
+	Screen_Load_LUT_constant(lut_1Gray_DU);
+
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+
+	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
+	Screen_ReadBusy_HIGH();
+}
+
+void Screen_Clear4G(void) {
 	const uint32_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
 
 	Screen_ResetRamCounter();
@@ -259,12 +279,14 @@ void Screen_Clear(void) {
 
 	Screen_Load_LUT_constant(lut_4Gray_GC);
 
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
+
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
 	Screen_Delay_ms(20);
 }
 
-void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
+void Screen_Display4G(const uint8_t *Image) { // TODO: support Red as well
 	const uint32_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
     UDOUBLE i,j,k;
     UBYTE temp1,temp2,temp3;
@@ -355,10 +377,30 @@ void Screen_Display(const UBYTE *Image) { // TODO: support Red as well
 
     Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 
-    Screen_ReadBusy_HIGH();
+
 }
 
-void Screen_DisplayPartial(const UBYTE * Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
+void Screen_Display(const uint8_t * image)
+{
+	const uint16_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
+
+	Screen_ResetRamCounter();
+
+	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
+	for (uint16_t i = 0; i < IMAGE_COUNTER; i++)
+	{
+		Screen_SendData(image[i]);
+	}
+
+	Screen_Load_LUT_constant(lut_1Gray_GC);
+
+	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+
+	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
+	Screen_ReadBusy_HIGH();
+}
+
+void Screen_DisplayPartial(const uint8_t * Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
 {
 	const UWORD Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
 	const UWORD IMAGE_COUNTER = Width * (Yend-Ystart);

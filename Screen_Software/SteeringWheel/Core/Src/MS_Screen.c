@@ -23,7 +23,7 @@ void Screen_Static_Init()
 
 void Static_Display(UBYTE *Canvas)
 {
-	Screen_Display(Canvas);
+	Screen_Display4G(Canvas);
 }
 
 void Screen_Dynamic_Init()

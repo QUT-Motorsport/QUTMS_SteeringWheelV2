@@ -23,12 +23,13 @@
 /* USER CODE BEGIN Includes */
 #include "ScreenV2.h"
 #include "MS_ScreenV2.h"
-#include "MS_Screen.h"
+#include "MS_GL.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 SPI_HandleTypeDef hspi1;
+uint8_t Buffer[BUFFER_SIZE];
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -90,16 +91,11 @@ int main(void)
   MX_SPI1_Init();
 
   /* USER CODE BEGIN 2 */
-  Screen_Device_Init();
-  Screen_Setup();
-  Screen_Clear();
-  Screen_Delay_ms(100);
-
-  UBYTE* canvas = Canvas_Init();
-  Screen_Startup(canvas);
+  MS_Screen_Init();
+  //MSGL_Clear(COLOR_WHITE);
+  MS_Screen_Flush();
 
 
-  int counter = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,8 +103,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	Dynamic_Counter(canvas, counter);
-	counter += 1;
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

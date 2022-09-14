@@ -56,6 +56,10 @@
 #define UWORD   uint16_t
 #define UDOUBLE uint32_t
 
+
+// Buffer macros
+#define BUFFER_SIZE (SCREEN_WIDTH * SCREEN_HEIGHT / 8)
+
 /**
  * delay ms
 **/

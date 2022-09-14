@@ -22,10 +22,13 @@ typedef enum SCREEN_DISPLAY_MODE {
 	SCREEN_DISPLAY_MODE_4GRAY = 0xFF
 } SCREEN_DISPLAY_MODE;
 
-void Screen_Clear(void);
+void Screen_Clear4G(void);
+void Screen_Display4G(const uint8_t * image);
+
 void Screen_Setup(void);
-void Screen_Display(const UBYTE * Image);
-void Screen_DisplayPartial(const UBYTE * Image, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
+void Screen_Clear(uint8_t color);
+void Screen_Display(const uint8_t * image);
+void Screen_DisplayPartial(const uint8_t * image, uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
 void Screen_Sleep(void);
 
 #endif
