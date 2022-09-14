@@ -4,8 +4,10 @@
 #include "ScreenConfig.h"
 
 // Display Mode
-#define SCREEN_DISPLAY_MODE_1						0xCF
-#define SCREEN_DISPLAY_MODE_2						0xC7
+#define SCREEN_DISPLAY_MODE_1						0xC7
+#define SCREEN_DISPLAY_MODE_2						0xCF
+#define SCREEN_DISPLAY_MODE_1_HARDNFAST				0x91
+#define SCREEN_DISPLAY_MODE_2_HARDNFAST				0x99
 
 // Screen data
 typedef enum SCREEN_DATA_ENTRY_MODE {

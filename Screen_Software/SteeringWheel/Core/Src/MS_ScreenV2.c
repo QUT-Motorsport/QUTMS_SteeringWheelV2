@@ -17,7 +17,7 @@ extern uint8_t Buffer[BUFFER_SIZE];
 void MS_Screen_Init()
 {
 	// zeroing out buffer
-	memset(&Buffer, 0x00, BUFFER_SIZE * sizeof(uint8_t));
+	memset(&ScreenBuffer, 0x00, BUFFER_SIZE * sizeof(uint8_t));
 
 	Screen_Device_Init();
 	Screen_Setup();
