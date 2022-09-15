@@ -9,15 +9,16 @@
 #include "MS_ScreenV2.h"
 #include "Screenv2.h"
 #include "MS_GL.h"
+#include <stdint.h>
 #include <string.h>
 
-
+#define BUFFER_MEM_SIZE BUFFER_SIZE * sizeof(uint8_t)
 extern uint8_t Buffer[BUFFER_SIZE];
 
 void MS_Screen_Init()
 {
 	// zeroing out buffer
-	memset(&ScreenBuffer, 0x00, BUFFER_SIZE * sizeof(uint8_t));
+	memset(&Buffer, 0x00, BUFFER_MEM_SIZE);
 
 	Screen_Device_Init();
 	Screen_Setup();

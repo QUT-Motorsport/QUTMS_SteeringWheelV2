@@ -104,8 +104,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
-	MS_Screen_Flush(0);
-	counter++;
   }
   /* USER CODE END 3 */
 }

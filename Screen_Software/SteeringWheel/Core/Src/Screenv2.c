@@ -252,7 +252,7 @@ void Screen_Clear(uint8_t color)
 		Screen_SendData(color);
 	}
 
-	Screen_Load_LUT_constant(lut_1Gray_DU);
+	Screen_Load_LUT_constant(lut_1Gray_GC);
 
 	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
 
@@ -412,33 +412,6 @@ void Screen_DisplayPartial(const uint8_t * Image, uint16_t Xstart, uint16_t Ysta
 	for(UWORD i; i < IMAGE_COUNTER; ++i)
 	{
 		Screen_SendData(Image[i]);
-	}
-
-	Screen_Load_LUT_constant(lut_1Gray_DU);
-
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
-
-	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
-
-	Screen_ReadBusy_HIGH();
-}
-
-void Screen_DisplayBufferRow(const uint8_t Buffer[5][280 * 96 / 8], uint8_t row)
-{
-
-	const uint16_t x_start = 0;
-	const uint16_t y_start = 96 * row;
-	const uint16_t x_end = 280;
-	const uint16_t y_end = y_start + 96;
-	const uint16_t BUFFER_SIZE = 280 * 96;
-
-	Screen_SetRam_StartEndPos(x_start, y_start, x_end, y_end);
-	Screen_SetRamCounter(x_start, y_start);
-
-	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
-	for(UWORD i; i < BUFFER_SIZE; ++i)
-	{
-		Screen_SendData(Buffer[row][i]);
 	}
 
 	Screen_Load_LUT_constant(lut_1Gray_DU);
