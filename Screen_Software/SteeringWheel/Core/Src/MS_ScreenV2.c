@@ -8,6 +8,7 @@
 
 #include "MS_ScreenV2.h"
 #include "Screenv2.h"
+#include "SCreen.h"
 #include "MS_GL.h"
 #include <stdint.h>
 #include <string.h>
@@ -18,7 +19,7 @@ extern uint8_t Buffer[BUFFER_SIZE];
 void MS_Screen_Init()
 {
 	// zeroing out buffer
-	memset(&Buffer, 0x00, BUFFER_MEM_SIZE);
+	memset(Buffer, COLOR_WHITE, BUFFER_MEM_SIZE);
 
 	Screen_Device_Init();
 	Screen_Setup();
@@ -28,5 +29,5 @@ void MS_Screen_Init()
 
 void MS_Screen_Flush()
 {
-	Screen_Clear(COLOR_WHITE);
+	Screen_Display(Buffer);
 }

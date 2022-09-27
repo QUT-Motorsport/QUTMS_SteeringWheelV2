@@ -92,7 +92,7 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   MS_Screen_Init();
-  //MSGL_Clear(COLOR_WHITE);
+  //MSGL_Clear(COLOR_BLACK);
   MS_Screen_Flush();
 
 

@@ -246,15 +246,13 @@ void Screen_Clear(uint8_t color)
 
 	Screen_ResetRamCounter();
 
-	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
+	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
 	for (uint16_t i = 0; i < IMAGE_COUNTER; i++)
 	{
 		Screen_SendData(color);
 	}
 
-	Screen_Load_LUT_constant(lut_1Gray_GC);
-
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+	Screen_Load_LUT_constant(lut_1Gray_DU);
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
@@ -384,17 +382,19 @@ void Screen_Display(const uint8_t * image)
 {
 	const uint16_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
 
+	Screen_Set_Booster_Soft_Start();
+
 	Screen_ResetRamCounter();
 
-	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
+	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
 	for (uint16_t i = 0; i < IMAGE_COUNTER; i++)
 	{
 		Screen_SendData(image[i]);
 	}
 
-	Screen_Load_LUT_constant(lut_1Gray_GC);
+	Screen_Load_LUT_constant(lut_1Gray_DU);
 
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_1);
+	//Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
@@ -408,15 +408,13 @@ void Screen_DisplayPartial(const uint8_t * Image, uint16_t Xstart, uint16_t Ysta
 	Screen_SetRam_StartEndPos(Xstart, Ystart, Xend, Yend);
 	Screen_SetRamCounter(Xstart, Ystart);
 
-	Screen_SendCommand(SCREEN_CMD_WRITE_BW_RAM);
+	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
 	for(UWORD i; i < IMAGE_COUNTER; ++i)
 	{
 		Screen_SendData(Image[i]);
 	}
 
 	Screen_Load_LUT_constant(lut_1Gray_DU);
-
-	Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 

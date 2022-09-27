@@ -10,8 +10,8 @@
 #include <stdint.h>
 
 typedef enum COLOR {
-	COLOR_WHITE = 0x00,
-	COLOR_BLACK = 0xFF
+	COLOR_WHITE = 0xFF,
+	COLOR_BLACK = 0x00
 } COLOR;
 
 void MSGL_Clear(uint8_t color);
