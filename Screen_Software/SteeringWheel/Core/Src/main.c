@@ -30,11 +30,10 @@
 SPI_HandleTypeDef hspi1;
 
 // lvgl buffers
-static lv_disp_draw_buf_t display_buffer;
-static lv_color_t buffer0[BUFFER_SIZE];
-static lv_color_t buffer1[BUFFER_SIZE];
+lv_disp_draw_buf_t display_buffer;
+lv_color_t buffer[BUFFER_SIZE];
 
-static lv_disp_drv_t display_driver;
+lv_disp_drv_t display_driver;
 lv_disp_t * display;
 /* USER CODE END PTD */
 
@@ -98,10 +97,8 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   MS_Screen_Init();
-  //MSGL_Clear(COLOR_BLACK);
-  MS_Screen_Flush();
-
-
+  HAL_Delay(0);
+  uint32_t start = HAL_GetTick();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -109,6 +106,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	// draw scene
+	MS_Draw();
+	// timer handling
+	lv_timer_handler();
+	lv_tick_inc(start - HAL_GetTick());
+	start = HAL_GetTick();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

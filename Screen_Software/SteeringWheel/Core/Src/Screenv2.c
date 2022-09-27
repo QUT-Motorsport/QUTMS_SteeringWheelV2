@@ -413,8 +413,8 @@ void Screen_lvgl_Display(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_co
 		uint8_t bit_mask = 0x00;
 		for(uint8_t j = 0; j < 8; ++j)
 		{
-			static const uint8_t bit_select = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
-			bit_mask = bit_mask | (color_p & bit_select[j]);
+			static const uint8_t bit_select[] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+			bit_mask = bit_mask | (lv_color_to1(*color_p) & bit_select[j]);
 			color_p++;
 		}
 		Screen_SendData(bit_mask);
@@ -427,7 +427,7 @@ void Screen_lvgl_Display(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_co
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
 
-	lv_disp_flush_ready(display_driver);
+	lv_disp_flush_ready(&display_driver);
 }
 
 void Screen_DisplayPartial(const uint8_t * Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)

@@ -21,7 +21,8 @@ typedef enum COLOR {
 } COLOR;
 
 void driver_init();
-static void lvgl_driver_init();
-static void MS_Screen_Init();
+void lvgl_driver_init();
+void MS_Screen_Init();
+void MS_Draw();
 
 #endif /* INC_MS_SCREENV2_H_ */
