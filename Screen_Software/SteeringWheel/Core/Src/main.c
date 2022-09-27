@@ -23,13 +23,19 @@
 /* USER CODE BEGIN Includes */
 #include "ScreenV2.h"
 #include "MS_ScreenV2.h"
-#include "MS_GL.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 SPI_HandleTypeDef hspi1;
-uint8_t Buffer[BUFFER_SIZE];
+
+// lvgl buffers
+static lv_disp_draw_buf_t display_buffer;
+static lv_color_t buffer0[BUFFER_SIZE];
+static lv_color_t buffer1[BUFFER_SIZE];
+
+static lv_disp_drv_t display_driver;
+lv_disp_t * display;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

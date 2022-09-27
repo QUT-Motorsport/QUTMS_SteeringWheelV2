@@ -2,6 +2,7 @@
 #define SCREEN_V2_H_
 
 #include "ScreenConfig.h"
+#include "lvgl/lvgl.h"
 
 // Display Mode
 #define SCREEN_DISPLAY_MODE_1						0xC7
@@ -19,13 +20,10 @@ typedef enum SCREEN_DATA_ENTRY_MODE {
 	SCREEN_DATA_ENTRY_MODE_X_UPDATE = 0b00000000
 } SCREEN_DATA_ENTRY_MODE;
 
-typedef enum SCREEN_DISPLAY_MODE {
-	SCREEN_DISPLAY_MODE_1GRAY = 0x00,
-	SCREEN_DISPLAY_MODE_4GRAY = 0xFF
-} SCREEN_DISPLAY_MODE;
-
 void Screen_Clear4G(void);
 void Screen_Display4G(const uint8_t * image);
+
+void Screen_lvgl_Display(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 
 void Screen_Setup(void);
 void Screen_Clear(uint8_t color);

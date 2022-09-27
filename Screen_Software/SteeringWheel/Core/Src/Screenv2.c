@@ -65,6 +65,8 @@ static const UBYTE lut_1Gray_A2[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //10
 		0x22, 0x22, 0x22, 0x22, 0x22 };
 
+extern lv_disp_drv_t display_driver;
+
 void Screen_ReadBusy_HIGH(void) {
 	UBYTE busy;
 	do {
@@ -382,8 +384,6 @@ void Screen_Display(const uint8_t * image)
 {
 	const uint16_t IMAGE_COUNTER = SCREEN_WIDTH * SCREEN_HEIGHT / 8;
 
-	Screen_Set_Booster_Soft_Start();
-
 	Screen_ResetRamCounter();
 
 	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
@@ -398,6 +398,36 @@ void Screen_Display(const uint8_t * image)
 
 	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
 	Screen_ReadBusy_HIGH();
+}
+
+void Screen_lvgl_Display(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
+{
+	const uint16_t IMAGE_COUNTER = area->y2 * area->x2 / 8;
+
+	Screen_ResetRamCounter();
+
+	Screen_SendCommand(SCREEN_CMD_WRITE_RED_RAM);
+	for (uint16_t i = 0; i < IMAGE_COUNTER; i++)
+	{
+		// color_p is one pixel per byte but we want 8 pixels per byte
+		uint8_t bit_mask = 0x00;
+		for(uint8_t j = 0; j < 8; ++j)
+		{
+			static const uint8_t bit_select = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+			bit_mask = bit_mask | (color_p & bit_select[j]);
+			color_p++;
+		}
+		Screen_SendData(bit_mask);
+	}
+
+	Screen_Load_LUT_constant(lut_1Gray_DU);
+
+	//Screen_Update_Display_Mode(SCREEN_DISPLAY_MODE_2);
+
+	Screen_SendCommand(SCREEN_CMD_MASTER_ACTIVATION);
+	Screen_ReadBusy_HIGH();
+
+	lv_disp_flush_ready(display_driver);
 }
 
 void Screen_DisplayPartial(const uint8_t * Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
