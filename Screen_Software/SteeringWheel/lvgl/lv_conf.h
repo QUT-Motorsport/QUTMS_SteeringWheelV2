@@ -33,7 +33,7 @@
  *=========================*/
 
 /*Enable and configure the built-in memory manager*/
-#define LV_USE_BUILTIN_MALLOC 1
+#define LV_USE_BUILTIN_MALLOC 0
 #if LV_USE_BUILTIN_MALLOC
     /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
     #define LV_MEM_SIZE (64U * 1024U)          /*[bytes]*/
@@ -56,10 +56,11 @@
     #define LV_SPRINTF_USE_FLOAT 0
 #endif  /*LV_USE_BUILTIN_SNPRINTF*/
 
-#define LV_STDLIB_INCLUDE <stdint.h>
-#define LV_MALLOC       lv_malloc_builtin
-#define LV_REALLOC      lv_realloc_builtin
-#define LV_FREE         lv_free_builtin
+#define LV_STDLIB_INCLUDE <stdint.h> \
+	#include <string.h>
+#define LV_MALLOC       malloc
+#define LV_REALLOC      realloc
+#define LV_FREE         free
 #define LV_MEMSET       lv_memset_builtin
 #define LV_MEMCPY       lv_memcpy_builtin
 #define LV_SNPRINTF     lv_snprintf_builtin

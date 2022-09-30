@@ -41,9 +41,9 @@ void lvgl_driver_init()
 
 void MS_Screen_Init()
 {
-	lv_init();
+	//lv_init();
 	driver_init();
-	lv_disp_draw_buf_init(&display_buffer, buffer, NULL, BUFFER_SIZE);
+	//lv_disp_draw_buf_init(&display_buffer, buffer, NULL, BUFFER_SIZE);
 }
 
 void MS_Draw()

@@ -417,7 +417,7 @@ void Screen_lvgl_Display(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_co
 			bit_mask = bit_mask | (lv_color_to1(*color_p) & bit_select[j]);
 			color_p++;
 		}
-		Screen_SendData(bit_mask);
+		Screen_SendData(0x00);
 	}
 
 	Screen_Load_LUT_constant(lut_1Gray_DU);
