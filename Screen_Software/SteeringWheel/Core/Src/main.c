@@ -36,14 +36,6 @@ lv_color_t buffer[BUFFER_SIZE];
 lv_disp_drv_t display_driver;
 lv_disp_t * display;
 
-#pragma pack (1)
-struct ADC_DATA
-{
-	uint8_t AD0, AD1, AD2, AD3;
-};
-
-volatile static struct ADC_DATA AD_RES;
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -81,6 +73,11 @@ static void MX_ADC1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 volatile uint16_t ADC_RES[3];
+volatile struct
+{
+	uint8_t UL, LL, UR, LR;
+} BTNS;
+
 /* USER CODE END 0 */
 
 /**
@@ -127,6 +124,10 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	HAL_ADC_Start_DMA(&hadc1, ADC_RES, 3);
+	BTNS.LL = HAL_GPIO_ReadPin(BUT_LL_GPIO_Port, BUT_LL_Pin);
+	BTNS.LR = HAL_GPIO_ReadPin(BUT_LR_GPIO_Port, BUT_LR_Pin);
+	BTNS.UL = HAL_GPIO_ReadPin(BUT_UL_GPIO_Port, BUT_UL_Pin);
+	BTNS.UR = HAL_GPIO_ReadPin(BUT_UR_GPIO_Port, BUT_UR_Pin);
 
 	//MS_Draw();
 	//lv_task_handler();
@@ -358,6 +359,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -368,6 +370,12 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, LED1_Pin|LED2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : BUT_LR_Pin BUT_UR_Pin */
+  GPIO_InitStruct.Pin = BUT_LR_Pin|BUT_UR_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SBUSY_Pin SCS_Pin SDC_Pin */
   GPIO_InitStruct.Pin = SBUSY_Pin|SCS_Pin|SDC_Pin;
@@ -389,6 +397,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BUT_UL_Pin BUT_LL_Pin */
+  GPIO_InitStruct.Pin = BUT_UL_Pin|BUT_LL_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 }
 
