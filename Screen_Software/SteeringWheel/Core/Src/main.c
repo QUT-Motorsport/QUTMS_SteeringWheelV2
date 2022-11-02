@@ -51,6 +51,8 @@ lv_disp_t * display;
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
+CAN_HandleTypeDef hcan1;
+
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim2;
@@ -66,6 +68,7 @@ static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_CAN1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -112,8 +115,50 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM2_Init();
   MX_ADC1_Init();
+  MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
   MS_Screen_Init();
+
+  uint32_t ADC_RES[4];
+
+  uint32_t TxMailbox;
+
+  if(HAL_CAN_Start(&hcan1) != HAL_OK)
+  {
+	  Error_Handler();
+  }
+
+  CAN_FilterTypeDef canFilter;
+
+  canFilter.FilterBank = 0;
+  canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+  canFilter.FilterScale = CAN_FILTERSCALE_32BIT;
+  canFilter.FilterIdHigh = 0x0000;
+  canFilter.FilterIdLow = 0x0000;
+  canFilter.FilterMaskIdHigh = 0x0000;
+  canFilter.FilterMaskIdLow = 0x0000;
+  canFilter.FilterFIFOAssignment = CAN_RX_FIFO0;
+  canFilter.FilterActivation = ENABLE;
+  canFilter.SlaveStartFilterBank = 14;
+
+  if(HAL_CAN_ConfigFilter(&hcan1, &canFilter) != HAL_OK)
+  {
+	Error_Handler();
+  }
+
+  // init can
+  CAN_TxHeaderTypeDef TxHeader;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.ExtId = 0x44;
+  TxHeader.StdId = 0x44;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.DLC = 2;
+  TxHeader.TransmitGlobalTime = DISABLE;
+
+  uint8_t TxData[2];
+  TxData[0] = 50;
+  TxData[1] = 0xAA;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -128,10 +173,11 @@ int main(void)
 	BTNS.LR = HAL_GPIO_ReadPin(BUT_LR_GPIO_Port, BUT_LR_Pin);
 	BTNS.UL = HAL_GPIO_ReadPin(BUT_UL_GPIO_Port, BUT_UL_Pin);
 	BTNS.UR = HAL_GPIO_ReadPin(BUT_UR_GPIO_Port, BUT_UR_Pin);
+	// send CAN message
+	uint32_t val = HAL_CAN_IsTxMessagePending(&hcan1, &TxMailbox);
+	HAL_StatusTypeDef err = HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
 
-	//MS_Draw();
-	//lv_task_handler();
-	//HAL_Delay(5);
+	HAL_Delay(10);
 	/*Screen_Clear(COLOR_BLACK);
 	HAL_Delay(1000);
 	Screen_Clear(COLOR_WHITE);
@@ -243,6 +289,43 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief CAN1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN1_Init(void)
+{
+
+  /* USER CODE BEGIN CAN1_Init 0 */
+
+  /* USER CODE END CAN1_Init 0 */
+
+  /* USER CODE BEGIN CAN1_Init 1 */
+
+  /* USER CODE END CAN1_Init 1 */
+  hcan1.Instance = CAN1;
+  hcan1.Init.Prescaler = 4;
+  hcan1.Init.Mode = CAN_MODE_NORMAL;
+  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_1TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_6TQ;
+  hcan1.Init.TimeTriggeredMode = DISABLE;
+  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoWakeUp = DISABLE;
+  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.ReceiveFifoLocked = DISABLE;
+  hcan1.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN1_Init 2 */
+
+  /* USER CODE END CAN1_Init 2 */
 
 }
 
