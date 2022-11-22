@@ -18,7 +18,7 @@
  * Global Defines
  */
 // orientation angle of the screen
-#define SCREEN_ORIENTATION 0
+#define SCREEN_ORIENTATION 180
 // colors
 #define ClrWhite    0x03
 #define ClrGray     0x02
@@ -37,12 +37,12 @@ extern uint8_t *DYNAMIC_CANVAS;
 /*
  * Function Predeclaration
  */
-void Screen_Static_Init(void);
-void Screen_Dynamic_Init(void);
+void Screen_Static_Init(UBYTE *Canvas);
+void Screen_Dynamic_Init(UBYTE *Canvas);
 UBYTE* Canvas_Init(void);
 void Screen_Startup(UBYTE * Canvas);
 void Static_Display(UBYTE *Canvas);
 void Dynamic_Display(UBYTE *Canvas);
-void Dynamic_Counter(UBYTE *Canvas, int32_t value);
+void Dynamic_Counter(UBYTE *Canvas, int8_t *VCU_STATES);
 
 #endif /* INC_MS_SCREEN_H_ */
