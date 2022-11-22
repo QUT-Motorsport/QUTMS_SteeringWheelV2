@@ -44,5 +44,6 @@ void Screen_Startup(UBYTE * Canvas);
 void Static_Display(UBYTE *Canvas);
 void Dynamic_Display(UBYTE *Canvas);
 void Dynamic_Counter(UBYTE *Canvas, int8_t *VCU_STATES);
+void Draw_BoardStates(UBYTE *Canvas);
 
 #endif /* INC_MS_SCREEN_H_ */

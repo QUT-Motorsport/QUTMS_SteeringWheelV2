@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MS_Screen.h"
+#include "heartbeat.h"
 
 /* USER CODE END Includes */
 
@@ -90,6 +91,9 @@ int main(void)
   MX_SPI1_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
+
+	CAN_setup();
+
 	// Initialise the screen
 	if (Screen_Init() != 0) {
 		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
@@ -105,7 +109,7 @@ int main(void)
 
 	HAL_Delay(5000);
 	Screen_Dynamic_Init(CountScreen);
-	int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
+	//int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
 
   /* USER CODE END 2 */
 
@@ -115,6 +119,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+		CAN_MSG_Generic_t msg;
+
+		while (queue_next(&CAN1_Rx, &msg)) {
+			// check for heartbeat
+			if (check_heartbeat_msg(&msg)) {
+			}
+		}
+
 		/* Screen_1Gray_Clear();
 		 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 		 HAL_Delay(1000);
@@ -122,12 +135,12 @@ int main(void)
 		 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 		 */
 		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-		Dynamic_Counter(CountScreen, VCU_STATES);
-		if (VCU_STATES[0] < 15) {
-			VCU_STATES[0]++;
-		} else {
-			VCU_STATES[0] = 0;
-		}
+		Draw_BoardStates(CountScreen);
+//		if (VCU_STATES[0] < 15) {
+//			VCU_STATES[0]++;
+//		} else {
+//			VCU_STATES[0] = 0;
+//		}
 //	  HAL_Delay(100);
 	}
   /* USER CODE END 3 */
