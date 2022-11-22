@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2022 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -55,33 +54,23 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+// Note in the definitions below the S at the start is for Screen i.e. SRST is the Screen Reset Pin
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define POT_R_Pin GPIO_PIN_0
-#define POT_R_GPIO_Port GPIOC
-#define POT_M_Pin GPIO_PIN_1
-#define POT_M_GPIO_Port GPIOC
-#define POT_L_Pin GPIO_PIN_2
-#define POT_L_GPIO_Port GPIOC
-#define B4_Pin GPIO_PIN_0
-#define B4_GPIO_Port GPIOA
-#define B3_Pin GPIO_PIN_1
-#define B3_GPIO_Port GPIOA
-#define RST_SCREEN_Pin GPIO_PIN_2
-#define RST_SCREEN_GPIO_Port GPIOA
-#define DC_SCREEN_Pin GPIO_PIN_3
-#define DC_SCREEN_GPIO_Port GPIOA
-#define CS_SCREEN_Pin GPIO_PIN_4
-#define CS_SCREEN_GPIO_Port GPIOA
-#define BUS_SCREEN_Pin GPIO_PIN_10
-#define BUS_SCREEN_GPIO_Port GPIOA
-#define SCREEN_BUSY_Pin GPIO_PIN_11
-#define SCREEN_BUSY_GPIO_Port GPIOA
-#define B1_Pin GPIO_PIN_3
-#define B1_GPIO_Port GPIOD
-#define B2_Pin GPIO_PIN_4
-#define B2_GPIO_Port GPIOD
+#define SBUSY_Pin GPIO_PIN_3
+#define SBUSY_GPIO_Port GPIOA
+#define SCS_Pin GPIO_PIN_4
+#define SCS_GPIO_Port GPIOA
+#define SDC_Pin GPIO_PIN_6
+#define SDC_GPIO_Port GPIOA
+#define SRST_Pin GPIO_PIN_4
+#define SRST_GPIO_Port GPIOC
+#define LED1_Pin GPIO_PIN_10
+#define LED1_GPIO_Port GPIOE
+#define LED2_Pin GPIO_PIN_11
+#define LED2_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
