@@ -14,6 +14,7 @@
 extern UBYTE *STATIC_CANVAS;
 extern UBYTE *DYNAMIC_CANVAS;
 extern uint8_t SCR_STATE;
+extern uint8_t DISP_STATE;
 extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
 extern dispSelector_t disp_select2;
@@ -105,13 +106,14 @@ void Draw_BoardStates(UBYTE *Canvas) {
 void init_Main_text()
 {
 
-	main_txt.title = (dispText_t){.text = "QUT MS Main", .xpos = 50, .ypos = 50, .font = &Font24, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED};
-	main_txt.driver = (dispText_t){.text = "DRIVER MODE", .xpos = 40, .ypos = 125, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED};
-	main_txt.driverless_mission1 = (dispText_t){.text = "DVL MISSION 1", .xpos = 40, .ypos = 175, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED};
-	main_txt.driverless_mission2 = (dispText_t){.text = "DVL MISSION 2", .xpos = 40, .ypos = 225, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED};
+	main_txt.missions[0] = (dispText_t){.text = "QUT MS Main", .xpos = 50, .ypos = 50, .font = &Font24, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 69};
+	main_txt.missions[1] = (dispText_t){.text = "MANUAL DRIVING", .xpos = 40, .ypos = 125, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 0};
+	main_txt.missions[2] = (dispText_t){.text = "MISSION: EBS", .xpos = 40, .ypos = 175, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 1};
+	main_txt.missions[3] = (dispText_t){.text = "MISSION: TRACK", .xpos = 40, .ypos = 225, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 2};
+	main_txt.missions[4] = (dispText_t){.text = "SPECIAL", .xpos = 40, .ypos = 275, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 3};
 	disp_select1 = (dispSelector_t){.xpos = 25, .ypos = 135, .radius = 4, .color = ClrBlack};
-	disp_select2 = (dispSelector_t){.xpos = 25, .ypos = 185, .radius = 4, .color = ClrWhite};
-	disp_select3 = (dispSelector_t){.xpos = 25, .ypos = 235, .radius = 4, .color = ClrWhite};
+	//disp_select2 = (dispSelector_t){.xpos = 25, .ypos = 185, .radius = 4, .color = ClrWhite};
+	//disp_select3 = (dispSelector_t){.xpos = 25, .ypos = 235, .radius = 4, .color = ClrWhite};
 }
 
 void Dynamic_Clear()
@@ -135,10 +137,11 @@ void Screen_Display(UBYTE *Canvas)
 		Refresh_Display(Canvas);
 
 		// draw new screen bitmap
-		Paint_DrawString_EN(main_txt.title.xpos, main_txt.title.ypos, main_txt.title.text,  main_txt.title.font,  main_txt.title.color_fg,  main_txt.title.color_bg);
-		Paint_DrawString_EN(main_txt.driver.xpos, main_txt.driver.ypos, main_txt.driver.text,  main_txt.driver.font,  main_txt.driver.color_fg,  main_txt.driver.color_bg);
-		Paint_DrawString_EN(main_txt.driverless_mission1.xpos, main_txt.driverless_mission1.ypos, main_txt.driverless_mission1.text,  main_txt.driverless_mission1.font,  main_txt.driverless_mission1.color_fg,  main_txt.driverless_mission1.color_bg);
-		Paint_DrawString_EN(main_txt.driverless_mission2.xpos, main_txt.driverless_mission2.ypos, main_txt.driverless_mission2.text,  main_txt.driverless_mission2.font,  main_txt.driverless_mission2.color_fg,  main_txt.driverless_mission2.color_bg);
+		Paint_DrawString_EN(main_txt.missions[0].xpos, main_txt.missions[0].ypos, main_txt.missions[0].text,  main_txt.missions[0].font,  main_txt.missions[0].color_fg,  main_txt.missions[0].color_bg);
+		Paint_DrawString_EN(main_txt.missions[1].xpos, main_txt.missions[1].ypos, main_txt.missions[1].text,  main_txt.missions[1].font,  main_txt.missions[1].color_fg,  main_txt.missions[1].color_bg);
+		Paint_DrawString_EN(main_txt.missions[2].xpos, main_txt.missions[2].ypos, main_txt.missions[2].text,  main_txt.missions[2].font,  main_txt.missions[2].color_fg,  main_txt.missions[2].color_bg);
+		Paint_DrawString_EN(main_txt.missions[3].xpos, main_txt.missions[3].ypos, main_txt.missions[3].text,  main_txt.missions[3].font,  main_txt.missions[3].color_fg,  main_txt.missions[3].color_bg);
+		Paint_DrawString_EN(main_txt.missions[4].xpos, main_txt.missions[4].ypos, main_txt.missions[4].text,  main_txt.missions[4].font,  main_txt.missions[4].color_fg,  main_txt.missions[4].color_bg);
 		Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius, disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 		//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 		//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
@@ -157,24 +160,69 @@ void Screen_Display(UBYTE *Canvas)
 	}*/
 }
 
-void Screen_Update(uint32_t ADC_value){
+void user_select(uint8_t selected_ID)
+{
+	for(int i = 0; i < 3; i++)
+	{
+		if(selected_ID == main_txt.missions[i+1].mission_ID)
+		{
+			main_txt.missions[i+1].color_bg = ClrWhite;
+			main_txt.missions[i+1].color_fg = ClrBlack;
+			main_txt.missions[i+1].select_state = SELECTED;
+		}
+		else{
+			main_txt.missions[i+1].color_bg = ClrBlack;
+			main_txt.missions[i+1].color_fg = ClrWhite;
+			main_txt.missions[i+1].select_state = NOT_SELECTED;
+		}
+	}
+	if (selected_ID == 3)
+	{
+		DISP_STATE = OTHER_SCREEN;
+	}
+}
+
+void Screen_Update(uint32_t ADC_value, bool btn_pressed){
 	// Test update
-	if(ADC_value < 1000){
+	if(ADC_value < 800){
 		//disp_select1.color = ClrBlack;
 		//disp_select2.color = WHITE;
 		//disp_select3.color = WHITE;
 		disp_select1.ypos = 135;
+		if(btn_pressed && (!main_txt.missions[0].select_state) ){
+			user_select(0);
+		}
 	}
-	else if(ADC_value < 2000){
+	else if(ADC_value < 1600){
 		//disp_select1.color = WHITE;
 		//disp_select2.color = ClrBlack;
 		//disp_select3.color = WHITE;
 		disp_select1.ypos = 185;
+		if(btn_pressed && (!main_txt.missions[1].select_state) ){
+			user_select(1);
+		}
 	}
+	else if(ADC_value < 2400){
+		disp_select1.ypos = 235;
+		if(btn_pressed && (!main_txt.missions[1].select_state) ){
+					user_select(2);
+				}
+	}
+
 	else{
 		//disp_select1.color = WHITE;
 		//disp_select2.color = WHITE;
 		//disp_select3.color = ClrBlack;
-		disp_select1.ypos = 235;
+		disp_select1.ypos = 285;
+		if(btn_pressed && (!main_txt.missions[2].select_state) ){
+			user_select(3);
+		}
 	}
+}
+
+void Special_Display(UBYTE *Canvas)
+{
+	Refresh_Display(Canvas);
+    Paint_DrawBitMap(pepe_img);
+    Dynamic_Display(Canvas);
 }

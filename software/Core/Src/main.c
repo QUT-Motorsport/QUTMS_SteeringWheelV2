@@ -54,6 +54,7 @@ dispSelector_t disp_select1;
 dispSelector_t disp_select2;
 dispSelector_t disp_select3;
 uint8_t SCR_STATE = STARTUP_SCREEN;
+uint8_t DISP_STATE = MAIN_SCREEN;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -75,6 +76,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	uint32_t ADC1_value = 0;
+	bool btn_press = false;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -115,7 +117,7 @@ int main(void)
 
 	init_Main_text();
 	Screen_Dynamic_Init(DynamicScreen);
-	//int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
+	int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -136,7 +138,7 @@ int main(void)
 		 ADC1_value = Get_ADC_Value(&hadc1);
 
 		 // CHECK BTN PRESS
-		 btn_pressed();
+		 btn_press = btn_pressed();
 
 		 // READ CAN RX
 		CAN_MSG_Generic_t msg;
@@ -149,12 +151,20 @@ int main(void)
 		}
 
 		// UPDATE SCREEN PRINT
-		// Screen_Update(ADC1_value);
+		Screen_Update(ADC1_value, btn_press);
 
 		//HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 
 		//Draw_BoardStates(DynamicScreen);
-		//Screen_Display(DynamicScreen);
+		switch(DISP_STATE){
+		case MAIN_SCREEN:
+			Screen_Display(DynamicScreen);
+			break;
+		case OTHER_SCREEN:
+			Special_Display(DynamicScreen);
+			break;
+		}
+
 
 	}
   /* USER CODE END 3 */

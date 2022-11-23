@@ -16,14 +16,13 @@ bool btn_pressed()
 	{
 		btn_counter++;
 	}
-	if(btn_counter > 25){
+	if(btn_counter > 15){
 		pressed = true;
 		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 		btn_counter = 0;
 	}
 	else{
 		pressed = false;
-		btn_counter = 0;
 	}
 	return pressed;
 }
