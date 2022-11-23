@@ -115,7 +115,7 @@ static void Screen_ReadBusy_HIGH(void)
     do {
         busy = Screen_Digital_Read(SBUSY_Pin, SBUSY_GPIO_Port);
     } while(busy);
-    Screen_Delay_ms(200);
+    Screen_Delay_ms(50);
     Debug("e-Paper busy release\r\n");
 }
 

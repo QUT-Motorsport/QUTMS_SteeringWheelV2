@@ -41,7 +41,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+  extern uint32_t ADC1_value;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
