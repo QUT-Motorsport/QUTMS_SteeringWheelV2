@@ -22,6 +22,7 @@
 #include "can.h"
 #include "spi.h"
 #include "gpio.h"
+#include "btn.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -134,6 +135,9 @@ int main(void)
 		 HAL_ADC_Start(&hadc1);
 		 ADC1_value = Get_ADC_Value(&hadc1);
 
+		 // CHECK BTN PRESS
+		 btn_pressed();
+
 		 // READ CAN RX
 		CAN_MSG_Generic_t msg;
 
@@ -145,12 +149,12 @@ int main(void)
 		}
 
 		// UPDATE SCREEN PRINT
-		 Screen_Update(ADC1_value);
+		// Screen_Update(ADC1_value);
 
-		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+		//HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 
 		//Draw_BoardStates(DynamicScreen);
-		Screen_Display(DynamicScreen);
+		//Screen_Display(DynamicScreen);
 
 	}
   /* USER CODE END 3 */

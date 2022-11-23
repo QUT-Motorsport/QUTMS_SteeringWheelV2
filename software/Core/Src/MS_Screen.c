@@ -157,8 +157,7 @@ void Screen_Display(UBYTE *Canvas)
 	}*/
 }
 
-void Screen_Update(uint32_t ADC_value)
-{
+void Screen_Update(uint32_t ADC_value){
 	// Test update
 	if(ADC_value < 1000){
 		//disp_select1.color = ClrBlack;
