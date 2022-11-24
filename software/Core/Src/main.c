@@ -107,6 +107,7 @@ int main(void)
 		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 	}
 	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
+
 	UBYTE *DynamicScreen = Canvas_Init();
 	UBYTE *Canvas_STARTUP = Canvas_Init();
 	Screen_Static_Init(Canvas_STARTUP);
@@ -118,6 +119,7 @@ int main(void)
 	init_Main_text();
 	Screen_Dynamic_Init(DynamicScreen);
 	int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
