@@ -124,16 +124,27 @@ void Dynamic_Clear()
 
 void Refresh_Display(UBYTE *Canvas)
 {
+	bool clearEntireWindow = false;
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(2);
 	Paint_Clear(WHITE);
-	Paint_ClearWindows(20, 20, 260, 460, WHITE);
+	for (int i = 0; i < 6; i++)
+	{
+		if(main_txt.missions[i].select_state == SELECTED)
+		{
+			Paint_ClearWindows(20, 20, 260, 460, WHITE);
+			clearEntireWindow = true;
+		}
+	}
+	if (!clearEntireWindow)
+	{
+		Paint_ClearWindows(20, 20, 45, 460, WHITE);
+	}
+
 }
 
 void Screen_Display(UBYTE *Canvas)
 {
-	//if (SCR_STATE == MAIN_SCREEN)
-	//{
 		// refresh screen
 		Refresh_Display(Canvas);
 
@@ -142,30 +153,11 @@ void Screen_Display(UBYTE *Canvas)
 		{
 			Paint_DrawString_EN(main_txt.missions[i].xpos, main_txt.missions[i].ypos, main_txt.missions[i].text,  main_txt.missions[i].font,  main_txt.missions[i].color_fg,  main_txt.missions[i].color_bg);
 		}
-		/*
-		Paint_DrawString_EN(main_txt.missions[0].xpos, main_txt.missions[0].ypos, main_txt.missions[0].text,  main_txt.missions[0].font,  main_txt.missions[0].color_fg,  main_txt.missions[0].color_bg);
-		Paint_DrawString_EN(main_txt.missions[1].xpos, main_txt.missions[1].ypos, main_txt.missions[1].text,  main_txt.missions[1].font,  main_txt.missions[1].color_fg,  main_txt.missions[1].color_bg);
-		Paint_DrawString_EN(main_txt.missions[2].xpos, main_txt.missions[2].ypos, main_txt.missions[2].text,  main_txt.missions[2].font,  main_txt.missions[2].color_fg,  main_txt.missions[2].color_bg);
-		Paint_DrawString_EN(main_txt.missions[3].xpos, main_txt.missions[3].ypos, main_txt.missions[3].text,  main_txt.missions[3].font,  main_txt.missions[3].color_fg,  main_txt.missions[3].color_bg);
-		Paint_DrawString_EN(main_txt.missions[4].xpos, main_txt.missions[4].ypos, main_txt.missions[4].text,  main_txt.missions[4].font,  main_txt.missions[4].color_fg,  main_txt.missions[4].color_bg);
-		Paint_DrawString_EN(main_txt.missions[5].xpos, main_txt.missions[5].ypos, main_txt.missions[5].text,  main_txt.missions[5].font,  main_txt.missions[5].color_fg,  main_txt.missions[5].color_bg);
-		*/
+
 		Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius, disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-		//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-		//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 		// display dynamic
 		Dynamic_Display(Canvas);
 
-	/*
-	else if (SCR_STATE == STARTUP_SCREEN)
-	{
-		UBYTE *Canvas_STARTUP = Canvas_Init();
-		Screen_Static_Init(Canvas_STARTUP);
-		Screen_Startup(Canvas_STARTUP);
-		HAL_Delay(3000);
-		free(Canvas_STARTUP);
-		SCR_STATE = MAIN_SCREEN;
-	}*/
 }
 
 void user_select(uint8_t selected_ID)
@@ -193,18 +185,12 @@ void user_select(uint8_t selected_ID)
 void Screen_Update(uint32_t ADC_value, bool btn_pressed){
 	// Test update
 	if(ADC_value < 300){
-		//disp_select1.color = ClrBlack;
-		//disp_select2.color = WHITE;
-		//disp_select3.color = WHITE;
 		disp_select1.ypos = 135;
 		if(btn_pressed && (!main_txt.missions[1].select_state) ){
 			user_select(0);
 		}
 	}
 	else if(ADC_value < 1500){
-		//disp_select1.color = WHITE;
-		//disp_select2.color = ClrBlack;
-		//disp_select3.color = WHITE;
 		disp_select1.ypos = 185;
 		if(btn_pressed && (!main_txt.missions[2].select_state) ){
 			user_select(1);
@@ -223,9 +209,6 @@ void Screen_Update(uint32_t ADC_value, bool btn_pressed){
 					}
 		}
 	else{
-		//disp_select1.color = WHITE;
-		//disp_select2.color = WHITE;
-		//disp_select3.color = ClrBlack;
 		disp_select1.ypos = 335;
 		if(btn_pressed && (!main_txt.missions[5].select_state) ){
 			user_select(4);
