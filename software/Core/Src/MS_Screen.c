@@ -124,22 +124,22 @@ void Dynamic_Clear()
 
 void Refresh_Display(UBYTE *Canvas)
 {
-	bool clearEntireWindow = false;
+	//bool clearEntireWindow = false;
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(2);
 	Paint_Clear(WHITE);
-	for (int i = 0; i < 6; i++)
-	{
-		if(main_txt.missions[i].select_state == SELECTED)
-		{
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	if(main_txt.missions[i].select_state == SELECTED)
+	//	{
 			Paint_ClearWindows(20, 20, 260, 460, WHITE);
-			clearEntireWindow = true;
-		}
-	}
-	if (!clearEntireWindow)
-	{
-		Paint_ClearWindows(20, 20, 45, 460, WHITE);
-	}
+	//		clearEntireWindow = true;
+	//	}
+	//}
+	//if (!clearEntireWindow)
+	//{
+	//	Paint_ClearWindows(20, 20, 45, 460, WHITE);
+	//}
 
 }
 

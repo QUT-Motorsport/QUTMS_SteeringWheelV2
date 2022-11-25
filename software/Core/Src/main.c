@@ -22,13 +22,13 @@
 #include "can.h"
 #include "spi.h"
 #include "gpio.h"
-#include "btn.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MS_Screen.h"
 #include "heartbeat.h"
 #include <queue.h>
+#include "btn.h"
 
 /* USER CODE END Includes */
 
