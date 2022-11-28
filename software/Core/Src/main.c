@@ -22,13 +22,13 @@
 #include "can.h"
 #include "spi.h"
 #include "gpio.h"
-#include "btn.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MS_Screen.h"
 #include "heartbeat.h"
 #include <queue.h>
+#include "btn.h"
 
 /* USER CODE END Includes */
 
@@ -55,6 +55,8 @@ dispSelector_t disp_select2;
 dispSelector_t disp_select3;
 uint8_t SCR_STATE = STARTUP_SCREEN;
 uint8_t DISP_STATE = MAIN_SCREEN;
+UBYTE DynamicScreen[33600];
+UBYTE Canvas_STARTUP[33600];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -108,12 +110,11 @@ int main(void)
 	}
 	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
 
-	UBYTE *DynamicScreen = Canvas_Init();
-	UBYTE *Canvas_STARTUP = Canvas_Init();
+	//UBYTE *DynamicScreen = Canvas_Init();
+	//UBYTE *Canvas_STARTUP = Canvas_Init();
 	Screen_Static_Init(Canvas_STARTUP);
 	Screen_Startup(Canvas_STARTUP);
 	HAL_Delay(3000);
-	free(Canvas_STARTUP);
 	SCR_STATE = MAIN_SCREEN;
 
 	init_Main_text();
@@ -125,8 +126,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-	CAN_setup();
-	CAN_TxHeaderTypeDef header;
+	//CAN_setup();
+	//CAN_TxHeaderTypeDef header;
 	//HAL_CAN_Start(&hcan1);
 	//uint32_t txMailbox = 0;
 
@@ -143,6 +144,7 @@ int main(void)
 		 btn_press = btn_pressed();
 
 		 // READ CAN RX
+		 /*
 		CAN_MSG_Generic_t msg;
 
 		while (queue_next(&CAN1_Rx, &msg)) {
@@ -150,7 +152,7 @@ int main(void)
 			// check for heartbeat
 			if (check_heartbeat_msg(&msg)) {
 			}
-		}
+		}*/
 
 		// UPDATE SCREEN PRINT
 		Screen_Update(ADC1_value, btn_press);
@@ -161,6 +163,7 @@ int main(void)
 		switch(DISP_STATE){
 		case MAIN_SCREEN:
 			Screen_Display(DynamicScreen);
+			HAL_Delay(10);
 			break;
 		case OTHER_SCREEN:
 			Special_Display(DynamicScreen);
@@ -202,11 +205,11 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV4;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }

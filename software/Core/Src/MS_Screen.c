@@ -62,12 +62,12 @@ void Screen_Startup(UBYTE *Canvas) {
 	Paint_SetScale(4);
 	Paint_Clear(WHITE);
 	Static_Display(Canvas);
-	HAL_Delay(2000);
+	HAL_Delay(500);
 	Paint_DrawString_EN(15, 200, "QUT Motorsports", &Font24, WHITE, ClrBlack);
 	Paint_DrawString_EN(25, 225, "Steering Wheel", &Font24, WHITE, ClrBlack);
 	Paint_DrawString_EN(35, 250, "Version 1.0", &Font24, WHITE, ClrBlack);
 	Static_Display(Canvas);
-	HAL_Delay(5000);
+	HAL_Delay(3000);
 	Paint_Clear(WHITE);
 	Static_Display(Canvas);
 }

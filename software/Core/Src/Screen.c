@@ -110,13 +110,13 @@ static void Screen_SendData(UBYTE Data)
 
 static void Screen_ReadBusy_HIGH(void)
 {
-    Debug("e-Paper busy\r\n");
+    //Debug("e-Paper busy\r\n");
     UBYTE busy;
     do {
         busy = Screen_Digital_Read(SBUSY_Pin, SBUSY_GPIO_Port);
     } while(busy);
     Screen_Delay_ms(50);
-    Debug("e-Paper busy release\r\n");
+    //Debug("e-Paper busy release\r\n");
 }
 
 /******************************************************************************
