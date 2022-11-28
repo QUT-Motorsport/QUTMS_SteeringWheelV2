@@ -17,8 +17,7 @@ extern uint8_t SCR_STATE;
 extern uint8_t DISP_STATE;
 extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
-extern dispSelector_t disp_select2;
-extern dispSelector_t disp_select3;
+extern volatile PAINT_TIME sPaint_time;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -151,6 +150,7 @@ void Screen_Display(UBYTE *Canvas)
 		Paint_DrawString_EN(main_txt.missions[5].xpos, main_txt.missions[5].ypos, main_txt.missions[5].text,  main_txt.missions[5].font,  main_txt.missions[5].color_fg,  main_txt.missions[5].color_bg);
 		*/
 		Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius, disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+		Paint_DrawTime(85, 90, &sPaint_time, &Font16, ClrWhite, ClrBlack);
 		//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 		//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 		// display dynamic

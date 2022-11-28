@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "can.h"
 #include "spi.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -51,12 +52,13 @@
 /* USER CODE BEGIN PV */
 struct main_screen_text main_txt;
 dispSelector_t disp_select1;
-dispSelector_t disp_select2;
-dispSelector_t disp_select3;
+volatile PAINT_TIME sPaint_time;
 uint8_t SCR_STATE = STARTUP_SCREEN;
 uint8_t DISP_STATE = MAIN_SCREEN;
 UBYTE DynamicScreen[33600];
 UBYTE Canvas_STARTUP[33600];
+uint32_t ADC1_value = 0;
+uint32_t ADC1_buffer;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -77,7 +79,9 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint32_t ADC1_value = 0;
+	sPaint_time.Hour = 0;
+	sPaint_time.Min = 0;
+	sPaint_time.Sec = 0;
 	bool btn_press = false;
   /* USER CODE END 1 */
 
@@ -102,6 +106,8 @@ int main(void)
   MX_SPI1_Init();
   MX_CAN1_Init();
   MX_ADC1_Init();
+  MX_TIM9_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
 	// Initialise the screen
@@ -130,29 +136,27 @@ int main(void)
 	//CAN_TxHeaderTypeDef header;
 	//HAL_CAN_Start(&hcan1);
 	//uint32_t txMailbox = 0;
-
+	HAL_TIM_Base_Start_IT(&htim9);
+	HAL_TIM_Base_Start_IT(&htim3);
 
 	while (1) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		// READ POT VALUES
-		 HAL_ADC_Start(&hadc1);
-		 ADC1_value = Get_ADC_Value(&hadc1);
 
-		 // CHECK BTN PRESS
-		 btn_press = btn_pressed();
+		// CHECK BTN PRESS
+		btn_press = btn_pressed();
 
-		 // READ CAN RX
-		 /*
-		CAN_MSG_Generic_t msg;
+		// READ CAN RX
+		/*
+		 CAN_MSG_Generic_t msg;
 
-		while (queue_next(&CAN1_Rx, &msg)) {
-			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-			// check for heartbeat
-			if (check_heartbeat_msg(&msg)) {
-			}
-		}*/
+		 while (queue_next(&CAN1_Rx, &msg)) {
+		 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+		 // check for heartbeat
+		 if (check_heartbeat_msg(&msg)) {
+		 }
+		 }*/
 
 		// UPDATE SCREEN PRINT
 		Screen_Update(ADC1_value, btn_press);
@@ -160,7 +164,7 @@ int main(void)
 		//HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 
 		//Draw_BoardStates(DynamicScreen);
-		switch(DISP_STATE){
+		switch (DISP_STATE) {
 		case MAIN_SCREEN:
 			Screen_Display(DynamicScreen);
 			HAL_Delay(10);
@@ -169,7 +173,6 @@ int main(void)
 			Special_Display(DynamicScreen);
 			break;
 		}
-
 
 	}
   /* USER CODE END 3 */

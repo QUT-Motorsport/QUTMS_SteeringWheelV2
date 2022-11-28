@@ -126,8 +126,6 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 /* USER CODE BEGIN 1 */
 uint32_t Get_ADC_Value(ADC_HandleTypeDef* adcHandle)
 {
-	// Poll ADC1 Perihperal & TimeOut = 1mSec
-	HAL_ADC_PollForConversion(&hadc1, 1);
 	// Read The ADC Conversion Result & Map It To PWM DutyCycle
 	return HAL_ADC_GetValue(&hadc1);
 }
