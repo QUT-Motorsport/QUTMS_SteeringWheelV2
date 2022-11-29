@@ -6,11 +6,14 @@
  */
 #include "main.h"
 #include "btn.h"
+#include "MS_Screen.h"
+extern volatile bool btn_pressed[4];
+extern uint8_t DISP_STATE;
 
 
+/*
 bool btn_pressed()
 {
-	bool pressed;
 	uint8_t btn_counter = 0;
 	while(!HAL_GPIO_ReadPin(Btn2_GPIO_Port, Btn2_Pin))
 	{
@@ -25,5 +28,26 @@ bool btn_pressed()
 		pressed = false;
 	}
 	return pressed;
+}*/
+
+void external_btn1_cb( void )
+{
+
+}
+
+void external_btn2_cb( void )
+{
+	DISP_STATE = VCU_STATE_SCREEN;
+}
+
+void external_btn3_cb( void )
+{
+	DISP_STATE = MAIN_SCREEN;
+}
+
+void external_btn4_cb( void )
+{
+	btn_pressed[0] = true;
+	HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 }
 

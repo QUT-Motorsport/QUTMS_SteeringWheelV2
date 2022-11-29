@@ -11,6 +11,7 @@
 #include "heartbeat.h"
 #include "main.h"
 
+
 extern UBYTE *STATIC_CANVAS;
 extern UBYTE *DYNAMIC_CANVAS;
 extern uint8_t SCR_STATE;
@@ -18,6 +19,7 @@ extern uint8_t DISP_STATE;
 extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
 extern volatile PAINT_TIME sPaint_time;
+extern volatile bool btn_pressed[4];
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -170,7 +172,7 @@ void Screen_Display(UBYTE *Canvas)
 
 void user_select(uint8_t selected_ID)
 {
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 4; i++)
 	{
 		if(selected_ID == main_txt.missions[i+1].mission_ID)
 		{
@@ -190,14 +192,15 @@ void user_select(uint8_t selected_ID)
 	}
 }
 
-void Screen_Update(uint32_t ADC_value, bool btn_pressed){
+void Screen_Update(uint32_t ADC_value){
+	bool btn_press = btn_pressed[0];
 	// Test update
 	if(ADC_value < 300){
 		//disp_select1.color = ClrBlack;
 		//disp_select2.color = WHITE;
 		//disp_select3.color = WHITE;
 		disp_select1.ypos = 135;
-		if(btn_pressed && (!main_txt.missions[1].select_state) ){
+		if(btn_press && (!main_txt.missions[1].select_state) ){
 			user_select(0);
 		}
 	}
@@ -206,19 +209,19 @@ void Screen_Update(uint32_t ADC_value, bool btn_pressed){
 		//disp_select2.color = ClrBlack;
 		//disp_select3.color = WHITE;
 		disp_select1.ypos = 185;
-		if(btn_pressed && (!main_txt.missions[2].select_state) ){
+		if(btn_press && (!main_txt.missions[2].select_state) ){
 			user_select(1);
 		}
 	}
 	else if(ADC_value < 2700){
 		disp_select1.ypos = 235;
-		if(btn_pressed && (!main_txt.missions[3].select_state) ){
+		if(btn_press && (!main_txt.missions[3].select_state) ){
 					user_select(2);
 				}
 	}
 	else if(ADC_value < 4000){
 			disp_select1.ypos = 285;
-			if(btn_pressed && (!main_txt.missions[4].select_state) ){
+			if(btn_press && (!main_txt.missions[4].select_state) ){
 						user_select(3);
 					}
 		}
@@ -227,10 +230,11 @@ void Screen_Update(uint32_t ADC_value, bool btn_pressed){
 		//disp_select2.color = WHITE;
 		//disp_select3.color = ClrBlack;
 		disp_select1.ypos = 335;
-		if(btn_pressed && (!main_txt.missions[5].select_state) ){
+		if(btn_press && (!main_txt.missions[5].select_state) ){
 			user_select(4);
 		}
 	}
+	btn_pressed[0] = false;
 }
 
 void Special_Display(UBYTE *Canvas)

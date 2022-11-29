@@ -57,8 +57,11 @@ uint8_t SCR_STATE = STARTUP_SCREEN;
 uint8_t DISP_STATE = MAIN_SCREEN;
 UBYTE DynamicScreen[33600];
 UBYTE Canvas_STARTUP[33600];
+//UBYTE Canvas_SPECIAL[33600];
+UBYTE Canvas_VCU[33600];
 uint32_t ADC1_value = 0;
 uint32_t ADC1_buffer;
+volatile bool btn_pressed[4] = {false, false, false, false};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,7 +85,6 @@ int main(void)
 	sPaint_time.Hour = 0;
 	sPaint_time.Min = 0;
 	sPaint_time.Sec = 0;
-	bool btn_press = false;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -125,7 +127,7 @@ int main(void)
 
 	init_Main_text();
 	Screen_Dynamic_Init(DynamicScreen);
-	int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
+	//int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
 
   /* USER CODE END 2 */
 
@@ -145,32 +147,40 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
 		// CHECK BTN PRESS
-		btn_press = btn_pressed();
 
 		// READ CAN RX
-		/*
-		 CAN_MSG_Generic_t msg;
 
-		 while (queue_next(&CAN1_Rx, &msg)) {
-		 HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-		 // check for heartbeat
-		 if (check_heartbeat_msg(&msg)) {
-		 }
-		 }*/
+		CAN_MSG_Generic_t msg;
+
+		while (queue_next(&CAN1_Rx, &msg)) {
+			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+			// check for heartbeat
+			if (check_heartbeat_msg(&msg)) {
+			}
+		}
 
 		// UPDATE SCREEN PRINT
-		Screen_Update(ADC1_value, btn_press);
+		Screen_Update(ADC1_value);
 
 		//HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 
 		//Draw_BoardStates(DynamicScreen);
 		switch (DISP_STATE) {
 		case MAIN_SCREEN:
+			HAL_Delay(100);
 			Screen_Display(DynamicScreen);
 			HAL_Delay(10);
 			break;
+		case VCU_STATE_SCREEN:
+			HAL_Delay(100);
+			Draw_BoardStates(Canvas_VCU);
+			HAL_Delay(10);
+			break;
 		case OTHER_SCREEN:
-			Special_Display(DynamicScreen);
+			//HAL_Delay(50);
+			//Special_Display(Canvas_SPECIAL);
+			DISP_STATE = MAIN_SCREEN;
+			HAL_Delay(10);
 			break;
 		}
 
