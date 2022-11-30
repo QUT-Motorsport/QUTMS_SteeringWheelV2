@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "heartbeat.h"
 #include "main.h"
-
+#include <CAN_SW.h>
 
 extern UBYTE *STATIC_CANVAS;
 extern UBYTE *DYNAMIC_CANVAS;
@@ -20,13 +20,14 @@ extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
 extern volatile PAINT_TIME sPaint_time;
 extern volatile bool btn_pressed[4];
+extern SW_HeartbeatState_t hbState;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
 	Screen_4Gray_Clear();
 	Screen_Delay_ms(500);
 	Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ORIENTATION,
-			NONINVERTED);
+	NONINVERTED);
 }
 
 void Static_Display(UBYTE *Canvas) {
@@ -38,7 +39,7 @@ void Screen_Dynamic_Init(UBYTE *Canvas) {
 	Screen_1Gray_Clear();
 	Screen_Delay_ms(500);
 	Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ORIENTATION,
-			NONINVERTED);
+	NONINVERTED);
 }
 
 void Dynamic_Display(UBYTE *Canvas) {
@@ -58,7 +59,7 @@ UBYTE* Canvas_Init() {
 
 void Screen_Startup(UBYTE *Canvas) {
 	Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ORIENTATION,
-			NONINVERTED);
+	NONINVERTED);
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(4);
 	Paint_Clear(WHITE);
@@ -104,142 +105,149 @@ void Draw_BoardStates(UBYTE *Canvas) {
 	Dynamic_Display(Canvas);
 }
 
-void init_Main_text()
-{
+void init_Main_text() {
 
-	main_txt.missions[0] = (dispText_t){.text = "QUT MS Main", .xpos = 50, .ypos = 50, .font = &Font24, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 69};
-	main_txt.missions[1] = (dispText_t){.text = "MANUAL DRIVING", .xpos = 40, .ypos = 125, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 0};
-	main_txt.missions[2] = (dispText_t){.text = "MISSION: EBS", .xpos = 40, .ypos = 175, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 1};
-	main_txt.missions[3] = (dispText_t){.text = "MISSION: TRACK", .xpos = 40, .ypos = 225, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 2};
-	main_txt.missions[4] = (dispText_t){.text = "INSPECTION", .xpos = 40, .ypos = 275, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 3};
-	main_txt.missions[5] = (dispText_t){.text = "SPECIAL", .xpos = 40, .ypos = 325, .font = &Font20, .color_fg = ClrWhite, .color_bg = ClrBlack, .select_state = NOT_SELECTED, .mission_ID = 4};
-	disp_select1 = (dispSelector_t){.xpos = 25, .ypos = 135, .radius = 4, .color = ClrBlack};
+	main_txt.missions[0] = (dispText_t ) { .text = "QUT MS Main", .xpos = 50,
+					.ypos = 50, .font = &Font24, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 69 };
+	main_txt.missions[1] = (dispText_t ) { .text = "MANUAL DRIVING", .xpos = 40,
+					.ypos = 125, .font = &Font20, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 0 };
+	main_txt.missions[2] = (dispText_t ) { .text = "MISSION: EBS", .xpos = 40,
+					.ypos = 175, .font = &Font20, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 1 };
+	main_txt.missions[3] = (dispText_t ) { .text = "MISSION: TRACK", .xpos = 40,
+					.ypos = 225, .font = &Font20, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 2 };
+	main_txt.missions[4] = (dispText_t ) { .text = "INSPECTION", .xpos = 40,
+					.ypos = 275, .font = &Font20, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 3 };
+	main_txt.missions[5] = (dispText_t ) { .text = "SPECIAL", .xpos = 40,
+					.ypos = 325, .font = &Font20, .color_fg = ClrWhite,
+					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
+					.mission_ID = 4 };
+	disp_select1 = (dispSelector_t ) { .xpos = 25, .ypos = 135, .radius = 4,
+					.color = ClrBlack };
 	//disp_select2 = (dispSelector_t){.xpos = 25, .ypos = 185, .radius = 4, .color = ClrWhite};
 	//disp_select3 = (dispSelector_t){.xpos = 25, .ypos = 235, .radius = 4, .color = ClrWhite};
 }
 
-void Dynamic_Clear()
-{
+void Dynamic_Clear() {
 	Screen_1Gray_Clear();
 }
 
-void Refresh_Display(UBYTE *Canvas)
-{
+void Refresh_Display(UBYTE *Canvas) {
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(2);
 	Paint_Clear(WHITE);
 	Paint_ClearWindows(20, 20, 260, 460, WHITE);
 }
 
-void Screen_Display(UBYTE *Canvas)
-{
+void Screen_Display(UBYTE *Canvas) {
 	//if (SCR_STATE == MAIN_SCREEN)
 	//{
-		// refresh screen
-		Refresh_Display(Canvas);
+	// refresh screen
+	Refresh_Display(Canvas);
 
-		// draw new screen bitmap
-		for (int i = 0; i < 6; i++)
-		{
-			Paint_DrawString_EN(main_txt.missions[i].xpos, main_txt.missions[i].ypos, main_txt.missions[i].text,  main_txt.missions[i].font,  main_txt.missions[i].color_fg,  main_txt.missions[i].color_bg);
-		}
-		/*
-		Paint_DrawString_EN(main_txt.missions[0].xpos, main_txt.missions[0].ypos, main_txt.missions[0].text,  main_txt.missions[0].font,  main_txt.missions[0].color_fg,  main_txt.missions[0].color_bg);
-		Paint_DrawString_EN(main_txt.missions[1].xpos, main_txt.missions[1].ypos, main_txt.missions[1].text,  main_txt.missions[1].font,  main_txt.missions[1].color_fg,  main_txt.missions[1].color_bg);
-		Paint_DrawString_EN(main_txt.missions[2].xpos, main_txt.missions[2].ypos, main_txt.missions[2].text,  main_txt.missions[2].font,  main_txt.missions[2].color_fg,  main_txt.missions[2].color_bg);
-		Paint_DrawString_EN(main_txt.missions[3].xpos, main_txt.missions[3].ypos, main_txt.missions[3].text,  main_txt.missions[3].font,  main_txt.missions[3].color_fg,  main_txt.missions[3].color_bg);
-		Paint_DrawString_EN(main_txt.missions[4].xpos, main_txt.missions[4].ypos, main_txt.missions[4].text,  main_txt.missions[4].font,  main_txt.missions[4].color_fg,  main_txt.missions[4].color_bg);
-		Paint_DrawString_EN(main_txt.missions[5].xpos, main_txt.missions[5].ypos, main_txt.missions[5].text,  main_txt.missions[5].font,  main_txt.missions[5].color_fg,  main_txt.missions[5].color_bg);
-		*/
-		Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius, disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-		Paint_DrawTime(85, 90, &sPaint_time, &Font16, ClrWhite, ClrBlack);
-		//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-		//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-		// display dynamic
-		Dynamic_Display(Canvas);
+	// draw new screen bitmap
+	for (int i = 0; i < 6; i++) {
+		Paint_DrawString_EN(main_txt.missions[i].xpos,
+				main_txt.missions[i].ypos, main_txt.missions[i].text,
+				main_txt.missions[i].font, main_txt.missions[i].color_fg,
+				main_txt.missions[i].color_bg);
+	}
+	/*
+	 Paint_DrawString_EN(main_txt.missions[0].xpos, main_txt.missions[0].ypos, main_txt.missions[0].text,  main_txt.missions[0].font,  main_txt.missions[0].color_fg,  main_txt.missions[0].color_bg);
+	 Paint_DrawString_EN(main_txt.missions[1].xpos, main_txt.missions[1].ypos, main_txt.missions[1].text,  main_txt.missions[1].font,  main_txt.missions[1].color_fg,  main_txt.missions[1].color_bg);
+	 Paint_DrawString_EN(main_txt.missions[2].xpos, main_txt.missions[2].ypos, main_txt.missions[2].text,  main_txt.missions[2].font,  main_txt.missions[2].color_fg,  main_txt.missions[2].color_bg);
+	 Paint_DrawString_EN(main_txt.missions[3].xpos, main_txt.missions[3].ypos, main_txt.missions[3].text,  main_txt.missions[3].font,  main_txt.missions[3].color_fg,  main_txt.missions[3].color_bg);
+	 Paint_DrawString_EN(main_txt.missions[4].xpos, main_txt.missions[4].ypos, main_txt.missions[4].text,  main_txt.missions[4].font,  main_txt.missions[4].color_fg,  main_txt.missions[4].color_bg);
+	 Paint_DrawString_EN(main_txt.missions[5].xpos, main_txt.missions[5].ypos, main_txt.missions[5].text,  main_txt.missions[5].font,  main_txt.missions[5].color_fg,  main_txt.missions[5].color_bg);
+	 */
+	Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius,
+			disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+	Paint_DrawTime(85, 90, &sPaint_time, &Font16, ClrWhite, ClrBlack);
+	//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+	//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+	// display dynamic
+	Dynamic_Display(Canvas);
 
 	/*
-	else if (SCR_STATE == STARTUP_SCREEN)
-	{
-		UBYTE *Canvas_STARTUP = Canvas_Init();
-		Screen_Static_Init(Canvas_STARTUP);
-		Screen_Startup(Canvas_STARTUP);
-		HAL_Delay(3000);
-		free(Canvas_STARTUP);
-		SCR_STATE = MAIN_SCREEN;
-	}*/
+	 else if (SCR_STATE == STARTUP_SCREEN)
+	 {
+	 UBYTE *Canvas_STARTUP = Canvas_Init();
+	 Screen_Static_Init(Canvas_STARTUP);
+	 Screen_Startup(Canvas_STARTUP);
+	 HAL_Delay(3000);
+	 free(Canvas_STARTUP);
+	 SCR_STATE = MAIN_SCREEN;
+	 }*/
 }
 
-void user_select(uint8_t selected_ID)
-{
-	for(int i = 0; i < 4; i++)
-	{
-		if(selected_ID == main_txt.missions[i+1].mission_ID)
-		{
-			main_txt.missions[i+1].color_bg = ClrWhite;
-			main_txt.missions[i+1].color_fg = ClrBlack;
-			main_txt.missions[i+1].select_state = SELECTED;
-		}
-		else{
-			main_txt.missions[i+1].color_bg = ClrBlack;
-			main_txt.missions[i+1].color_fg = ClrWhite;
-			main_txt.missions[i+1].select_state = NOT_SELECTED;
+void user_select(uint8_t selected_ID) {
+	for (int i = 0; i < 4; i++) {
+		if (selected_ID == main_txt.missions[i + 1].mission_ID) {
+			main_txt.missions[i + 1].color_bg = ClrWhite;
+			main_txt.missions[i + 1].color_fg = ClrBlack;
+			main_txt.missions[i + 1].select_state = SELECTED;
+		} else {
+			main_txt.missions[i + 1].color_bg = ClrBlack;
+			main_txt.missions[i + 1].color_fg = ClrWhite;
+			main_txt.missions[i + 1].select_state = NOT_SELECTED;
 		}
 	}
-	if (selected_ID == 4)
-	{
+	if (selected_ID == 4) {
 		DISP_STATE = OTHER_SCREEN;
 	}
 }
 
-void Screen_Update(uint32_t ADC_value){
+void Screen_Update(uint32_t ADC_value) {
 	bool btn_press = btn_pressed[0];
+	if(btn_press)
+	{
+		hbState.flags._SW_Flags.MISSION_SELECTED = 1;
+	}
 	// Test update
-	if(ADC_value < 300){
-		//disp_select1.color = ClrBlack;
-		//disp_select2.color = WHITE;
-		//disp_select3.color = WHITE;
+	if (ADC_value < 300) {
 		disp_select1.ypos = 135;
-		if(btn_press && (!main_txt.missions[1].select_state) ){
+		if (btn_press && (!main_txt.missions[1].select_state)) {
+			hbState.missionID = MISSION_MANUAL;
 			user_select(0);
 		}
-	}
-	else if(ADC_value < 1500){
-		//disp_select1.color = WHITE;
-		//disp_select2.color = ClrBlack;
-		//disp_select3.color = WHITE;
+	} else if (ADC_value < 1500) {
 		disp_select1.ypos = 185;
-		if(btn_press && (!main_txt.missions[2].select_state) ){
+		if (btn_press && (!main_txt.missions[2].select_state)) {
+			hbState.missionID = MISSION_EBS;
 			user_select(1);
 		}
-	}
-	else if(ADC_value < 2700){
+	} else if (ADC_value < 2700) {
 		disp_select1.ypos = 235;
-		if(btn_press && (!main_txt.missions[3].select_state) ){
-					user_select(2);
-				}
-	}
-	else if(ADC_value < 4000){
-			disp_select1.ypos = 285;
-			if(btn_press && (!main_txt.missions[4].select_state) ){
-						user_select(3);
-					}
+		if (btn_press && (!main_txt.missions[3].select_state)) {
+			hbState.missionID = MISSION_TRACK;
+			user_select(2);
 		}
-	else{
-		//disp_select1.color = WHITE;
-		//disp_select2.color = WHITE;
-		//disp_select3.color = ClrBlack;
+	} else if (ADC_value < 4000) {
+		disp_select1.ypos = 285;
+		if (btn_press && (!main_txt.missions[4].select_state)) {
+			hbState.missionID = MISSION_INSPECTION;
+			user_select(3);
+		}
+	} else {
 		disp_select1.ypos = 335;
-		if(btn_press && (!main_txt.missions[5].select_state) ){
+		if (btn_press && (!main_txt.missions[5].select_state)) {
 			user_select(4);
 		}
 	}
 	btn_pressed[0] = false;
 }
 
-void Special_Display(UBYTE *Canvas)
-{
+void Special_Display(UBYTE *Canvas) {
 	Refresh_Display(Canvas);
-    Paint_DrawBitMap(pepe_img);
-    Dynamic_Display(Canvas);
+	Paint_DrawBitMap(pepe_img);
+	Dynamic_Display(Canvas);
 }

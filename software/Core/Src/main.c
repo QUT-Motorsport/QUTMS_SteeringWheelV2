@@ -29,6 +29,7 @@
 #include "MS_Screen.h"
 #include "heartbeat.h"
 #include <queue.h>
+#include <CAN_SW.h>
 #include "btn.h"
 
 /* USER CODE END Includes */
@@ -50,6 +51,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+// screen variables
 struct main_screen_text main_txt;
 dispSelector_t disp_select1;
 volatile PAINT_TIME sPaint_time;
@@ -57,11 +60,16 @@ uint8_t SCR_STATE = STARTUP_SCREEN;
 uint8_t DISP_STATE = MAIN_SCREEN;
 UBYTE DynamicScreen[33600];
 UBYTE Canvas_STARTUP[33600];
-//UBYTE Canvas_SPECIAL[33600];
-UBYTE Canvas_VCU[33600];
+
+// ADC
 uint32_t ADC1_value = 0;
 uint32_t ADC1_buffer;
+
+// buttons
 volatile bool btn_pressed[4] = {false, false, false, false};
+
+// initiating heartbeat
+SW_HeartbeatState_t hbState;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -110,7 +118,13 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM9_Init();
   MX_TIM3_Init();
+  MX_TIM12_Init();
   /* USER CODE BEGIN 2 */
+
+  hbState.flags.rawMem = 0;
+  hbState.missionID = MISSION_NONE;
+  hbState.stateID = SW_STATE_START;
+
 
 	// Initialise the screen
 	if (Screen_Init() != 0) {
@@ -118,8 +132,6 @@ int main(void)
 	}
 	/* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
 
-	//UBYTE *DynamicScreen = Canvas_Init();
-	//UBYTE *Canvas_STARTUP = Canvas_Init();
 	Screen_Static_Init(Canvas_STARTUP);
 	Screen_Startup(Canvas_STARTUP);
 	HAL_Delay(3000);
@@ -127,19 +139,22 @@ int main(void)
 
 	init_Main_text();
 	Screen_Dynamic_Init(DynamicScreen);
-	//int8_t VCU_STATES[5] = { 0, 2, 3, 4, 5 };
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-	//CAN_setup();
-	//CAN_TxHeaderTypeDef header;
-	//HAL_CAN_Start(&hcan1);
-	//uint32_t txMailbox = 0;
+	CAN_setup();
+	CAN_TxHeaderTypeDef header;
+	HAL_CAN_Start(&hcan1);
+	uint32_t txMailbox = 0;
+
 	HAL_TIM_Base_Start_IT(&htim9);
 	HAL_TIM_Base_Start_IT(&htim3);
+	HAL_TIM_Base_Start_IT(&htim12);
+
+	hbState.stateID = SW_STATE_READY;
 
 	while (1) {
     /* USER CODE END WHILE */
@@ -173,7 +188,7 @@ int main(void)
 			break;
 		case VCU_STATE_SCREEN:
 			HAL_Delay(100);
-			Draw_BoardStates(Canvas_VCU);
+			Draw_BoardStates(DynamicScreen);
 			HAL_Delay(10);
 			break;
 		case OTHER_SCREEN:
