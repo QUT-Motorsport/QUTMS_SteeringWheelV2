@@ -219,7 +219,7 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle) {
 }
 
 /* USER CODE BEGIN 1 */
-void tim9_cb() {
+void tim9_cb(void) {
 
 	sPaint_time.Sec++;
 	if (sPaint_time.Sec == 60) {
@@ -231,15 +231,19 @@ void tim9_cb() {
 	}
 }
 
-void tim3_cb() {
+void tim3_cb(void) {
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1);
 	ADC1_value = HAL_ADC_GetValue(&hadc1);
 }
 
-void tim12_cb() {
+void tim12_cb(void) {
 	SW_Heartbeat_t msg = Compose_SW_Heartbeat(&hbState);
-	CAN_TxHeaderTypeDef pHeader = {.DLC = sizeof(msg.data), .ExtId = 10, .IDE = 10, .StdId = 99};
+	CAN_TxHeaderTypeDef pHeader;
+	pHeader.ExtId = msg.id;
+	pHeader.IDE = CAN_ID_EXT;
+	pHeader.RTR = CAN_RTR_DATA;
+	pHeader.DLC = sizeof(msg.data);
 	send_can_msg(&hcan1, &pHeader, msg.data);
 }
 /* USER CODE END 1 */

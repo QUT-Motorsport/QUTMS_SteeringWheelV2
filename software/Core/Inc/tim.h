@@ -49,6 +49,7 @@ void MX_TIM12_Init(void);
 /* USER CODE BEGIN Prototypes */
 void tim9_cb( void );
 void tim3_cb( void );
+void tim12_cb( void );
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
