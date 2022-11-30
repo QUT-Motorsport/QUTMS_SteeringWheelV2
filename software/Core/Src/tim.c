@@ -28,7 +28,7 @@
 
 extern volatile PAINT_TIME sPaint_time;
 extern uint32_t ADC1_value;
-extern SW_HeartbeatState_t hbState;
+extern SW_HeartbeatState_t SW_hbState;
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -238,7 +238,7 @@ void tim3_cb(void) {
 }
 
 void tim12_cb(void) {
-	SW_Heartbeat_t msg = Compose_SW_Heartbeat(&hbState);
+	SW_Heartbeat_t msg = Compose_SW_Heartbeat(&SW_hbState);
 	CAN_TxHeaderTypeDef pHeader;
 	pHeader.ExtId = msg.id;
 	pHeader.IDE = CAN_ID_EXT;

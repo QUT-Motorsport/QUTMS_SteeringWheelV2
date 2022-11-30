@@ -2203,6 +2203,7 @@ void Draw_BoardStates(UBYTE *Canvas);
 void init_Main_text( void );
 void Refresh_Display(UBYTE *Canvas);
 void Screen_Display(UBYTE *Canvas);
+void Screen_Waiting_Display( UBYTE *Canvas );
 void user_select( uint8_t selected_ID );
 void Screen_Update( uint32_t ADC_value );
 void Special_Display(UBYTE *Canvas);

@@ -20,7 +20,7 @@ extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
 extern volatile PAINT_TIME sPaint_time;
 extern volatile bool btn_pressed[4];
-extern SW_HeartbeatState_t hbState;
+extern SW_HeartbeatState_t SW_hbState;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -74,6 +74,8 @@ void Screen_Startup(UBYTE *Canvas) {
 	Static_Display(Canvas);
 }
 
+
+// ------------------ VCU STATE -------------------------
 void Draw_BoardStates(UBYTE *Canvas) {
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(2);
@@ -148,6 +150,17 @@ void Refresh_Display(UBYTE *Canvas) {
 	Paint_ClearWindows(20, 20, 260, 460, WHITE);
 }
 
+
+void Screen_Waiting_Display( UBYTE *Canvas ){
+	Refresh_Display(Canvas);
+
+	Paint_DrawString_EN(50, 220, "Waiting For", &Font24, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(20, 260, "Driverless HB", &Font24, ClrWhite, ClrBlack);
+
+	Dynamic_Display(Canvas);
+}
+
+
 void Screen_Display(UBYTE *Canvas) {
 	//if (SCR_STATE == MAIN_SCREEN)
 	//{
@@ -161,32 +174,12 @@ void Screen_Display(UBYTE *Canvas) {
 				main_txt.missions[i].font, main_txt.missions[i].color_fg,
 				main_txt.missions[i].color_bg);
 	}
-	/*
-	 Paint_DrawString_EN(main_txt.missions[0].xpos, main_txt.missions[0].ypos, main_txt.missions[0].text,  main_txt.missions[0].font,  main_txt.missions[0].color_fg,  main_txt.missions[0].color_bg);
-	 Paint_DrawString_EN(main_txt.missions[1].xpos, main_txt.missions[1].ypos, main_txt.missions[1].text,  main_txt.missions[1].font,  main_txt.missions[1].color_fg,  main_txt.missions[1].color_bg);
-	 Paint_DrawString_EN(main_txt.missions[2].xpos, main_txt.missions[2].ypos, main_txt.missions[2].text,  main_txt.missions[2].font,  main_txt.missions[2].color_fg,  main_txt.missions[2].color_bg);
-	 Paint_DrawString_EN(main_txt.missions[3].xpos, main_txt.missions[3].ypos, main_txt.missions[3].text,  main_txt.missions[3].font,  main_txt.missions[3].color_fg,  main_txt.missions[3].color_bg);
-	 Paint_DrawString_EN(main_txt.missions[4].xpos, main_txt.missions[4].ypos, main_txt.missions[4].text,  main_txt.missions[4].font,  main_txt.missions[4].color_fg,  main_txt.missions[4].color_bg);
-	 Paint_DrawString_EN(main_txt.missions[5].xpos, main_txt.missions[5].ypos, main_txt.missions[5].text,  main_txt.missions[5].font,  main_txt.missions[5].color_fg,  main_txt.missions[5].color_bg);
-	 */
+
 	Paint_DrawCircle(disp_select1.xpos, disp_select1.ypos, disp_select1.radius,
 			disp_select1.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 	Paint_DrawTime(85, 90, &sPaint_time, &Font16, ClrWhite, ClrBlack);
-	//Paint_DrawCircle(disp_select2.xpos, disp_select2.ypos, disp_select2.radius, disp_select2.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-	//Paint_DrawCircle(disp_select3.xpos, disp_select3.ypos, disp_select3.radius, disp_select3.color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 	// display dynamic
 	Dynamic_Display(Canvas);
-
-	/*
-	 else if (SCR_STATE == STARTUP_SCREEN)
-	 {
-	 UBYTE *Canvas_STARTUP = Canvas_Init();
-	 Screen_Static_Init(Canvas_STARTUP);
-	 Screen_Startup(Canvas_STARTUP);
-	 HAL_Delay(3000);
-	 free(Canvas_STARTUP);
-	 SCR_STATE = MAIN_SCREEN;
-	 }*/
 }
 
 void user_select(uint8_t selected_ID) {
@@ -208,33 +201,31 @@ void user_select(uint8_t selected_ID) {
 
 void Screen_Update(uint32_t ADC_value) {
 	bool btn_press = btn_pressed[0];
-	if(btn_press)
-	{
-		hbState.flags._SW_Flags.MISSION_SELECTED = 1;
-	}
+
+	// only allow selection if mission is not selected
 	// Test update
 	if (ADC_value < 300) {
 		disp_select1.ypos = 135;
 		if (btn_press && (!main_txt.missions[1].select_state)) {
-			hbState.missionID = MISSION_MANUAL;
+			SW_hbState.missionID = MISSION_MANUAL;
 			user_select(0);
 		}
 	} else if (ADC_value < 1500) {
 		disp_select1.ypos = 185;
 		if (btn_press && (!main_txt.missions[2].select_state)) {
-			hbState.missionID = MISSION_EBS;
+			SW_hbState.missionID = MISSION_EBS;
 			user_select(1);
 		}
 	} else if (ADC_value < 2700) {
 		disp_select1.ypos = 235;
 		if (btn_press && (!main_txt.missions[3].select_state)) {
-			hbState.missionID = MISSION_TRACK;
+			SW_hbState.missionID = MISSION_TRACK;
 			user_select(2);
 		}
 	} else if (ADC_value < 4000) {
 		disp_select1.ypos = 285;
 		if (btn_press && (!main_txt.missions[4].select_state)) {
-			hbState.missionID = MISSION_INSPECTION;
+			SW_hbState.missionID = MISSION_INSPECTION;
 			user_select(3);
 		}
 	} else {
@@ -242,6 +233,9 @@ void Screen_Update(uint32_t ADC_value) {
 		if (btn_press && (!main_txt.missions[5].select_state)) {
 			user_select(4);
 		}
+	}
+	if (btn_press) {
+		SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
 	}
 	btn_pressed[0] = false;
 }
