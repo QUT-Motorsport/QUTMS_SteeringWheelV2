@@ -176,12 +176,18 @@ int main(void) {
 		case SW_STATE_READY:
 			HAL_Delay(100);
 			Screen_Waiting_Display(DynamicScreen);
-			while(DVL_hbState.stateID != DVL_STATE_SELECT_MISSION )
-			{
-				// do nothing
+			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+				while (queue_next(&CAN1_Rx, &msg)) {
+					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+					// check for heartbeat
+					if (check_heartbeat_msg(&msg)) {
+						HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+					}
+				}
 			}
 
 			SW_hbState.stateID = SW_STATE_SELECT_MISSION;
+			break;
 
 		case SW_STATE_SELECT_MISSION:
 			// UPDATE SCREEN PRINT
@@ -206,9 +212,26 @@ int main(void) {
 				HAL_Delay(10);
 				break;
 			}
+			break;
 
+		case SW_STATE_IN_MISSION:
+			HAL_Delay(100);
+			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+				while (queue_next(&CAN1_Rx, &msg)) {
+					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+					// check for heartbeat
+					if (check_heartbeat_msg(&msg)) {
+						HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+					}
+				}
+			}
+
+			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 0;
+			SW_hbState.stateID = SW_STATE_SELECT_MISSION;
+			SW_hbState.missionID = MISSION_NONE;
+			clear_main();
+			break;
 		}
-
 	}
 	/* USER CODE END 3 */
 }

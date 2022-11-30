@@ -74,7 +74,6 @@ void Screen_Startup(UBYTE *Canvas) {
 	Static_Display(Canvas);
 }
 
-
 // ------------------ VCU STATE -------------------------
 void Draw_BoardStates(UBYTE *Canvas) {
 	Paint_SelectImage(Canvas);
@@ -150,8 +149,7 @@ void Refresh_Display(UBYTE *Canvas) {
 	Paint_ClearWindows(20, 20, 260, 460, WHITE);
 }
 
-
-void Screen_Waiting_Display( UBYTE *Canvas ){
+void Screen_Waiting_Display( UBYTE *Canvas) {
 	Refresh_Display(Canvas);
 
 	Paint_DrawString_EN(50, 220, "Waiting For", &Font24, ClrWhite, ClrBlack);
@@ -159,7 +157,6 @@ void Screen_Waiting_Display( UBYTE *Canvas ){
 
 	Dynamic_Display(Canvas);
 }
-
 
 void Screen_Display(UBYTE *Canvas) {
 	//if (SCR_STATE == MAIN_SCREEN)
@@ -199,45 +196,57 @@ void user_select(uint8_t selected_ID) {
 	}
 }
 
+void clear_main(void) {
+	for (int i = 0; i < 4; i++) {
+		main_txt.missions[i + 1].color_bg = ClrBlack;
+		main_txt.missions[i + 1].color_fg = ClrWhite;
+		main_txt.missions[i + 1].select_state = NOT_SELECTED;
+
+	}
+}
+
 void Screen_Update(uint32_t ADC_value) {
 	bool btn_press = btn_pressed[0];
 
 	// only allow selection if mission is not selected
-	// Test update
-	if (ADC_value < 300) {
-		disp_select1.ypos = 135;
-		if (btn_press && (!main_txt.missions[1].select_state)) {
-			SW_hbState.missionID = MISSION_MANUAL;
-			user_select(0);
+	if (!SW_hbState.flags._SW_Flags.MISSION_SELECTED) {
+		// Test update
+		if (ADC_value < 300) {
+			disp_select1.ypos = 135;
+			if (btn_press && (!main_txt.missions[1].select_state)) {
+				SW_hbState.missionID = MISSION_MANUAL;
+				user_select(0);
+			}
+		} else if (ADC_value < 1500) {
+			disp_select1.ypos = 185;
+			if (btn_press && (!main_txt.missions[2].select_state)) {
+				SW_hbState.missionID = MISSION_EBS;
+				user_select(1);
+			}
+		} else if (ADC_value < 2700) {
+			disp_select1.ypos = 235;
+			if (btn_press && (!main_txt.missions[3].select_state)) {
+				SW_hbState.missionID = MISSION_TRACK;
+				user_select(2);
+			}
+		} else if (ADC_value < 4000) {
+			disp_select1.ypos = 285;
+			if (btn_press && (!main_txt.missions[4].select_state)) {
+				SW_hbState.missionID = MISSION_INSPECTION;
+				user_select(3);
+			}
+		} else {
+			disp_select1.ypos = 335;
+			if (btn_press && (!main_txt.missions[5].select_state)) {
+				user_select(4);
+			}
 		}
-	} else if (ADC_value < 1500) {
-		disp_select1.ypos = 185;
-		if (btn_press && (!main_txt.missions[2].select_state)) {
-			SW_hbState.missionID = MISSION_EBS;
-			user_select(1);
+		if (btn_press) {
+			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
+			SW_hbState.stateID = SW_STATE_IN_MISSION;
 		}
-	} else if (ADC_value < 2700) {
-		disp_select1.ypos = 235;
-		if (btn_press && (!main_txt.missions[3].select_state)) {
-			SW_hbState.missionID = MISSION_TRACK;
-			user_select(2);
-		}
-	} else if (ADC_value < 4000) {
-		disp_select1.ypos = 285;
-		if (btn_press && (!main_txt.missions[4].select_state)) {
-			SW_hbState.missionID = MISSION_INSPECTION;
-			user_select(3);
-		}
-	} else {
-		disp_select1.ypos = 335;
-		if (btn_press && (!main_txt.missions[5].select_state)) {
-			user_select(4);
-		}
+		btn_pressed[0] = false;
 	}
-	if (btn_press) {
-		SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
-	}
-	btn_pressed[0] = false;
 }
 
 void Special_Display(UBYTE *Canvas) {
