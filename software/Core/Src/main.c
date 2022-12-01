@@ -212,6 +212,21 @@ int main(void) {
 				HAL_Delay(10);
 				break;
 			}
+
+			break;
+
+		case SW_MISSION_ACK:
+			HAL_Delay(100);
+			while (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
+				while (queue_next(&CAN1_Rx, &msg)) {
+					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+					// check for heartbeat
+					if (check_heartbeat_msg(&msg)) {
+						HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+					}
+				}
+			}
+			SW_hbState.stateID = SW_STATE_IN_MISSION;
 			break;
 
 		case SW_STATE_IN_MISSION:
