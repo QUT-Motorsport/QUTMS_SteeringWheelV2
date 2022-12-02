@@ -31,6 +31,7 @@
 #include <queue.h>
 #include <CAN_SW.h>
 #include "btn.h"
+#include <Timer.h>
 
 /* USER CODE END Includes */
 
@@ -59,6 +60,9 @@ volatile PAINT_TIME sPaint_time;
 uint8_t DISP_STATE = MAIN_SCREEN;
 UBYTE DynamicScreen[33600];
 UBYTE Canvas_STARTUP[33600];
+
+// software timer
+ms_timer_t soft_timer;
 
 // ADC
 uint32_t ADC1_value = 0;
@@ -94,6 +98,10 @@ int main(void) {
 	sPaint_time.Hour = 0;
 	sPaint_time.Min = 0;
 	sPaint_time.Sec = 0;
+
+	// softwate timer
+	soft_timer = timer_init(10, false, NULL);
+
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -148,10 +156,15 @@ int main(void) {
 	CAN_setup();
 	HAL_CAN_Start(&hcan1);
 
+	// Hardware timer start
 	HAL_TIM_Base_Start_IT(&htim9); // screen clock timer (1Hz)
 	HAL_TIM_Base_Start_IT(&htim3); // ADC reading for pots (10Hz)
 	HAL_TIM_Base_Start_IT(&htim4); // btn debouncing timer (100Hz)
 	HAL_TIM_Base_Start_IT(&htim12); // SW heartbeat timer (50Hz)
+
+	// Software timer start
+	timer_start(&soft_timer);
+	bool soft_timer_delay = false;
 
 	//SW_hbState.stateID = SW_STATE_READY;
 	SW_hbState.stateID = SW_STATE_SELECT_MISSION;
@@ -160,6 +173,7 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
+		soft_timer_delay = timer_update(&soft_timer, NULL);
 
 		// process incoming can message
 		CAN_MSG_Generic_t msg;
@@ -178,8 +192,10 @@ int main(void) {
 
 		case SW_STATE_READY:
 			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
-				HAL_Delay(100);
-				Draw_BoardStates(DynamicScreen);
+				if (soft_timer_delay) {
+					Draw_BoardStates(DynamicScreen);
+					soft_timer_delay = false;
+				}
 
 				while (queue_next(&CAN1_Rx, &msg)) {
 					if (SW_hbState.stateID != SW_STATE_READY) {
@@ -203,21 +219,24 @@ int main(void) {
 			//Draw_BoardStates(DynamicScreen);
 			switch (DISP_STATE) {
 			case MAIN_SCREEN:
-				HAL_Delay(100);
-				Screen_Display(DynamicScreen);
-				HAL_Delay(10);
+				if (soft_timer_delay) {
+					Screen_Display(DynamicScreen);
+					soft_timer_delay = false;
+				}
 				break;
 
 			case VCU_STATE_SCREEN:
-				HAL_Delay(100);
-				Draw_BoardStates(DynamicScreen);
-				HAL_Delay(10);
+				if (soft_timer_delay) {
+					Draw_BoardStates(DynamicScreen);
+					soft_timer_delay = false;
+				}
 				break;
 
 			case MANUAL_SCREEN:
-				HAL_Delay(100);
-				Manual_Screen(DynamicScreen);
-				HAL_Delay(10);
+				if (soft_timer_delay) {
+					Manual_Screen(DynamicScreen);
+					soft_timer_delay = false;
+				}
 				break;
 
 			case OTHER_SCREEN:
@@ -231,7 +250,6 @@ int main(void) {
 			break;
 
 		case SW_STATE_MISSION_ACK:
-			HAL_Delay(100);
 			if (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
 				while (queue_next(&CAN1_Rx, &msg)) {
 					if (SW_hbState.stateID != SW_STATE_MISSION_ACK) {
@@ -248,7 +266,6 @@ int main(void) {
 			break;
 
 		case SW_STATE_IN_MISSION:
-			HAL_Delay(100);
 			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
 				while (queue_next(&CAN1_Rx, &msg)) {
 					if (SW_hbState.stateID != SW_STATE_IN_MISSION) {
