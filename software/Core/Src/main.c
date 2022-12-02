@@ -86,43 +86,42 @@ void SystemClock_Config(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
+ * @brief  The application entry point.
+ * @retval int
+ */
+int main(void) {
+	/* USER CODE BEGIN 1 */
 	sPaint_time.Hour = 0;
 	sPaint_time.Min = 0;
 	sPaint_time.Sec = 0;
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_SPI1_Init();
-  MX_CAN1_Init();
-  MX_ADC1_Init();
-  MX_TIM9_Init();
-  MX_TIM3_Init();
-  MX_TIM12_Init();
-  MX_TIM4_Init();
-  /* USER CODE BEGIN 2 */
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_SPI1_Init();
+	MX_CAN1_Init();
+	MX_ADC1_Init();
+	MX_TIM9_Init();
+	MX_TIM3_Init();
+	MX_TIM12_Init();
+	MX_TIM4_Init();
+	/* USER CODE BEGIN 2 */
 
 	SW_hbState.flags.rawMem = 0;
 	SW_hbState.missionID = MISSION_NONE;
@@ -141,10 +140,10 @@ int main(void)
 	init_Main_text();
 	Screen_Dynamic_Init(DynamicScreen);
 
-  /* USER CODE END 2 */
+	/* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
 
 	CAN_setup();
 	HAL_CAN_Start(&hcan1);
@@ -152,14 +151,15 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim9); // screen clock timer (1Hz)
 	HAL_TIM_Base_Start_IT(&htim3); // ADC reading for pots (10Hz)
 	HAL_TIM_Base_Start_IT(&htim4); // btn debouncing timer (100Hz)
-	HAL_TIM_Base_Start_IT(&htim12);// SW heartbeat timer (50Hz)
+	HAL_TIM_Base_Start_IT(&htim12); // SW heartbeat timer (50Hz)
 
-	SW_hbState.stateID = SW_STATE_READY;
+	//SW_hbState.stateID = SW_STATE_READY;
+	SW_hbState.stateID = SW_STATE_SELECT_MISSION;
 
 	while (1) {
-    /* USER CODE END WHILE */
+		/* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+		/* USER CODE BEGIN 3 */
 
 		// process incoming can message
 		CAN_MSG_Generic_t msg;
@@ -177,10 +177,14 @@ int main(void)
 		switch (SW_hbState.stateID) {
 
 		case SW_STATE_READY:
-			HAL_Delay(100);
-			Screen_Waiting_Display(DynamicScreen);
-			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+				HAL_Delay(100);
+				Draw_BoardStates(DynamicScreen);
+
 				while (queue_next(&CAN1_Rx, &msg)) {
+					if (SW_hbState.stateID != SW_STATE_READY) {
+						break;
+					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
 					if (check_heartbeat_msg(&msg)) {
@@ -226,10 +230,13 @@ int main(void)
 
 			break;
 
-		case SW_MISSION_ACK:
+		case SW_STATE_MISSION_ACK:
 			HAL_Delay(100);
-			while (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
+			if (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
 				while (queue_next(&CAN1_Rx, &msg)) {
+					if (SW_hbState.stateID != SW_STATE_MISSION_ACK) {
+						break;
+					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
 					if (check_heartbeat_msg(&msg)) {
@@ -242,8 +249,11 @@ int main(void)
 
 		case SW_STATE_IN_MISSION:
 			HAL_Delay(100);
-			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
 				while (queue_next(&CAN1_Rx, &msg)) {
+					if (SW_hbState.stateID != SW_STATE_IN_MISSION) {
+						break;
+					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
 					if (check_heartbeat_msg(&msg)) {
@@ -259,47 +269,44 @@ int main(void)
 			break;
 		}
 	}
-  /* USER CODE END 3 */
+	/* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ * @brief System Clock Configuration
+ * @retval None
+ */
+void SystemClock_Config(void) {
+	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 10;
-  RCC_OscInitStruct.PLL.PLLN = 192;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV6;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	/** Initializes the RCC Oscillators according to the specified parameters
+	 * in the RCC_OscInitTypeDef structure.
+	 */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLM = 10;
+	RCC_OscInitStruct.PLL.PLLN = 192;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV6;
+	RCC_OscInitStruct.PLL.PLLQ = 4;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+		Error_Handler();
+	}
 
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+	/** Initializes the CPU, AHB and APB buses clocks
+	 */
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK) {
+		Error_Handler();
+	}
 }
 
 /* USER CODE BEGIN 4 */
@@ -307,17 +314,16 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
+void Error_Handler(void) {
+	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1) {
 	}
-  /* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

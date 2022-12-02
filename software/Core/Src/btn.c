@@ -47,6 +47,7 @@ void external_btn2_cb( void )
 void external_btn3_cb( void )
 {
 	DISP_STATE = MAIN_SCREEN;
+	clear_main();
 }
 
 void external_btn4_cb( void )

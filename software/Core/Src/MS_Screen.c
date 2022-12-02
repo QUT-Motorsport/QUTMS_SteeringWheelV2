@@ -11,6 +11,8 @@
 #include "heartbeat.h"
 #include "main.h"
 #include <CAN_SW.h>
+#include <string.h>
+#include <math.h>
 
 extern UBYTE *STATIC_CANVAS;
 extern UBYTE *DYNAMIC_CANVAS;
@@ -193,7 +195,9 @@ void user_select(uint8_t selected_ID) {
 			main_txt.missions[i + 1].select_state = NOT_SELECTED;
 		}
 	}
-	if (selected_ID == 4) {
+	if (selected_ID == 0) {
+		DISP_STATE = MANUAL_SCREEN;
+	} else if (selected_ID == 4) {
 		DISP_STATE = OTHER_SCREEN;
 	}
 }
@@ -207,6 +211,9 @@ void clear_main(void) {
 		main_txt.missions[i + 1].select_state = NOT_SELECTED;
 
 	}
+	SW_hbState.stateID = SW_STATE_SELECT_MISSION;
+	SW_hbState.missionID = MISSION_NONE;
+	SW_hbState.flags._SW_Flags.MISSION_SELECTED = 0;
 }
 
 void Screen_Update(uint32_t ADC_value) {
@@ -247,32 +254,50 @@ void Screen_Update(uint32_t ADC_value) {
 		}
 		if (btn_press && SW_hbState.missionID != MISSION_MANUAL) {
 			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
-			SW_hbState.stateID = SW_MISSION_ACK;
+			SW_hbState.stateID = SW_STATE_MISSION_ACK;
 		}
 		btn_pressed[0] = false;
 	}
 }
 
 //-------------------------------MANUAL DRIVING SCREEN -------------------------------
-void Manual_Screen( UBYTE *Canvas ){
+void Manual_Screen( UBYTE *Canvas) {
+	char text[15];
 	Refresh_Display(Canvas);
 
-	Paint_DrawString_EN(40, 60, "MANUAL DRIVING MODE", &Font24, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(30, 60, "MANUAL MODE", &Font24, ClrWhite, ClrBlack);
 
-	Paint_DrawString_EN(30, 90, "SPEED", &Font16, ClrWhite, ClrBlack);
-	Paint_DrawString_EN(30, 110, "69KM/h", &Font24, ClrWhite, ClrBlack);
+	// state of charge
+	sprintf(text, "S.O.C: %d", batSOC);
+	Paint_DrawString_EN(70, 120, strcat(text, "%"), &Font20, ClrWhite,
+	ClrBlack);
+	Paint_DrawRectangle(40, 140, 240, 180, ClrBlack, DOT_PIXEL_1X1,
+			DRAW_FILL_EMPTY);
+	Paint_DrawRectangle(45, 145, 45 + (uint16_t) 190 * (batSOC / 100.0), 175,
+	ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 
-	Paint_DrawString_EN(100, 90, "SOMETHING", &Font16, ClrWhite, ClrBlack);
-	Paint_DrawString_EN(100, 110, "PEPE <3", &Font24, ClrWhite, ClrBlack);
+	// Battery min/max temps
+	Paint_DrawString_EN(80, 220, "BATTERY", &Font20, ClrBlack, ClrWhite);
+	//TODO
+	sprintf(text, "15.3V");
+	Paint_DrawString_EN(55, 250, "MIN", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(30, 270, text, &Font24, ClrWhite, ClrBlack);
+	sprintf(text, "99.3V");
+	Paint_DrawString_EN(175, 250, "MAX", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(150, 270, text, &Font24, ClrWhite, ClrBlack);
 
-	Paint_DrawRectangle(40, 150, 240, 200, ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-	Paint_DrawRectangle(45, 145, 235*(batSOC/100), 195, ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-
+	// MOTOR
+	Paint_DrawString_EN(80, 320, "MOTORS", &Font20, ClrBlack, ClrWhite);
+	//TODO
+	sprintf(text, "-10.3C");
+	Paint_DrawString_EN(55, 350, "MIN", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(30, 370, text, &Font24, ClrWhite, ClrBlack);
+	sprintf(text, "69.3C");
+	Paint_DrawString_EN(175, 350, "MAX", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(150, 370, text, &Font24, ClrWhite, ClrBlack);
 
 	Dynamic_Display(Canvas);
 }
-
-
 
 //----------------------------------------PEPE SCREEN---------------------------------
 void Special_Display(UBYTE *Canvas) {
