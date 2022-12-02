@@ -81,7 +81,7 @@ void Draw_BoardStates(UBYTE *Canvas) {
 	Paint_Clear(WHITE);
 	Paint_ClearWindows(20, 20, 260, 460, WHITE);
 	//Paint_DrawNum(50, 50, value, &Font24, ClrBlack, ClrWhite);
-	Paint_DrawString_EN(25, 50, "QUT MS VCU STATUS", &Font20, WHITE, ClrBlack);
+	Paint_DrawString_EN(25, 50, "QUTMS VCU STATUS", &Font20, WHITE, ClrBlack);
 	char text[15];
 
 	sprintf(text, "CTRL: 0x%02X", VCU_hbState_CTRL.stateID);
@@ -98,6 +98,8 @@ void Draw_BoardStates(UBYTE *Canvas) {
 
 	sprintf(text, "DVL:  0x%02X", DVL_hbState.stateID);
 	Paint_DrawString_EN(75, 300, text, &Font20, WHITE, ClrBlack);
+
+	Paint_DrawTime(25, 350, &sPaint_time, &Font20, WHITE, ClrBlack);
 
 //	Paint_DrawString_EN(75, 150, "DASH: 0x00", &Font20, WHITE, ClrBlack);
 //	Paint_DrawString_EN(75, 200, "EBS:  0x00", &Font20, WHITE, ClrBlack);
@@ -243,7 +245,7 @@ void Screen_Update(uint32_t ADC_value) {
 		}
 		if (btn_press) {
 			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
-			SW_hbState.stateID = SW_MISSION_ACK;
+			SW_hbState.stateID = SW_STATE_MISSION_ACK;
 		}
 		btn_pressed[0] = false;
 	}
@@ -252,5 +254,20 @@ void Screen_Update(uint32_t ADC_value) {
 void Special_Display(UBYTE *Canvas) {
 	Refresh_Display(Canvas);
 	Paint_DrawBitMap(pepe_img);
+	Paint_DrawString_EN(60, 70, "Pepe is love,", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(60, 100, "Pepe is life", &Font20, ClrWhite, ClrBlack);
+	//Paint_DrawBitMap(sponsor_CTALS);
 	Dynamic_Display(Canvas);
+
+	//HAL_Delay(2000);
+
+	/*
+	Refresh_Display(Canvas);
+	//Paint_DrawBitMap(pepe_img);
+	//Paint_DrawString_EN(60, 70, "Pepe is love,", &Font20, ClrWhite, ClrBlack);
+	//Paint_DrawString_EN(60, 100, "Pepe is life", &Font20, ClrWhite, ClrBlack);
+	Paint_DrawBitMap(sponsor_TM);
+	Dynamic_Display(Canvas);
+	HAL_Delay(2000);*/
+
 }

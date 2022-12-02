@@ -7,8 +7,10 @@
 #include "main.h"
 #include "btn.h"
 #include "MS_Screen.h"
+#include <CAN_SW.h>
 extern volatile bool btn_pressed[4];
 extern uint8_t DISP_STATE;
+extern SW_HeartbeatState_t SW_hbState;
 
 
 /*
@@ -32,7 +34,11 @@ bool btn_pressed()
 
 void external_btn1_cb( void )
 {
+	SW_hbState.flags._SW_Flags.FAN_ENABLE = (SW_hbState.flags._SW_Flags.FAN_ENABLE == 0) ? 1 : 0;
+	for(int i = 0; i < 100; i++)
+	{
 
+	}
 }
 
 void external_btn2_cb( void )

@@ -174,9 +174,13 @@ int main(void) {
 		switch (SW_hbState.stateID) {
 
 		case SW_STATE_READY:
-			HAL_Delay(100);
-			Screen_Waiting_Display(DynamicScreen);
+			//HAL_Delay(100);
+			//Screen_Waiting_Display(DynamicScreen);
 			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+				HAL_Delay(100);
+				//Special_Display(DynamicScreen);
+				Draw_BoardStates(DynamicScreen);
+				HAL_Delay(10);
 				while (queue_next(&CAN1_Rx, &msg)) {
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
@@ -206,8 +210,8 @@ int main(void) {
 				HAL_Delay(10);
 				break;
 			case OTHER_SCREEN:
-				//HAL_Delay(50);
-				//Special_Display(Canvas_SPECIAL);
+				HAL_Delay(50);
+				Special_Display(DynamicScreen);
 				DISP_STATE = MAIN_SCREEN;
 				HAL_Delay(10);
 				break;
@@ -215,7 +219,7 @@ int main(void) {
 
 			break;
 
-		case SW_MISSION_ACK:
+		case SW_STATE_MISSION_ACK:
 			HAL_Delay(100);
 			while (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
 				while (queue_next(&CAN1_Rx, &msg)) {
