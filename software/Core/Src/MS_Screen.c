@@ -20,6 +20,7 @@ extern dispSelector_t disp_select1;
 extern volatile PAINT_TIME sPaint_time;
 extern volatile bool btn_pressed[4];
 extern SW_HeartbeatState_t SW_hbState;
+extern volatile uint8_t batSOC;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -56,6 +57,8 @@ UBYTE* Canvas_Init() {
 	return canvas;
 }
 
+// ------------------------------INITIALISING SCREEN---------------------------------
+
 void Screen_Startup(UBYTE *Canvas) {
 	Paint_NewImage(Canvas, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ORIENTATION,
 	NONINVERTED);
@@ -73,7 +76,7 @@ void Screen_Startup(UBYTE *Canvas) {
 	Static_Display(Canvas);
 }
 
-// ------------------ VCU STATE -------------------------
+// ------------------------------VCU STATE SCREEN---------------------------------
 void Draw_BoardStates(UBYTE *Canvas) {
 	Paint_SelectImage(Canvas);
 	Paint_SetScale(2);
@@ -105,6 +108,8 @@ void Draw_BoardStates(UBYTE *Canvas) {
 	Dynamic_Display(Canvas);
 }
 
+// ------------------------------MAIN SELECTION SCREEN---------------------------------
+
 void init_Main_text() {
 
 	main_txt.missions[0] = (dispText_t ) { .text = "QUT MS Main", .xpos = 50,
@@ -133,8 +138,6 @@ void init_Main_text() {
 					.mission_ID = 4 };
 	disp_select1 = (dispSelector_t ) { .xpos = 25, .ypos = 135, .radius = 4,
 					.color = ClrBlack };
-	//disp_select2 = (dispSelector_t){.xpos = 25, .ypos = 185, .radius = 4, .color = ClrWhite};
-	//disp_select3 = (dispSelector_t){.xpos = 25, .ypos = 235, .radius = 4, .color = ClrWhite};
 }
 
 void Dynamic_Clear() {
@@ -158,9 +161,7 @@ void Screen_Waiting_Display( UBYTE *Canvas) {
 }
 
 void Screen_Display(UBYTE *Canvas) {
-	//if (SCR_STATE == MAIN_SCREEN)
-	//{
-	// refresh screen
+
 	Refresh_Display(Canvas);
 
 	// draw new screen bitmap
@@ -178,6 +179,8 @@ void Screen_Display(UBYTE *Canvas) {
 	Dynamic_Display(Canvas);
 }
 
+// ------------------------USER SELECTION SCREEN UPDATE-------------------------------
+
 void user_select(uint8_t selected_ID) {
 	for (int i = 0; i < 4; i++) {
 		if (selected_ID == main_txt.missions[i + 1].mission_ID) {
@@ -194,6 +197,8 @@ void user_select(uint8_t selected_ID) {
 		DISP_STATE = OTHER_SCREEN;
 	}
 }
+
+//-----------------------------RESET MAIN SELECTION SCREEN----------------------------
 
 void clear_main(void) {
 	for (int i = 0; i < 4; i++) {
@@ -240,7 +245,7 @@ void Screen_Update(uint32_t ADC_value) {
 				user_select(4);
 			}
 		}
-		if (btn_press) {
+		if (btn_press && SW_hbState.missionID != MISSION_MANUAL) {
 			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
 			SW_hbState.stateID = SW_MISSION_ACK;
 		}
@@ -248,7 +253,28 @@ void Screen_Update(uint32_t ADC_value) {
 	}
 }
 
+//-------------------------------MANUAL DRIVING SCREEN -------------------------------
+void Manual_Screen( UBYTE *Canvas ){
+	Refresh_Display(Canvas);
 
+	Paint_DrawString_EN(40, 60, "MANUAL DRIVING MODE", &Font24, ClrWhite, ClrBlack);
+
+	Paint_DrawString_EN(30, 90, "SPEED", &Font16, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(30, 110, "69KM/h", &Font24, ClrWhite, ClrBlack);
+
+	Paint_DrawString_EN(100, 90, "SOMETHING", &Font16, ClrWhite, ClrBlack);
+	Paint_DrawString_EN(100, 110, "PEPE <3", &Font24, ClrWhite, ClrBlack);
+
+	Paint_DrawRectangle(40, 150, 240, 200, ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+	Paint_DrawRectangle(45, 145, 235*(batSOC/100), 195, ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+
+
+	Dynamic_Display(Canvas);
+}
+
+
+
+//----------------------------------------PEPE SCREEN---------------------------------
 void Special_Display(UBYTE *Canvas) {
 	Refresh_Display(Canvas);
 	Paint_DrawBitMap(pepe_img);

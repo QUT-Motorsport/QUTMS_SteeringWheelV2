@@ -66,6 +66,9 @@ uint32_t ADC1_value = 0;
 // buttons
 volatile bool btn_pressed[4] = { false, false, false, false };
 
+// battery data
+volatile uint8_t batSOC = 100;
+
 // initiating heartbeat
 SW_HeartbeatState_t SW_hbState;
 extern DVL_HeartbeatState_t DVL_hbState;
@@ -200,11 +203,19 @@ int main(void)
 				Screen_Display(DynamicScreen);
 				HAL_Delay(10);
 				break;
+
 			case VCU_STATE_SCREEN:
 				HAL_Delay(100);
 				Draw_BoardStates(DynamicScreen);
 				HAL_Delay(10);
 				break;
+
+			case MANUAL_SCREEN:
+				HAL_Delay(100);
+				Manual_Screen(DynamicScreen);
+				HAL_Delay(10);
+				break;
+
 			case OTHER_SCREEN:
 				//HAL_Delay(50);
 				//Special_Display(Canvas_SPECIAL);

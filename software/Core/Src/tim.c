@@ -27,6 +27,7 @@
 #include "can.h"
 
 extern volatile PAINT_TIME sPaint_time;
+extern volatile uint8_t batSOC;
 extern uint32_t ADC1_value;
 extern SW_HeartbeatState_t SW_hbState;
 /* USER CODE END 0 */
@@ -319,6 +320,12 @@ void tim9_cb(void) {
 	} else if (sPaint_time.Min == 60) {
 		sPaint_time.Min = 0;
 		sPaint_time.Hour++;
+	}
+
+	if(batSOC > 0){
+		batSOC = batSOC - 5;
+	} else{
+		batSOC = 100;
 	}
 }
 
