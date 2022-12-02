@@ -355,6 +355,7 @@ void soft_timer_disp_cb(void *args) {
 		break;
 
 	case VCU_STATE_SCREEN:
+		HAL_Delay(100);
 		Draw_BoardStates(&DynamicScreen);
 		break;
 

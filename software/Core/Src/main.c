@@ -87,7 +87,6 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-
 /* USER CODE END 0 */
 
 /**
@@ -101,7 +100,7 @@ int main(void) {
 	sPaint_time.Sec = 0;
 
 	// softwate timer
-	soft_timer = timer_init(10, true, &soft_timer_disp_cb);
+	soft_timer = timer_init(1, true, &soft_timer_disp_cb);
 
 	/* USER CODE END 1 */
 
@@ -193,7 +192,7 @@ int main(void) {
 			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
 				Draw_BoardStates(DynamicScreen);
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if ( (SW_hbState.stateID != SW_STATE_READY) || (DVL_hbState.stateID == DVL_STATE_SELECT_MISSION)) {
+					if ((SW_hbState.stateID != SW_STATE_READY)) {
 						break;
 					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
@@ -215,11 +214,11 @@ int main(void) {
 			break;
 
 		case SW_STATE_MISSION_ACK:
-			if (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
+			while (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
+				if ((SW_hbState.stateID != SW_STATE_MISSION_ACK)) {
+					break;
+				}
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if ( (SW_hbState.stateID != SW_STATE_MISSION_ACK) || (DVL_hbState.stateID == DVL_STATE_CHECK_EBS)) {
-						break;
-					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
 					if (check_heartbeat_msg(&msg)) {
@@ -231,11 +230,11 @@ int main(void) {
 			break;
 
 		case SW_STATE_IN_MISSION:
-			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+			while (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
+				if ((SW_hbState.stateID != SW_STATE_IN_MISSION)) {
+					break;
+				}
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if ( (SW_hbState.stateID != SW_STATE_IN_MISSION) || (DVL_hbState.stateID == DVL_STATE_SELECT_MISSION) ) {
-						break;
-					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					// check for heartbeat
 					if (check_heartbeat_msg(&msg)) {
