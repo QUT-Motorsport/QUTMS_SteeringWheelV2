@@ -12,6 +12,7 @@
 #include <stdbool.h>
 
 //bool btn_pressed( void );
+void debounce_cb( void );
 void external_btn1_cb( void );
 void external_btn2_cb( void );
 void external_btn3_cb( void );

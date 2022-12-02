@@ -7,32 +7,36 @@
 #include "main.h"
 #include "btn.h"
 #include "MS_Screen.h"
+#include <stdbool.h>
+#include <CAN_SW.h>
+
+
 extern volatile bool btn_pressed[4];
 extern uint8_t DISP_STATE;
+volatile bool prev_btn_state = false;
+volatile bool curr_btn_state = false;
+extern SW_HeartbeatState_t SW_hbState;
 
 
-/*
-bool btn_pressed()
+void debounce_cb( void )
 {
-	uint8_t btn_counter = 0;
-	while(!HAL_GPIO_ReadPin(Btn2_GPIO_Port, Btn2_Pin))
-	{
-		btn_counter++;
+	prev_btn_state = curr_btn_state;
+
+	if(!HAL_GPIO_ReadPin(Btn1_GPIO_Port, Btn1_Pin)){
+		curr_btn_state = true;
+	} else {
+		curr_btn_state = false;
 	}
-	if(btn_counter > 15){
-		pressed = true;
-		HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-		btn_counter = 0;
-	}
-	else{
-		pressed = false;
-	}
-	return pressed;
-}*/
+
+}
+
 
 void external_btn1_cb( void )
 {
-
+	if( prev_btn_state && curr_btn_state)
+	{
+		SW_hbState.flags._SW_Flags.FAN_ENABLE = (SW_hbState.flags._SW_Flags.FAN_ENABLE == 0) ? 1 : 0;
+	}
 }
 
 void external_btn2_cb( void )

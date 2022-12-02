@@ -14,7 +14,6 @@
 
 extern UBYTE *STATIC_CANVAS;
 extern UBYTE *DYNAMIC_CANVAS;
-extern uint8_t SCR_STATE;
 extern uint8_t DISP_STATE;
 extern struct main_screen_text main_txt;
 extern dispSelector_t disp_select1;
@@ -248,6 +247,7 @@ void Screen_Update(uint32_t ADC_value) {
 		btn_pressed[0] = false;
 	}
 }
+
 
 void Special_Display(UBYTE *Canvas) {
 	Refresh_Display(Canvas);
