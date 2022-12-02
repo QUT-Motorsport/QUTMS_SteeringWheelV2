@@ -25,11 +25,14 @@
 #include "adc.h"
 #include <CAN_SW.h>
 #include "can.h"
+#include "MS_screen.h"
 
 extern volatile PAINT_TIME sPaint_time;
 extern volatile uint8_t batSOC;
 extern uint32_t ADC1_value;
 extern SW_HeartbeatState_t SW_hbState;
+extern uint8_t DISP_STATE;
+extern UBYTE DynamicScreen;
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -343,5 +346,27 @@ void tim12_cb(void) {
 	pHeader.RTR = CAN_RTR_DATA;
 	pHeader.DLC = sizeof(msg.data);
 	send_can_msg(&hcan1, &pHeader, msg.data);
+}
+
+void soft_timer_disp_cb(void *args) {
+	switch (DISP_STATE) {
+	case MAIN_SCREEN:
+		Screen_Display(&DynamicScreen);
+		break;
+
+	case VCU_STATE_SCREEN:
+		Draw_BoardStates(&DynamicScreen);
+		break;
+
+	case MANUAL_SCREEN:
+		Manual_Screen(&DynamicScreen);
+		break;
+
+	case OTHER_SCREEN:
+		//HAL_Delay(50);
+		//Special_Display(Canvas_SPECIAL);
+		DISP_STATE = MAIN_SCREEN;
+		break;
+	}
 }
 /* USER CODE END 1 */

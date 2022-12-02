@@ -53,6 +53,7 @@ void MX_TIM12_Init(void);
 void tim9_cb( void );
 void tim3_cb( void );
 void tim12_cb( void );
+void soft_timer_disp_cb(void *args);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

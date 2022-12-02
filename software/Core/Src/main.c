@@ -87,6 +87,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+
 /* USER CODE END 0 */
 
 /**
@@ -100,7 +101,7 @@ int main(void) {
 	sPaint_time.Sec = 0;
 
 	// softwate timer
-	soft_timer = timer_init(10, false, NULL);
+	soft_timer = timer_init(10, true, &soft_timer_disp_cb);
 
 	/* USER CODE END 1 */
 
@@ -164,7 +165,6 @@ int main(void) {
 
 	// Software timer start
 	timer_start(&soft_timer);
-	bool soft_timer_delay = false;
 
 	//SW_hbState.stateID = SW_STATE_READY;
 	SW_hbState.stateID = SW_STATE_SELECT_MISSION;
@@ -173,7 +173,6 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		soft_timer_delay = timer_update(&soft_timer, NULL);
 
 		// process incoming can message
 		CAN_MSG_Generic_t msg;
@@ -192,13 +191,9 @@ int main(void) {
 
 		case SW_STATE_READY:
 			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
-				if (soft_timer_delay) {
-					Draw_BoardStates(DynamicScreen);
-					soft_timer_delay = false;
-				}
-
+				Draw_BoardStates(DynamicScreen);
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if (SW_hbState.stateID != SW_STATE_READY) {
+					if ( (SW_hbState.stateID != SW_STATE_READY) || (DVL_hbState.stateID == DVL_STATE_SELECT_MISSION)) {
 						break;
 					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
@@ -215,44 +210,14 @@ int main(void) {
 		case SW_STATE_SELECT_MISSION:
 			// UPDATE SCREEN PRINT
 			Screen_Update(ADC1_value);
-
-			//Draw_BoardStates(DynamicScreen);
-			switch (DISP_STATE) {
-			case MAIN_SCREEN:
-				if (soft_timer_delay) {
-					Screen_Display(DynamicScreen);
-					soft_timer_delay = false;
-				}
-				break;
-
-			case VCU_STATE_SCREEN:
-				if (soft_timer_delay) {
-					Draw_BoardStates(DynamicScreen);
-					soft_timer_delay = false;
-				}
-				break;
-
-			case MANUAL_SCREEN:
-				if (soft_timer_delay) {
-					Manual_Screen(DynamicScreen);
-					soft_timer_delay = false;
-				}
-				break;
-
-			case OTHER_SCREEN:
-				//HAL_Delay(50);
-				//Special_Display(Canvas_SPECIAL);
-				DISP_STATE = MAIN_SCREEN;
-				HAL_Delay(10);
-				break;
-			}
+			timer_update(&soft_timer, NULL);
 
 			break;
 
 		case SW_STATE_MISSION_ACK:
 			if (DVL_hbState.stateID != DVL_STATE_CHECK_EBS) {
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if (SW_hbState.stateID != SW_STATE_MISSION_ACK) {
+					if ( (SW_hbState.stateID != SW_STATE_MISSION_ACK) || (DVL_hbState.stateID == DVL_STATE_CHECK_EBS)) {
 						break;
 					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
@@ -268,7 +233,7 @@ int main(void) {
 		case SW_STATE_IN_MISSION:
 			if (DVL_hbState.stateID != DVL_STATE_SELECT_MISSION) {
 				while (queue_next(&CAN1_Rx, &msg)) {
-					if (SW_hbState.stateID != SW_STATE_IN_MISSION) {
+					if ( (SW_hbState.stateID != SW_STATE_IN_MISSION) || (DVL_hbState.stateID == DVL_STATE_SELECT_MISSION) ) {
 						break;
 					}
 					HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
