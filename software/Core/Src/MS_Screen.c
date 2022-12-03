@@ -252,7 +252,7 @@ void Screen_Update(uint32_t ADC_value) {
 				user_select(4);
 			}
 		}
-		if (btn_press && SW_hbState.missionID != MISSION_MANUAL) {
+		if (btn_press && SW_hbState.missionID != MISSION_NONE) {
 			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
 			SW_hbState.stateID = SW_STATE_MISSION_ACK;
 		}
