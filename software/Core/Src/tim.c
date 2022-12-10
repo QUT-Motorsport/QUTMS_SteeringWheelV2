@@ -364,8 +364,8 @@ void soft_timer_disp_cb(void *args) {
 		break;
 
 	case OTHER_SCREEN:
-		//HAL_Delay(50);
-		//Special_Display(Canvas_SPECIAL);
+		HAL_Delay(50);
+		Special_Display(&DynamicScreen);
 		DISP_STATE = MAIN_SCREEN;
 		break;
 	}

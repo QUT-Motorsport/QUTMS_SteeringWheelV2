@@ -134,7 +134,7 @@ void init_Main_text() {
 					.ypos = 275, .font = &Font20, .color_fg = ClrWhite,
 					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
 					.mission_ID = 3 };
-	main_txt.missions[5] = (dispText_t ) { .text = "SPECIAL", .xpos = 40,
+	main_txt.missions[5] = (dispText_t ) { .text = "SPACEX BOOSTERS", .xpos = 40,
 					.ypos = 325, .font = &Font20, .color_fg = ClrWhite,
 					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
 					.mission_ID = 4 };
