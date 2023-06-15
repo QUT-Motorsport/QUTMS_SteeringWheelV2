@@ -26,6 +26,7 @@
 #include <CAN_SW.h>
 #include "can.h"
 #include "MS_screen.h"
+#include "CapEst.h"
 
 extern volatile PAINT_TIME sPaint_time;
 extern volatile uint8_t batSOC;
@@ -34,6 +35,7 @@ extern uint32_t ADC2_value;
 extern SW_HeartbeatState_t SW_hbState;
 extern uint8_t DISP_STATE;
 extern UBYTE DynamicScreen;
+extern int CapEstVal;
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -341,6 +343,7 @@ void tim3_cb(void) {
 	HAL_ADC_Start(&hadc2);
 	HAL_ADC_PollForConversion(&hadc2, 1);
 	ADC2_value = HAL_ADC_GetValue(&hadc2);
+	CapEstVal = CapEstConversion(ADC2_value);
 }
 
 void tim12_cb(void) {

@@ -67,6 +67,7 @@ ms_timer_t soft_timer;
 // ADC
 uint32_t ADC1_value = 0;
 uint32_t ADC2_value = 0;
+int CapEstVal = 0;
 
 // buttons
 volatile bool btn_pressed[4] = { false, false, false, false };

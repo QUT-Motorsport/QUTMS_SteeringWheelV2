@@ -25,6 +25,7 @@ extern volatile bool btn_pressed[4];
 extern SW_HeartbeatState_t SW_hbState;
 extern volatile uint8_t batSOC;
 extern uint32_t ADC2_value;
+extern int CapEstVal;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -271,13 +272,13 @@ void Manual_Screen( UBYTE *Canvas) {
 	Paint_DrawString_EN(30, 60, "MANUAL MODE", &Font24, ClrWhite, ClrBlack);
 
 	// state of charge
-	sprintf(text, "PUSH: %d", CapEstConversion(ADC2_value));
+	sprintf(text, "PUSH: %d", CapEstVal);
 	Paint_DrawString_EN(70, 120, text, &Font20, ClrWhite,
 	ClrBlack);
 	Paint_DrawRectangle(40, 140, 240, 180, ClrBlack, DOT_PIXEL_1X1,
 			DRAW_FILL_EMPTY);
 
-	Paint_DrawRectangle(140, 145, 140 + (uint16_t) CapEstConversion(ADC2_value), 175,
+	Paint_DrawRectangle(140, 145, 140 + CapEstVal, 175,
 		ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_FULL);
 
 
