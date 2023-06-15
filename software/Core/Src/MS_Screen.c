@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include "heartbeat.h"
 #include "main.h"
+#include "CapEst.h"
 #include <CAN_SW.h>
 #include <string.h>
 #include <math.h>
@@ -23,6 +24,7 @@ extern volatile PAINT_TIME sPaint_time;
 extern volatile bool btn_pressed[4];
 extern SW_HeartbeatState_t SW_hbState;
 extern volatile uint8_t batSOC;
+extern uint32_t ADC2_value;
 
 void Screen_Static_Init(UBYTE *Canvas) {
 	Screen_4Gray_Init();
@@ -197,6 +199,7 @@ void user_select(uint8_t selected_ID) {
 	}
 	if (selected_ID == 0) {
 		DISP_STATE = MANUAL_SCREEN;
+		//SW_hbState.stateID = SW_STATE_IN_MISSION;
 	} else if (selected_ID == 4) {
 		DISP_STATE = OTHER_SCREEN;
 	}
@@ -252,7 +255,7 @@ void Screen_Update(uint32_t ADC_value) {
 				user_select(4);
 			}
 		}
-		if (btn_press && SW_hbState.missionID != MISSION_NONE) {
+		if (btn_press && SW_hbState.missionID != MISSION_NONE && SW_hbState.missionID != MISSION_MANUAL) {
 			SW_hbState.flags._SW_Flags.MISSION_SELECTED = 1;
 			SW_hbState.stateID = SW_STATE_MISSION_ACK;
 		}
@@ -268,13 +271,15 @@ void Manual_Screen( UBYTE *Canvas) {
 	Paint_DrawString_EN(30, 60, "MANUAL MODE", &Font24, ClrWhite, ClrBlack);
 
 	// state of charge
-	sprintf(text, "S.O.C: %d", batSOC);
-	Paint_DrawString_EN(70, 120, strcat(text, "%"), &Font20, ClrWhite,
+	sprintf(text, "PUSH: %d", CapEstConversion(ADC2_value));
+	Paint_DrawString_EN(70, 120, text, &Font20, ClrWhite,
 	ClrBlack);
 	Paint_DrawRectangle(40, 140, 240, 180, ClrBlack, DOT_PIXEL_1X1,
 			DRAW_FILL_EMPTY);
-	Paint_DrawRectangle(45, 145, 45 + (uint16_t) 190 * (batSOC / 100.0), 175,
-	ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+
+	Paint_DrawRectangle(140, 145, 140 + (uint16_t) CapEstConversion(ADC2_value), 175,
+		ClrBlack, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+
 
 	// Battery min/max temps
 	Paint_DrawString_EN(80, 220, "BATTERY", &Font20, ClrBlack, ClrWhite);

@@ -30,6 +30,7 @@
 extern volatile PAINT_TIME sPaint_time;
 extern volatile uint8_t batSOC;
 extern uint32_t ADC1_value;
+extern uint32_t ADC2_value;
 extern SW_HeartbeatState_t SW_hbState;
 extern uint8_t DISP_STATE;
 extern UBYTE DynamicScreen;
@@ -325,17 +326,21 @@ void tim9_cb(void) {
 		sPaint_time.Hour++;
 	}
 
-	if(batSOC > 0){
+	/*if(batSOC > 0){
 		batSOC = batSOC - 5;
 	} else{
 		batSOC = 100;
-	}
+	}*/
 }
 
 void tim3_cb(void) {
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1);
 	ADC1_value = HAL_ADC_GetValue(&hadc1);
+
+	HAL_ADC_Start(&hadc2);
+	HAL_ADC_PollForConversion(&hadc2, 1);
+	ADC2_value = HAL_ADC_GetValue(&hadc2);
 }
 
 void tim12_cb(void) {
@@ -351,6 +356,7 @@ void tim12_cb(void) {
 void soft_timer_disp_cb(void *args) {
 	switch (DISP_STATE) {
 	case MAIN_SCREEN:
+		HAL_Delay(100);
 		Screen_Display(&DynamicScreen);
 		break;
 
@@ -360,6 +366,7 @@ void soft_timer_disp_cb(void *args) {
 		break;
 
 	case MANUAL_SCREEN:
+		HAL_Delay(100);
 		Manual_Screen(&DynamicScreen);
 		break;
 
