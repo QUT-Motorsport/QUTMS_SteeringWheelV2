@@ -1,9 +1,0 @@
-Added Component: Designator=U5(Texas_Instruments_DDC0006A_IPC_A)
-Add component. Clean all parameters for all variants
-Added Pin To Net: NetName=PWR CB 3V3 Pin=U5-1
-Added Pin To Net: NetName=3V3 Pin=U5-2
-Added Pin To Net: NetName=PWR FB 3V3 Pin=U5-3
-Added Pin To Net: NetName=12VP Pin=U5-4
-Added Pin To Net: NetName=12VP Pin=U5-5
-Added Pin To Net: NetName=PWR SW 3V3 Pin=U5-6
-Added Member To Class: ClassName=U_STRWL-S05-V00-Master-PSU3V3-300mA Member=Component U5 LMR14010ADDCR

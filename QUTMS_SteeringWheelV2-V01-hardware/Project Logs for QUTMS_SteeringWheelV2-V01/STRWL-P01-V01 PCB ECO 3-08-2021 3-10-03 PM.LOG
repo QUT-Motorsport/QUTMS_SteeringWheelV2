@@ -1,4 +1,0 @@
-Removed Pin From Net: NetName=CAN GLV RX Pin=U3-95
-Removed Pin From Net: NetName=CAN GLX TX Pin=U3-96
-Added Pin To Net: NetName=CAN GLV RX Pin=U3-91
-Added Pin To Net: NetName=CAN GLX TX Pin=U3-92
