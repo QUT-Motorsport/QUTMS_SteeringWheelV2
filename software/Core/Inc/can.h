@@ -35,19 +35,20 @@ extern "C" {
 extern CAN_HandleTypeDef hcan1;
 
 /* USER CODE BEGIN Private defines */
-#define CAN_QUEUE_SIZE 50
-
-extern message_queue_t queue_CAN;
-extern message_queue_t queue_CAN_OD;
 extern uint32_t txMailbox_CAN1;
+
+extern message_queue_t CAN1_Rx;
+extern message_queue_t CAN1_Tx;
+
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-bool setup_CAN();
-void handle_CAN_interrupt(CAN_HandleTypeDef *hcan, int fifo);
+void CAN_setup( void );
 HAL_StatusTypeDef send_can_msg(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[]);
+void can_tx_interrupt(CAN_HandleTypeDef *hcan);
+void can_rx_interrupt(CAN_HandleTypeDef *hcan, int fifo);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
