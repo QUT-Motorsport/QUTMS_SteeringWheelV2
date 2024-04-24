@@ -1,2 +1,5 @@
+# Ignore Debug Folder
+/Software/Debug
 
-software/Debug/
+# Also Ignore Debug Folder in Screen_Software
+/Screen_Software/SteeringWheel/Debug

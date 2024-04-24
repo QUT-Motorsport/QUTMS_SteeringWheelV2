@@ -1,7 +1,0 @@
-../Core/Src/MS_Screen.c:15:6:Screen_Static_Init	24	static
-../Core/Src/MS_Screen.c:23:6:Static_Display	16	static
-../Core/Src/MS_Screen.c:28:6:Screen_Dynamic_Init	24	static
-../Core/Src/MS_Screen.c:36:6:Dynamic_Display	16	static
-../Core/Src/MS_Screen.c:41:8:Canvas_Init	16	static
-../Core/Src/MS_Screen.c:51:6:Screen_Startup	24	static
-../Core/Src/MS_Screen.c:68:6:Dynamic_Counter	40	static
