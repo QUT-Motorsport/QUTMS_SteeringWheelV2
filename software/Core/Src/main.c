@@ -28,7 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "MS_Screen.h"
 #include "heartbeat.h"
-#include <queue.h>
+#include <message_queue.h>
 #include <CAN_SW.h>
 #include "btn.h"
 #include <Timer.h>

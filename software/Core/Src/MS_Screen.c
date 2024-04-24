@@ -114,7 +114,7 @@ void Draw_BoardStates(UBYTE *Canvas) {
 
 void init_Main_text() {
 
-	main_txt.missions[0] = (dispText_t ) { .text = "QUT MS Main", .xpos = 50,
+	main_txt.missions[0] = (dispText_t ) { .text = "Dev V2 Main", .xpos = 50,
 					.ypos = 50, .font = &Font24, .color_fg = ClrWhite,
 					.color_bg = ClrBlack, .select_state = NOT_SELECTED,
 					.mission_ID = 69 };
